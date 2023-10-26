@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      import: optional:config-server:${CONFIG_SERVER:http://localhost:8888}
+

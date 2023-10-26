@@ -1,0 +1,17 @@
+server:
+  port: 8888
+
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/angelestrada14019/proyecto-integrador-2
+          default-label: dev-back
+          force-pull: true
+          search-paths: config-data
+
+
