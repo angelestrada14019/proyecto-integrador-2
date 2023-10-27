@@ -16,7 +16,7 @@ const Index: NextPage<Props> = ({ }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <BodySingle title={"Wowfunding"}>
+            <BodySingle title={""}>
                 <div></div>
             </BodySingle>
             </LayoutGeneral>
