@@ -133,7 +133,7 @@ resource "aws_security_group" "private_sg" {
 }
 
 resource "aws_instance" "private_instance" {
-  count        = 3
+  count        = 4
   ami          = "ami-0c94855ba95c574c8"
   instance_type = "t2.micro"
   subnet_id     = module.private_subnet.subnet_ids[count.index]
