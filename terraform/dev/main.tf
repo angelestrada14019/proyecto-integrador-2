@@ -4,13 +4,14 @@ module "vpc" {
   cidr   = var.vpc_cidr_block
 }
 //--public-------------------------------------------------------
-module "public_subnet" {
-  source          = "terraform-aws-modules/subnet/aws"
-  count           = 1
-  name            = var.public_subnet_name
-  vpc_id          = module.vpc.vpc_id
-  cidr            = var.public_subnet_cidr
+resource "aws_subnet" "public_subnet" {
+  count = 1
+  vpc_id     = module.vpc.vpc_id
+  cidr_block = var.public_subnet_cidr
   availability_zone = var.subnets_availability_zone[0]
+  tags = {
+    Name = var.public_subnet_name
+  }
 }
 resource "aws_internet_gateway" "gw" {
   vpc_id = module.vpc.vpc_id
@@ -31,7 +32,7 @@ resource "aws_route_table" "public_route_table" {
 }
 resource "aws_route_table_association" "public_route_table_association" {
   count       = 1
-  subnet_id   = module.public_subnet.subnet_ids[count.index]
+  subnet_id   = aws_subnet.public_subnet[0].id
   route_table_id = aws_route_table.public_route_table.id
 }
 
@@ -61,7 +62,7 @@ resource "aws_instance" "public_instance" {
   count        = 1
   ami          = "ami-0c94855ba95c574c8"
   instance_type = "t2.micro"
-  subnet_id     = module.public_subnet.subnet_ids[count.index]
+  subnet_id     = aws_subnet.public_subnet[0].id
   key_name      = "your_key_pair_name"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
   tags = {
@@ -70,13 +71,14 @@ resource "aws_instance" "public_instance" {
 }
 
 //.....private...............................................
-module "private_subnet" {
-  source          = "terraform-aws-modules/subnet/aws"
-  count           = 1
-  name            = var.private_subnet_name
-  vpc_id          = module.vpc.vpc_id
-  cidr            = var.private_subnet_cidr
+resource "aws_subnet" "private_subnet" {
+  count = 1
+  vpc_id     = module.vpc.vpc_id
+  cidr_block = var.private_subnet_cidr
   availability_zone = var.subnets_availability_zone[1]
+  tags = {
+    Name = var.private_subnet_name
+  }
 }
 resource "aws_eip" "nat_eip" {
   vpc = true
@@ -87,7 +89,7 @@ resource "aws_eip" "nat_eip" {
 
 resource "aws_nat_gateway" "nat_gw" {
   allocation_id = aws_eip.nat_eip.id
-  subnet_id     = module.public_subnet.subnet_ids[0]
+  subnet_id     = aws_subnet.public_subnet[0].id
   tags = {
     Name = var.nat_gateway_name
   }
@@ -106,7 +108,7 @@ resource "aws_route_table" "private_route_table" {
 
 resource "aws_route_table_association" "private_route_table_association" {
   count       = 1
-  subnet_id   = module.private_subnet.subnet_ids[count.index]
+  subnet_id   = aws_subnet.private_subnet[0].id
   route_table_id = aws_route_table.private_route_table.id
 }
 
@@ -120,7 +122,7 @@ resource "aws_security_group" "private_sg" {
     from_port        = 0
     to_port          = 65535
     protocol         = "tcp"
-    cidr_blocks      = [module.private_subnet.ipv4_cidr_block]
+    cidr_blocks      = [aws_subnet.private_subnet[0].cidr_block]
   }
 
   egress {
@@ -136,7 +138,7 @@ resource "aws_instance" "private_instance" {
   count        = 4
   ami          = "ami-0c94855ba95c574c8"
   instance_type = "t2.micro"
-  subnet_id     = module.private_subnet.subnet_ids[count.index]
+  subnet_id     = aws_subnet.private_subnet[0].id
   key_name      = "your_key_pair_name"
   vpc_security_group_ids = [aws_security_group.private_sg.id]
   tags = {
