@@ -36,14 +36,15 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           TF_LOG: DEBUG  # Habilita la salida detallada de Terraform
         run: |
-          terraform plan 2>&1  # Redirige stderr a stdout
+          cd $GITHUB_WORKSPACE
+          terraform plan
         continue-on-error: true  # Continúa la ejecución incluso si hay errores
       
       - name: Display Terraform Errors
-        if: ${{ failure() }}  # Ejecuta solo si el paso anterior (Terraform Plan) falló
+        if: ${{ failure() }}
         run: |
           echo "Errores durante la ejecución de Terraform:"
-          cat $GITHUB_WORKSPACE/terraform.log  # Muestra la salida en el registro
+          cat $GITHUB_WORKSPACE/terraform.log
       
 
     #   - name: Terraform Plan
