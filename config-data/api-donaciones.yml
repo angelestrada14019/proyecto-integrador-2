@@ -4,9 +4,10 @@ spring:
   application:
     name: api-donaciones
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/BackEndSpecialization_BackEnd1_Group5
-    username: root
-    password: topo21
+    username: pi21023c02_GRUPO2
+    password: jaiPe0oh
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO2
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
