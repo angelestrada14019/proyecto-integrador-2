@@ -60,7 +60,7 @@ resource "aws_security_group" "public_sg" {
 
 resource "aws_instance" "public_instance" {
   count        = 1
-  ami          = "ami-0c94855ba95c574c8"
+  ami          = "ami-05c13eab67c5d8861"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public_subnet[0].id
   key_name      = "your_key_pair_name"
@@ -136,7 +136,7 @@ resource "aws_security_group" "private_sg" {
 
 resource "aws_instance" "private_instance" {
   count        = 4
-  ami          = "ami-0c94855ba95c574c8"
+  ami          = "ami-05c13eab67c5d8861"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private_subnet[0].id
   key_name      = "your_key_pair_name"
