@@ -63,7 +63,7 @@ resource "aws_instance" "public_instance" {
   ami          = "ami-05c13eab67c5d8861"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public_subnet[0].id
-  key_name      = "your_key_pair_name"
+  key_name      = "pi2-g2"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
   tags = {
     Name = var.public_instance_name
@@ -139,7 +139,7 @@ resource "aws_instance" "private_instance" {
   ami          = "ami-05c13eab67c5d8861"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private_subnet[0].id
-  key_name      = "your_key_pair_name"
+  key_name      = "pi2-g2"
   vpc_security_group_ids = [aws_security_group.private_sg.id]
   tags = {
     Name = "${var.private_instance_name}-${count.index + 1}"
