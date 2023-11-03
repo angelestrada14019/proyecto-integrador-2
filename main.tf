@@ -145,3 +145,9 @@ resource "aws_instance" "private_instance" {
     Name = "${var.private_instance_name}-${count.index + 1}"
   }
 }
+
+//----- S3------------------------------------
+resource "aws_s3_bucket" "image_bucket" {
+  bucket = "${var.name_bucket}"
+  acl    = "public-read"
+}

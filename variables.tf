@@ -4,7 +4,7 @@ variable "region" {
 variable "vpc_name" {
   description = "vpc-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyVPC"
+  default     = "vpc-pi2-gp2-wowfunding"
 }
 variable "subnets_availability_zone" {
   default = [
@@ -15,62 +15,62 @@ variable "subnets_availability_zone" {
 variable "public_subnet_name" {
   description = "pbsubnet-pi2-gp2-wowfunding"
   type        = string
-  default     = "PublicSubnet"
+  default     = "pbsubnet-pi2-gp2-wowfunding"
 }
 
 variable "private_subnet_name" {
   description = "pvsubnet-pi2-gp2-wowfunding"
   type        = string
-  default     = "PrivateSubnet"
+  default     = "pvsubnet-pi2-gp2-wowfunding"
 }
 
 variable "internet_gateway_name" {
   description = "ig-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyInternetGateway"
+  default     = "ig-pi2-gp2-wowfunding"
 }
 
 variable "public_route_table_name" {
   description = "pbroutet-pi2-gp2-wowfunding"
   type        = string
-  default     = "PublicRouteTable"
+  default     = "pbroutet-pi2-gp2-wowfunding"
 }
 
 variable "private_route_table_name" {
   description = "pvroutet-pi2-gp2-wowfunding"
   type        = string
-  default     = "PrivateRouteTable"
+  default     = "pvroutet-pi2-gp2-wowfunding"
 }
 
 variable "public_security_group_name" {
   description = "pbsg-pi2-gp2-wowfunding"
   type        = string
-  default     = "PublicSecurityGroup"
+  default     = "pbsg-pi2-gp2-wowfunding"
 }
 
 variable "private_security_group_name" {
   description = "pvroutet-pi2-gp2-wowfunding"
   type        = string
-  default     = "PrivateSecurityGroup"
+  default     = "pvroutet-pi2-gp2-wowfunding"
 }
 
 
 variable "public_instance_name" {
   description = "pbec-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyPublicInstance"
+  default     = "pbec-pi2-gp2-wowfunding"
 }
 
 variable "private_instance_name" {
   description = "pvec-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyPrivateInstance"
+  default     = "pvec-pi2-gp2-wowfunding"
 }
 
 variable "nat_gateway_name" {
   description = "ng-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyNATGateway"
+  default     = "ng-pi2-gp2-wowfunding"
 }
 
 variable "vpc_cidr_block" {
@@ -93,6 +93,11 @@ variable "private_subnet_cidr" {
 variable "nat_eip_name" {
   description = "eip-pi2-gp2-wowfunding"
   type        = string
-  default     = "MyNATEIP"
+  default     = "eip-pi2-gp2-wowfunding"
+}
+variable "name_bucket" {
+  description = "s3-pi2-gp2-wowfunding"
+  type        = string
+  default     = "s3-pi2-gp2-wowfunding"
 }
 
