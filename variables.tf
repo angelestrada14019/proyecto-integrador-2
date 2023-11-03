@@ -82,13 +82,13 @@ variable "vpc_cidr_block" {
 variable "public_subnet_cidr" {
   description = "pbcidr-pi2-gp2-wowfunding"
   type        = string
-  default     = "10.0.1.0/28"
+  default     = "10.0.0.0/28"
 }
 
 variable "private_subnet_cidr" {
   description = "pcidr-pi2-gp2-wowfunding"
   type        = string
-  default     = "10.0.2.0/28"
+  default     = "10.0.0.16/28"
 }
 variable "nat_eip_name" {
   description = "eip-pi2-gp2-wowfunding"
