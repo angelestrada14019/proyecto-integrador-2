@@ -68,9 +68,9 @@ variable "private_instance_name" {
 }
 
 variable "nat_gateway_name" {
-  description = "ng-pi2-gp2-wowfunding"
+  description = "ng-pi2-gp2-wowfunding2"
   type        = string
-  default     = "ng-pi2-gp2-wowfunding"
+  default     = "ng-pi2-gp2-wowfunding2"
 }
 
 variable "vpc_cidr_block" {
