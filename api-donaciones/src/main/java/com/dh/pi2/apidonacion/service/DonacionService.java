@@ -1,11 +1,16 @@
 package com.dh.pi2.apidonacion.service;
 import com.dh.pi2.apidonacion.dto.DonacionDTO;
+import com.dh.pi2.apidonacion.exceptions.ResourceNotFoundException;
 import com.dh.pi2.apidonacion.model.Donacion;
+import com.dh.pi2.apidonacion.model.MetodoPago;
 import com.dh.pi2.apidonacion.repository.IDonacionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,66 +29,63 @@ public class DonacionService {
 
         if(donacionDTO.getCantidad() == 0 || donacionDTO == null)
             throw new BadRequestException("El donacion no puede ser 0 o null");
-        Long metodoPagoId = donacionDTO.getMetodoPagoID().getId();
+        int metodoPagoId = donacionDTO.getMetodoPagoID().getId();
         Donacion donacion = mapper.convertValue(donacionDTO, Donacion.class);
-
-        /*if (this.findDonacionByID(donacion.getId()) != null)
-            throw new BadRequestException("Este donacion ya existe");*/
 
         donacionDTO = mapper.convertValue(donacionRepository.save(donacion), DonacionDTO.class);
         donacionDTO.setMetodoPagoID(metodoPagoService.findMPById(metodoPagoId));
 
         return donacionDTO;
     }
-
+    /*
+    Aca necesito un getAllDonacionByUser
+    Y tambien un getAllDonacionByProducto
+     */
     // Método para obtener una donación por su ID
-    public DonacionDTO getDonacionById(Long id) {
-        Optional<Donacion> optionalDonacion = donacionRepository.findById(id);
-        if (optionalDonacion.isPresent()) {
-            Donacion donacion = optionalDonacion.get();
-            return mapToDonacionDTO(donacion);
-        } else {
-            // Puedes manejar la excepción o el caso en que la donación no existe
-            return null;
-        }
-    }
-
-    // Método para actualizar una donación por su ID
-    public DonacionDTO updateDonacion(Long id, DonacionDTO donacionDTO) {
-        Optional<Donacion> optionalDonacion = donacionRepository.findById(id);
-        if (optionalDonacion.isPresent()) {
-            Donacion donacion = optionalDonacion.get();
-            // Actualizar los atributos de la donación con los datos del DTO
-            donacion.setComentario(donacionDTO.getComentario());
-            donacion.setCantidad(donacionDTO.getCantidad());
-            donacion.setFechaDonacion(donacionDTO.getFechaDonacion());
-            donacion.setMetodoPagoID(donacionDTO.getMetodoPagoID());
-            donacion.setIdUsuarios(donacionDTO.getIdUsuarios());
-            donacion.setIddonacionos(donacionDTO.getIddonacionos());
-            // Guardar la donación actualizada en el repositorio
-            donacionRepository.save(donacion);
-            return mapToDonacionDTO(donacion);
-        } else {
-            // Puedes manejar la excepción o el caso en que la donación no existe
-            return null;
-        }
+    public DonacionDTO getDonacionByID(int id) throws BadRequestException, ResourceNotFoundException {
+        if( id < 1 )
+            throw new BadRequestException("El id de la donacion no puede ser negativo");
+        if (donacionRepository.findById(id).isEmpty())
+            throw new ResourceNotFoundException("No existe existe la donacion con id: " + id);
+        Optional<Donacion> donacion = donacionRepository.findById(id);
+        return mapper.convertValue(donacion, DonacionDTO.class);
     }
 
     // Método para eliminar una donación por su ID
-    public void deleteDonacion(Long id) {
+    public void deleteDonacion(int id) throws BadRequestException, ResourceNotFoundException {
+        if( id < 1 )
+            throw new BadRequestException("El id del producto no puede ser negativo");
+        if (donacionRepository.findById(id).isEmpty())
+            throw new ResourceNotFoundException("No existe existe la donacion con id: " + id);
         donacionRepository.deleteById(id);
     }
 
-    // Método para mapear Donacion a DonacionDTO
-    private DonacionDTO mapToDonacionDTO(Donacion donacion) {
-        DonacionDTO donacionDTO = new DonacionDTO();
-        donacionDTO.setComentario(donacion.getComentario());
-        donacionDTO.setCantidad(donacion.getCantidad());
-        donacionDTO.setFechaDonacion(donacion.getFechaDonacion());
-        donacionDTO.setMetodoPagoID(donacion.getMetodoPagoID());
-        donacionDTO.setIdUsuarios(donacion.getIdUsuarios());
-        donacionDTO.setIddonacionos(donacion.getIddonacionos());
-        return donacionDTO;
+    // Lista de Donaciones según un Usuario
+    public List<DonacionDTO> findDonacionesByUsuario(int id)  throws BadRequestException {
+        if (id < 1)
+            throw new BadRequestException("El id de la ciudad no puede ser negativo");
+
+        List<Donacion> donaciones = donacionRepository.findDonacionesByUsuario(id);
+        List<DonacionDTO> donacionDTOS = new ArrayList<>();
+        for (Donacion donacion: donaciones) {
+            donacionDTOS.add(mapper.convertValue(donacion, DonacionDTO.class));
+        }
+
+        return donacionDTOS;
+    }
+
+    // Lista de Donaciones según un Producto
+    public List<DonacionDTO> findDonacionesByProducto(int id)  throws BadRequestException {
+        if (id < 1)
+            throw new BadRequestException("El id de la ciudad no puede ser negativo");
+
+        List<Donacion> donaciones = donacionRepository.findDonacionesByProducto(id);
+        List<DonacionDTO> donacionDTOS = new ArrayList<>();
+        for (Donacion donacion: donaciones) {
+            donacionDTOS.add(mapper.convertValue(donacion, DonacionDTO.class));
+        }
+
+        return donacionDTOS;
     }
 }
 
