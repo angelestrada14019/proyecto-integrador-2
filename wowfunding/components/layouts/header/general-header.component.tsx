@@ -16,10 +16,10 @@ const Header: FC<Props> = ({variant}: Props) => {
     return <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ paddingX: "40px" }}>
             <NextLink href="/" passHref>
-                <MUILink variant="body2" sx={{color: 'white', fontSize: 16, fontWeight: 600, marginRight: 5 }}> Explorar proyectos</MUILink>
+                <MUILink variant="body2" sx={{color: 'white', fontSize: 18, fontWeight: 600, marginRight: 5 }}> Explorar proyectos</MUILink>
             </NextLink>
             <NextLink href="/" passHref>
-                <MUILink variant="body2" sx={{color: 'white', fontSize: 16, fontWeight: 600, marginRight: 5 }}> Cómo funciona</MUILink>
+                <MUILink variant="body2" sx={{color: 'white', fontSize: 18, fontWeight: 600, marginRight: 5 }}> Crear un proyecto</MUILink>
             </NextLink>
             <Box sx={{marginLeft: "auto", marginTop: "5px"}}>
                 <NextLink href="/" passHref>
@@ -27,8 +27,8 @@ const Header: FC<Props> = ({variant}: Props) => {
                 </NextLink>
             </Box>
             <Box sx={{marginLeft: "auto" }}>
-                <NextLink href="/" passHref>
-                    <MUILink variant="body2" sx={{color: 'white', fontSize: 16, fontWeight: 600, marginRight: 5 }}>Crear un proyecto</MUILink>
+                <NextLink href="/registro" passHref>
+                    <MUILink variant="body2" sx={{color: 'white', fontSize: 18, fontWeight: 600, marginRight: 5 }}>Registrarse</MUILink>
                 </NextLink>
                 <NextLink href="/login" passHref>
                     <MUILink variant="body2" sx={{color: 'white', fontSize: 18, fontWeight: 600}}>Iniciar Sesion</MUILink>

@@ -2,8 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
-const LinearDeterminate =() => {
-  const [progress, setProgress] = React.useState(10);
+interface Prop {
+  amount : number
+  finalAmount : number
+}
+
+const LinearDeterminate =({amount,finalAmount} : Prop) => {
+  const [progress, setProgress] = React.useState((amount / finalAmount) * 100);
 
 
   return (

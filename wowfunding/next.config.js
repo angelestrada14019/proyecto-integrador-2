@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['www.bbva.com',],
+        domains: ['www.bbva.com','www.unifranz.edu.bo','www.acumar.gob.ar','www.campanario.es',''],
     },
     reactStrictMode: true,
     swcMinify: true,

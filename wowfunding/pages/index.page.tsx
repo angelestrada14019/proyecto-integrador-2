@@ -13,6 +13,41 @@ interface Props {
 
 }
 
+const arrayDeMediCards = [
+    {
+        title: 'Campaña de Ayuda Humanitaria',
+        descripcion: 'Ayuda a proporcionar suministros médicos y alimentos a áreas afectadas por desastres naturales.',
+        imagen: 'http://udgsedecop.gobiernodigital.gob.mx/wp-content/uploads/sites/40/2020/09/FB_IMG_1578600211791-3-596x250.jpg',
+        tiempoFinalizar: 7, // 7 días
+        fondosRecaudados: 5000,
+        fondosARecaudar: 5646,
+    },
+    {
+        title: 'Campaña de Educación Infantil',
+        descripcion: 'Apoya a la educación de niños en situaciones de vulnerabilidad, proporcionando material educativo y apoyo escolar.',
+        imagen: 'https://neoattack.com/blog/wp-content/uploads/2022/03/marketing-escuelas-infantiles.jpg',
+        tiempoFinalizar: 14, // 14 días
+        fondosRecaudados: 12000,
+        fondosARecaudar: 12460,
+    },
+    {
+        title: 'Campaña de Conservación de la Naturaleza',
+        descripcion: 'Contribuye a la protección de la vida silvestre y la preservación de ecosistemas naturales.',
+        imagen: 'https://www.indh.cl/bb/wp-content/uploads/2013/05/470x273.jpg',
+        tiempoFinalizar: 5, // 5 días
+        fondosRecaudados: 8000,
+        fondosARecaudar: 84580,
+    },
+    {
+        title: 'Campaña de Salud Mental',
+        descripcion: 'Apoyo a personas que luchan contra problemas de salud mental proporcionando recursos y asesoramiento.',
+        imagen: 'https://www.paho.org/sites/default/files/2023-04/who-75-whd-2023-web-banner-es.jpg',
+        tiempoFinalizar: 10, // 10 días
+        fondosRecaudados: 15000,
+        fondosARecaudar: 67643,
+    },
+];
+
 const Index: NextPage<Props> = ({ }) => {
 
     return (<LayoutGeneral>
@@ -29,10 +64,17 @@ const Index: NextPage<Props> = ({ }) => {
                     Proyectos recientes
                 </Typography>
                 <Grid container gap={4}>
-                    <MediaCard />
-                    <MediaCard />
-                    <MediaCard />
-                    <MediaCard />
+                    {arrayDeMediCards.map((card, index) =>
+                        <MediaCard
+                            key={index}
+                            title={card.title}
+                            descripcion={card.descripcion}
+                            imagen={card.imagen}
+                            tiempoFinalizar={card.tiempoFinalizar}
+                            fondosRecaudados={card.fondosRecaudados}
+                            fondosARecaudar={card.fondosARecaudar}
+                            />
+                    )}
                 </Grid>
 
                 <Typography variant='h6' marginBottom={2} marginTop={4}>
@@ -40,7 +82,7 @@ const Index: NextPage<Props> = ({ }) => {
                     <ComoFunciona />
                 </Typography>
                 <Newsletter />
-                <FooterAccesos/>
+                <FooterAccesos />
             </div>
         </BodySingle>
     </LayoutGeneral>

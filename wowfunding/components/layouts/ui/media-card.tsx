@@ -6,36 +6,45 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import LinearDeterminate from './linear-determinate';
+import { Grid } from '@mui/material';
 
-const MediaCard = () => {
+interface MediCardProp {
+    title: string;
+    descripcion: string;
+    imagen: string;
+    tiempoFinalizar: number;
+    fondosRecaudados: number;
+    fondosARecaudar: number;
+}
+
+const MediaCard = ({ title, imagen, descripcion, tiempoFinalizar, fondosRecaudados, fondosARecaudar }: MediCardProp) => {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
             <CardMedia
                 sx={{ height: 140 }}
-                image="https://www.bbva.com/wp-content/uploads/2020/07/BBVA-CompraOnline-0107-1920x1180.jpg"
+                image={imagen}
                 title="green iguana"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    {title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    {descripcion}
                 </Typography>
 
             </CardContent>
-            <CardActions>
+            <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography variant="body2" color="text.secondary">
-                    Quedan x dias
+                    Quedan {tiempoFinalizar} dias
                 </Typography>
-                <Button size="small">VER MAS</Button>
-            </CardActions>
+                <Button size="small" sx={{ fontWeight: "bold" }} >VER MAS</Button>
+            </CardContent>
             <CardContent>
                 <Typography gutterBottom variant="body2" component="div">
-                    $ 1000 recaudados
+                    $ {fondosRecaudados} recaudados
                 </Typography>
-                <LinearDeterminate />
+                <LinearDeterminate amount={fondosRecaudados} finalAmount={fondosARecaudar} />
             </CardContent>
 
         </Card>
