@@ -14,5 +14,4 @@ export const schema = yup.object({
     email: yup.string()
         .required('El email es requerido')
         .email()
-        .matches(/^[^@\s]+@[^@\s.]+$/)
 });
