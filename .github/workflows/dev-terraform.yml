@@ -3,10 +3,11 @@ name: 'Terraform'
 on:
   push:
     branches:
-      - infra
+      - infra-1
   pull_request:
     branches:
-      - infra
+      - infra-1
+  workflow_dispatch: {}
 
 jobs:
   terraform:
@@ -43,7 +44,7 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-        
+
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
       

@@ -1,25 +1,50 @@
-name: Deploy Container image to aws ECR
+name: Deploy Docker Images to AWS ECR
 on:
   push:
-    branches: [ dev-back-1 ]
+    branches:
+      - dev-back
   pull_request:
-    branches: [ dev-back-1 ]
-jobs: 
-    aws_ecr_dockerfile_deploy:
-        runs-on: ubuntu-latest
-        name: AWS ecr deploy- A job that deploys a image container using a aws_ecr_dockerfile_deploy
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            - name: Deploy container image to AWS ECR
-              uses: nyakaz73/aws-ecr-deploy@v0.08
-              id: deploy 
-              with:
-                access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                region: ${{ secrets.AWS_REGION }}
-                aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-                image_name: back
+    branches:
+      - dev-back
 
-            - name: Get the output status
-              run: echo "${{ steps.deploy.outputs.status }}"
+jobs:
+  aws_ecr_dockerfile_deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Docker images to AWS ECR
+    steps:
+      - name: Checkout code from dev-back
+        uses: actions/checkout@v2
+        with:
+          ref: refs/heads/dev-back
+          path: dev-back
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+      - name: Build and push Docker images
+        run: |
+          services=("api-gateway" "config-server" "discovery" "mc-productos" "api-donaciones" "api-usuarios")
+
+          for service in "${services[@]}"; do
+            if [ -d "$service" ]; then
+              docker build -t $service -f $service/Dockerfile .
+              docker tag $service:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$service:latest
+              docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$service:latest
+            else
+              echo "El servicio $service no se encontró en la ruta $service"
+            fi
+          done
+
+      - name: Get the output status
+        run: echo "Images pushed successfully."
+
+
