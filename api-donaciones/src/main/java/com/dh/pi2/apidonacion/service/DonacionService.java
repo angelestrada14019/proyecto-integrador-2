@@ -37,10 +37,7 @@ public class DonacionService {
 
         return donacionDTO;
     }
-    /*
-    Aca necesito un getAllDonacionByUser
-    Y tambien un getAllDonacionByProducto
-     */
+
     // Método para obtener una donación por su ID
     public DonacionDTO getDonacionByID(int id) throws BadRequestException, ResourceNotFoundException {
         if( id < 1 )
