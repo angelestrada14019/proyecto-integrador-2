@@ -2,9 +2,6 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name   = var.vpc_name
   cidr   = var.vpc_cidr_block
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 //--public-------------------------------------------------------
 resource "aws_subnet" "public_subnet" {
@@ -16,17 +13,11 @@ resource "aws_subnet" "public_subnet" {
   tags = {
     Name = var.public_subnet_name
   }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 resource "aws_internet_gateway" "gw" {
   vpc_id = module.vpc.vpc_id
   tags = {
     Name = var.internet_gateway_name
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 resource "aws_route_table" "public_route_table" {
@@ -38,9 +29,6 @@ resource "aws_route_table" "public_route_table" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 resource "aws_route_table_association" "public_route_table_association" {
@@ -69,9 +57,6 @@ resource "aws_security_group" "public_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_instance" "public_instance" {
@@ -84,9 +69,6 @@ resource "aws_instance" "public_instance" {
   associate_public_ip_adress = true
   tags = {
     Name = var.public_instance_name
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
@@ -107,9 +89,6 @@ resource "aws_eip" "nat_eip" {
   tags = {
     Name = var.nat_eip_name
   }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_nat_gateway" "nat_gw" {
@@ -117,9 +96,6 @@ resource "aws_nat_gateway" "nat_gw" {
   subnet_id     = aws_subnet.public_subnet[0].id
   tags = {
     Name = var.nat_gateway_name
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 resource "aws_route_table" "private_route_table" {
@@ -131,9 +107,6 @@ resource "aws_route_table" "private_route_table" {
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat_gw.id
-  }
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
@@ -163,9 +136,6 @@ resource "aws_security_group" "private_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_instance" "private_instance" {
@@ -179,16 +149,10 @@ resource "aws_instance" "private_instance" {
   tags = {
     Name = "${var.private_instance_name}-${count.index + 1}"
   }
-lifecycle {
-    create_before_destroy = true
-  }
 }
 
 //----- S3------------------------------------
 resource "aws_s3_bucket" "image_bucket" {
   bucket = "${var.name_bucket}"
   acl    = "public-read"
-  lifecycle {
-    create_before_destroy = true
-  }
 }

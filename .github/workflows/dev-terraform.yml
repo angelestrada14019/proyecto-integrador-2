@@ -43,6 +43,9 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+        
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
       
       - name: Terraform Apply
         run: terraform apply -auto-approve
