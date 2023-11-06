@@ -2,6 +2,9 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name   = var.vpc_name
   cidr   = var.vpc_cidr_block
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 //--public-------------------------------------------------------
 resource "aws_subnet" "public_subnet" {
@@ -9,14 +12,21 @@ resource "aws_subnet" "public_subnet" {
   vpc_id     = module.vpc.vpc_id
   cidr_block = var.public_subnet_cidr
   availability_zone = var.subnets_availability_zone[0]
+  map_public_ip_on_launch = "true"
   tags = {
     Name = var.public_subnet_name
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 resource "aws_internet_gateway" "gw" {
   vpc_id = module.vpc.vpc_id
   tags = {
     Name = var.internet_gateway_name
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 resource "aws_route_table" "public_route_table" {
@@ -28,6 +38,9 @@ resource "aws_route_table" "public_route_table" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.gw.id
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 resource "aws_route_table_association" "public_route_table_association" {
@@ -56,6 +69,9 @@ resource "aws_security_group" "public_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_instance" "public_instance" {
@@ -65,8 +81,12 @@ resource "aws_instance" "public_instance" {
   subnet_id     = aws_subnet.public_subnet[0].id
   key_name      = "pi2-g2"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
+  associate_public_ip_adress = true
   tags = {
     Name = var.public_instance_name
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -75,6 +95,7 @@ resource "aws_subnet" "private_subnet" {
   count = 1
   vpc_id     = module.vpc.vpc_id
   cidr_block = var.private_subnet_cidr
+  map_public_ip_on_launch = "false"
   availability_zone = var.subnets_availability_zone[1]
   tags = {
     Name = var.private_subnet_name
@@ -82,8 +103,12 @@ resource "aws_subnet" "private_subnet" {
 }
 resource "aws_eip" "nat_eip" {
   vpc = true
+  depends_on = [aws_internet_gateway.gw]
   tags = {
     Name = var.nat_eip_name
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -92,6 +117,9 @@ resource "aws_nat_gateway" "nat_gw" {
   subnet_id     = aws_subnet.public_subnet[0].id
   tags = {
     Name = var.nat_gateway_name
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 resource "aws_route_table" "private_route_table" {
@@ -103,6 +131,9 @@ resource "aws_route_table" "private_route_table" {
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat_gw.id
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -119,18 +150,21 @@ resource "aws_security_group" "private_sg" {
 
   ingress {
     description      = "Private traffic from VPC"
-    from_port        = 0
-    to_port          = 65535
+    from_port        = 22
+    to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_subnet.private_subnet[0].cidr_block]
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -140,9 +174,13 @@ resource "aws_instance" "private_instance" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.private_subnet[0].id
   key_name      = "pi2-g2"
+  associate_public_ip_adress = false
   vpc_security_group_ids = [aws_security_group.private_sg.id]
   tags = {
     Name = "${var.private_instance_name}-${count.index + 1}"
+  }
+lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -150,4 +188,7 @@ resource "aws_instance" "private_instance" {
 resource "aws_s3_bucket" "image_bucket" {
   bucket = "${var.name_bucket}"
   acl    = "public-read"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
