@@ -21,9 +21,9 @@ public class MetodoPagoService {
 
     @Autowired
     ObjectMapper mapper;
-    public MetodoPago findMPById(int id) {
+    public MetodoPagoDTO findMPById(int id) {
         MetodoPago metodoPago = metodoPagoRepository.findById(id).orElse(null);
-        return metodoPago;
+        return mapper.convertValue(metodoPago, MetodoPagoDTO.class);
     }
 
     public MetodoPagoDTO crearMetodoPago(MetodoPagoDTO metodoPagoDTO) throws BadRequestException {

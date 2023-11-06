@@ -33,7 +33,7 @@ public class DonacionService {
         Donacion donacion = mapper.convertValue(donacionDTO, Donacion.class);
 
         donacionDTO = mapper.convertValue(donacionRepository.save(donacion), DonacionDTO.class);
-        donacionDTO.setMetodoPagoID(metodoPagoService.findMPById(metodoPagoId));
+        donacionDTO.setMetodoPagoID(mapper.convertValue(metodoPagoService.findMPById(metodoPagoId), MetodoPago.class));
 
         return donacionDTO;
     }
