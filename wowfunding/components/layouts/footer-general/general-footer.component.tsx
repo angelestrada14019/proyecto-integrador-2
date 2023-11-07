@@ -16,7 +16,7 @@ const GeneralFooter = () => {
               alignItems='center'
               justifyContent={'center'}
               borderTop={'1px solid #eaeaea'}
-              sx={{backgroundColor: "#0B3954"}}>
+              sx={{backgroundColor: "#4BC6B9"}}>
         
             <Grid container justifyContent="space-between" alignItems="center" maxWidth={"70%"}>
                 <Grid item xs={6}>

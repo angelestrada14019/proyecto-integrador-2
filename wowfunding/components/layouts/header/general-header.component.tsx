@@ -12,6 +12,7 @@ type Props = {
     variant?: "simple" | "general"
 }
 
+const usuarioLogueado = true; // temporal mientras implementamos la conexión al backend
 const Header: FC<Props> = ({variant}: Props) => {
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth:"1490px" }}>
         <Toolbar disableGutters sx={{ paddingX: "40px", background: "#F7F7FF", marginTop:"17px", height:"10px" }} >
@@ -27,15 +28,27 @@ const Header: FC<Props> = ({variant}: Props) => {
                     <Image src="/logo_completo.png" width={"284px"} height={"50%"} alt="Logo" ></Image>
                 </NextLink>
             </Box>
-            <Box sx={{marginLeft: "auto" }}>
+
+            {!usuarioLogueado && <Box sx={{marginLeft: "auto" }}>
                 <NextLink href="/registro" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5 }}>Registrarse</MUILink>
                 </NextLink>
                 <NextLink href="/login" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400}}>Iniciar Sesion</MUILink>
                 </NextLink>
-            </Box>
-            
+            </Box>}
+
+            {usuarioLogueado && <Box sx={{marginLeft: "auto", display:"flex", alignItems:"center" }}>
+                <NextLink href="/registro" passHref>
+                    <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 3 }}>Donaciones y proyectos</MUILink>
+                </NextLink>
+                <NextLink href="/" passHref >
+                    <Image src="/perfil.png"  width={"45px"} height={"45px"} alt="Perfil" ></Image>
+                </NextLink>
+                <NextLink href="/login" passHref>
+                    <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginLeft:1}}>Nombre</MUILink>
+                </NextLink>
+            </Box>}
         </Toolbar>
     </Container>
 }
