@@ -28,11 +28,11 @@ const GeneralFooter = () => {
                     </Link>
                 </Grid>
                 <Grid item container xs={6} justifyContent="flex-end">
-                    {socialMediaIcons.map((socialIcon) => (
+                    {/* {socialMediaIcons.map((socialIcon) => (
                         <Link key={socialIcon.name} href={socialIcon.link} sx={{ marginRight: 5 }}>
                             <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={"30px"} height={"30px"}/>
                         </Link>
-                    ))}
+                    ))} */}
                 </Grid>
             </Grid>
 
