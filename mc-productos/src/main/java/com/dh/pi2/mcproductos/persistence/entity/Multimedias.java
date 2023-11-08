@@ -19,6 +19,10 @@ public class Multimedias {
     private int id;
     @Column(name = "Url")
     private String url;
+
+    @Column(name = "tipo")
+    private int tipo;
+
     @ManyToOne
     @JoinColumn(name = "PRODUCTOS_id", referencedColumnName = "id")
     private Productos productosId;

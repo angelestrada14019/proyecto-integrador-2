@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class MultimediasDto {
     private int id;
     private String url;
+    private int tipo;
     @JsonIgnore
     private Productos productosId;
 }
