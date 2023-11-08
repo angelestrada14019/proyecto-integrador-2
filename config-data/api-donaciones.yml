@@ -1,5 +1,6 @@
 server:
   port: ${SERVER_PORT:0}
+
 spring:
   application:
     name: api-donaciones
@@ -7,20 +8,18 @@ spring:
     username: ${mysql_username}
     password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
+    url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}?useSSL=false&serverTimezone=UTC
 
 info:
   application:
     name: api-donaciones
 
 eureka:
-#  instance:
-#    hostname: localhost
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
 
 
