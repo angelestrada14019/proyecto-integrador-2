@@ -10,6 +10,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
 
+#eureka
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
 #actuator
 management:
 #  health:
