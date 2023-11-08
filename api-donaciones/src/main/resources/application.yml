@@ -1,6 +1,5 @@
 spring:
   application:
     name: api-donaciones
-  cloud:
-    config:
-      import: optional:config-server:${CONFIG_SERVER:http://localhost:8888}
+  config:
+    import: configserver:${CONFIG_SERVER:http://localhost:8888}
