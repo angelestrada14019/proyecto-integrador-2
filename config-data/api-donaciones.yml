@@ -1,39 +1,30 @@
 server:
-  port: 8085
+  port: ${SERVER_PORT:0}
+
 spring:
   application:
     name: api-donaciones
-  ## MySQL
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/wowfunding
-    username: root
-    password: topo21
+    username: ${mysql_username}
+    password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
 
-#eureka
+info:
+  application:
+    name: api-donaciones
+
 eureka:
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: true
-    serviceURL:
-      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
-#actuator
-management:
-  #  health:
-  #    circuitbreakers:
-  #      enabled: true
-  info:
-    env:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-  endpoint:
-    health:
-      show-details: always
-info:
-  name: api-donaciones
-  description: api-donaciones
-  version: 1.0.0
-  date: 2023-11-02
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+

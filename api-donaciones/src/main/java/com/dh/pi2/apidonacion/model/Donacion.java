@@ -19,7 +19,6 @@ import java.time.LocalDate;
 public class Donacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
     @Column(name = "Comentario")
@@ -36,7 +35,7 @@ public class Donacion {
     private LocalDate fechaDonacion;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "METODO_PAGO_id", referencedColumnName = "id")
     private MetodoPago metodoPagoID;
 
     @Column(name = "USUARIOS_idUSUARIOS")
