@@ -5,10 +5,9 @@ spring:
   application:
     name: api-donaciones
   datasource:
-    username: ${mysql_username}
-    password: ${mysql_password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/wowfunding
+    username: root
+    password: topo21
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
