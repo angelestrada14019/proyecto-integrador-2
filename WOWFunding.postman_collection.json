@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "32e4f4ee-be25-45b9-bfc3-9c496f5be50e",
+		"name": "WOWFunding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18589816"
+	},
+	"item": [
+		{
+			"name": "ControllerDonacion",
+			"item": [
+				{
+					"name": "crear donacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"string\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 1\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:55123/donacion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "55123",
+							"path": [
+								"donacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get donacion por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"string\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 1\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:18635/donacion/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"donacion",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar donacion por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/donacion/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"donacion",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "donaciones por producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/donacion/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"donacion",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "donaciones por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/donacion/usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"donacion",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ControllerMetodoPago",
+			"item": [
+				{
+					"name": "crear metodoPago",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"tarjeta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:18635/metodoPago",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"metodoPago"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get metodoPago por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/metodoPago/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"metodoPago",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar metodoPago por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/metodoPago/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"metodoPago",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista todos los metodoPago",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:18635/metodoPago",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18635",
+							"path": [
+								"metodoPago"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -9,15 +9,15 @@ spring:
       discovery:
         locator:
           enabled: true
-#      routes:
-#        - id: msscustomer
-#          uri: lb://api-customer
-#          predicates:
-#            - Path=/customers/**
-#        - id: msswallet
-#          uri: lb://api-wallet
-#          predicates:
-#            - Path=/wallet/**
+      routes:
+        - id: api-donaciones
+          uri: lb://api-donaciones
+          predicates:
+            - Path=/api/**
+        - id: ms-productos
+          uri: lb://ms-productos
+          predicates:
+            - Path=/api/**
 #        - id: mssmargins
 #          uri: lb://api-margins
 #          predicates:
@@ -32,7 +32,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceURL:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
 management:
   endpoint:
     gateway:
