@@ -9,11 +9,12 @@ spring:
       discovery:
         locator:
           enabled: true
-#      routes:
-#        - id: msscustomer
-#          uri: lb://api-customer
-#          predicates:
-#            - Path=/customers/**
+      routes:
+        - id: users-api
+          uri: lb://users-api
+          predicates:
+            - Path=/users/**
+
 #        - id: msswallet
 #          uri: lb://api-wallet
 #          predicates:
