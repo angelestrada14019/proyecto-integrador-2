@@ -13,12 +13,11 @@ spring:
         - id: api-donaciones
           uri: lb://api-donaciones
           predicates:
-            - Path=/donacion/**
-            - Path=/metodoPago/**
-#        - id: msswallet
-#          uri: lb://api-wallet
-#          predicates:
-#            - Path=/wallet/**
+            - Path=/api/**
+        - id: ms-productos
+          uri: lb://ms-productos
+          predicates:
+            - Path=/api/**
 #        - id: mssmargins
 #          uri: lb://api-margins
 #          predicates:

@@ -10,7 +10,7 @@ spring:
       server:
         git:
           uri: https://github.com/angelestrada14019/proyecto-integrador-2
-          default-label: dev-back-donaciones
+          default-label: dev-back
           force-pull: true
           search-paths: config-data
 

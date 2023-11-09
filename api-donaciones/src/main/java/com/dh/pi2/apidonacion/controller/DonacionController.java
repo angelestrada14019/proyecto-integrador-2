@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/donacion")
+@RequestMapping("/api/donacion")
 public class DonacionController {
 
     @Autowired
