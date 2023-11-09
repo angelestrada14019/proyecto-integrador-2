@@ -4,7 +4,7 @@ import {
     ERROR_SERVER,
     ERROR_INCORRECT_DATA,
     ERROR_METHOD_NOT_ALLOWED
-} from "services/login/user-sesion.errors";
+} from "services/sesion/user-sesion.errors";
 
 type Data = {
     data: any;

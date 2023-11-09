@@ -9,7 +9,7 @@ import { schema } from './schema';
 import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { postRegistro } from 'services/login/user-sesion.service';
+import { postRegistro } from 'services/sesion/user-sesion.service';
 import { useForm } from 'react-hook-form';
 
 

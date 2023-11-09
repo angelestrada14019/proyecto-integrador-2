@@ -20,32 +20,31 @@ const ImageCarousel = () => {
 
     };
     return (
-        <Carousel>
+        <Carousel showThumbs={false} showStatus={false} autoPlay stopOnHover infiniteLoop={true} swipeable>
             {items.map((item, index) => (
                 <div key={index}
-                    style={{ height: "600px" }}
+                    style={{ height: "700px" }}
                 >
                     <Image src={item}
-                        width={1600}
+                        width={1920}
                         height={700}
-                        objectFit='cover'
                         alt={`Imagen ${index + 1}`}
                     />
                     <p style={{
                         position: 'absolute',
                         bottom: '40px',
-                        left: '50%',
-                        marginLeft: '-45%',
-                        width: '90%',
+                        left: '0%',
+                        // marginLeft: '-45%',
+                        width: '100%',
                         borderRadius: '10px',
                         background: '#09ac8bcf',
-                        padding: '10px',
+                        padding: '8px',
                         fontSize: '12px',
                         textAlign: 'center',
                         opacity: '1',
                     }}>
                         <NextLink href="/login" passHref>
-                            <MUILink variant="h6" style={{color :"white", fontWeight:"bold"}}>croquetitas</MUILink>
+                            <MUILink variant="h6" style={{ color: "white", fontWeight: "bold" }}>croquetitas</MUILink>
                         </NextLink>
                     </p>
                 </div>
