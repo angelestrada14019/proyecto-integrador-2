@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
-@Table(name = "METODO_PAGO")
+@Table(name = "metodo_pago")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,8 +20,7 @@ public class MetodoPago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "NAME")
+    @Column(name = "name", nullable = false)
     private String name;
+
 }

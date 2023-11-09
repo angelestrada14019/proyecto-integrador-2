@@ -1,6 +1,5 @@
 package com.dh.pi2.apidonacion.model;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "DONACIONES")
+@Table(name = "donaciones")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,27 +20,23 @@ public class Donacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Comentario")
+    @Column(name = "comentario")
     private String comentario;
 
-    @Column(name = "Cantidad")
-    @NotNull
-    @NotBlank
+    @Column(name = "cantidad", nullable = false)
     private double cantidad;
 
-    @Column(name = "Fecha_Donacion")
-    @NotNull
-    @NotBlank
+    @Column(name = "fecha_donacion", nullable = false)
     private LocalDate fechaDonacion;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "METODO_PAGO_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "metodo_pago_id", referencedColumnName = "id")
     private MetodoPago metodoPagoID;
 
-    @Column(name = "USUARIOS_idUSUARIOS")
+    @Column(name = "usuarios_id")
     private int idUsuarios;
 
-    @Column(name = "PRODUCTOS_idPRODUCTOS")
+    @Column(name = "productos_id")
     private int idProductos;
 
 }
