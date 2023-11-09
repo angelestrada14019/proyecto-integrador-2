@@ -13,3 +13,12 @@ export const theme = createTheme({
         fontFamily: 'Roboto, sans-serif'
     },
 });
+/*
+height: 100px;
+max-width: 1490px;
+
+background: #F7F7FF;
+margin-top: 17px;
+height: 10px;
+
+*/

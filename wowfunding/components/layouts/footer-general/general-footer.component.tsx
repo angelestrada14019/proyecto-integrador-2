@@ -16,7 +16,7 @@ const GeneralFooter = () => {
               alignItems='center'
               justifyContent={'center'}
               borderTop={'1px solid #eaeaea'}
-              sx={{backgroundColor: "#0B3954"}}>
+              sx={{backgroundColor: "#4BC6B9"}}>
         
             <Grid container justifyContent="space-between" alignItems="center" maxWidth={"70%"}>
                 <Grid item xs={6}>
@@ -28,11 +28,11 @@ const GeneralFooter = () => {
                     </Link>
                 </Grid>
                 <Grid item container xs={6} justifyContent="flex-end">
-                    {socialMediaIcons.map((socialIcon) => (
+                    {/* {socialMediaIcons.map((socialIcon) => (
                         <Link key={socialIcon.name} href={socialIcon.link} sx={{ marginRight: 5 }}>
                             <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={"30px"} height={"30px"}/>
                         </Link>
-                    ))}
+                    ))} */}
                 </Grid>
             </Grid>
 
