@@ -14,7 +14,7 @@ spring:
           uri: lb://api-donaciones
           predicates:
             - Path=/donacion/**
-            - Path=/metodopago/**
+            - Path=/metodoPago/**
 #        - id: msswallet
 #          uri: lb://api-wallet
 #          predicates:
