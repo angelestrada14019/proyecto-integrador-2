@@ -10,6 +10,11 @@ spring:
         locator:
           enabled: true
       routes:
+
+        - id: users-api
+          uri: lb://users-api
+          predicates:
+            - Path=/users/**
         - id: api-donaciones
           uri: lb://api-donaciones
           predicates:
@@ -18,10 +23,7 @@ spring:
           uri: lb://mc-productos
           predicates:
             - Path=/api-productos/**
-#        - id: mssmargins
-#          uri: lb://api-margins
-#          predicates:
-#            - Path=/calculate/**
+
 
 info:
   app:
