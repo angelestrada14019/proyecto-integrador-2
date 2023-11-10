@@ -101,7 +101,7 @@ const ProyectoID = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid sx={{ display: "flex", justifyContent: "center" }} marginTop={5} marginBottom={5}>
-                                    <NextLink href="/" passHref >
+                                    <NextLink href="/donaciones" passHref >
                                         <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} >
                                             Donar a la campaña
                                         </Button>

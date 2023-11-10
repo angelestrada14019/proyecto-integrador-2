@@ -1,21 +1,21 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import BodySingle from "components/layouts/body/single/body-single";
 import LayoutGeneral from 'components/layouts/layout-general';
 import ImageCarousel from 'components/layouts/ui/carrousel/carrousel';
-import { Button, Grid, ThemeProvider, Typography, createTheme } from '@mui/material';
-import MediaCard from 'components/layouts/ui/media-card';
+import { Grid, ThemeProvider, createTheme } from '@mui/material';
 import ComoFunciona from 'components/layouts/como-funciona/como-funciona';
 import Newsletter from 'components/layouts/newsletter/newsletter';
 import FooterAccesos from 'components/layouts/footer-accesos/footer-accesos.component';
 import SobreNosotros from 'components/layouts/sobre-nosotros/sobre-nosotros';
 import Alianzas from 'components/layouts/alianzas/alianzas';
 import SimpleCall from 'components/layouts/call-to-actions/simple-call';
-import LandingTitles from 'components/layouts/ui/landing-titles';
 import ReporteLanding from 'components/layouts/reporte-landing/reporte-landing';
 import BigCall from 'components/layouts/call-to-actions/big-call';
 import Noticias from 'components/layouts/noticias/noticias';
 import CardsLanding from 'components/layouts/cards-landing/cards-landing';
+import { getProyectos } from 'services/proyectos/proyectos.service';
+import { Proyectos } from 'interfaces/proyect.type';
 
 
 
@@ -30,11 +30,12 @@ const theme = createTheme({
 
 
 interface Props {
-
+    proyectos: Proyectos[]
 }
 
 
-const Index: NextPage<Props> = ({ }) => {
+const Index: NextPage<Props> = ({proyectos }: Props) => {
+    console.log('proyectos', proyectos)
 
     return (<LayoutGeneral>
         <Head>
@@ -82,5 +83,23 @@ const Index: NextPage<Props> = ({ }) => {
     )
 }
 
+
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+    const proyectos = await getProyectos(0, 12);
+    console.log('proyectosConsulta', proyectos)
+
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate'
+    )
+
+
+    return {
+        props: {
+            proyectos: proyectos
+        },
+    };
+};
 
 export default Index

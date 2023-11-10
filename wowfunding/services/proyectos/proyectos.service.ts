@@ -1,5 +1,5 @@
 
-const API_URL = "https://localhost:3000"
+const API_URL = "http://localhost:8080"
 
 const fetchApi = async (endpoint: string, urlParams?: string) => {
     const url = `${API_URL}/${endpoint}${urlParams || ''}`
@@ -8,15 +8,16 @@ const fetchApi = async (endpoint: string, urlParams?: string) => {
 }
 
 export const getProyectos = async (offset?: number, limit?: number) => {
+    console.log('offset', offset,limit)
     const params = new URLSearchParams();
-    if (offset) params.set("offset", `${offset}`);
-    if (limit) params.set("limit", `${limit}`);
-    return fetchApi("comics", params.toString());
+    if (offset) params.set("pageNumber", `${offset}`);
+    if (limit) params.set("pageSize", `${limit}`);
+    return fetchApi(`api-productos/productos?pageNumber=0&pageSize=12`);
 }
 
 
 export const getProyecto = async (proyectoId: number) =>{
-    const data = await fetch(`${API_URL}/proyecto/${proyectoId}`)
+    const data = await fetch(`${API_URL}/productos/${proyectoId}`)
     console.log('data', data)
 
     const results = [{
