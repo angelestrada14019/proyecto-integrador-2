@@ -24,6 +24,6 @@ public class UserType {
     private ZonedDateTime lastUpdated;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "type")
+    @JoinColumn(name = "id")
     private User user;
 }

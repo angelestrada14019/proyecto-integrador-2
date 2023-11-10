@@ -5,6 +5,8 @@ import com.dh.pi2.usersapi.api.UserResponseTO;
 import com.dh.pi2.usersapi.persistence.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+
 @Component
 public class UserMapper {
 
@@ -14,6 +16,21 @@ public class UserMapper {
         user.setLastname(userRequestTO.getLastname());
         user.setPassword(userRequestTO.getPassword());
         user.setProfileUrl(userRequestTO.getProfileUrl());
+        user.setEmail(userRequestTO.getEmail());
+        user.setType(userRequestTO.getType());
+        user.setCreationDate(ZonedDateTime.now());
+        user.setLastUpdated(ZonedDateTime.now());
+
+        return user;
+    }
+
+    public User mapUpdateRequest(User user, UserRequestTO userRequestTO) {
+        user.setName(userRequestTO.getName());
+        user.setLastname(userRequestTO.getLastname());
+        user.setProfileUrl(userRequestTO.getProfileUrl());
+        user.setEmail(userRequestTO.getEmail());
+        user.setType(userRequestTO.getType());
+        user.setLastUpdated(ZonedDateTime.now());
 
         return user;
     }
@@ -27,7 +44,7 @@ public class UserMapper {
                 .profileUrl(user.getProfileUrl())
                 .creationDate(user.getCreationDate())
                 .lastUpdated(user.getLastUpdated())
-                .userType(user.getUserType())
+                //.userType(user.getUserType())
                 .build();
     }
 }

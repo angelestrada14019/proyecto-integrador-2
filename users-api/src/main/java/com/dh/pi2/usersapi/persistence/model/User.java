@@ -28,8 +28,9 @@ public class User {
 
     private ZonedDateTime creationDate;
     private ZonedDateTime lastUpdated;
+    private Long type;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     @JoinColumn(name = "type")
     private UserType userType;
 }
