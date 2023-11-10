@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")
+@RequestMapping("/api-productos/productos")
 public class ProductosController extends BaseController<ProductosDto>{
 
     @Autowired

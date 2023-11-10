@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/multimedias")
+@RequestMapping("/api-productos/multimedias")
 public class MultimediasController extends BaseController<MultimediasDto> {
 
     @Autowired
