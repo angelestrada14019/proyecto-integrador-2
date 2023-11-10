@@ -18,9 +18,6 @@ const FooterAccesos = () => {
             <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
           </Box>
           <Box>
-            <a href="/declaracion-de-privacidad">Declaración de privacidad</a>
-          </Box>
-          <Box>
             <a href="/informacion-legal">Información legal</a>
           </Box>
         </Grid>
@@ -34,12 +31,8 @@ const FooterAccesos = () => {
           <Box>
             <a href="/ideas">Ideas para recaudar fondos</a>
           </Box>
-          <Box>
-            <a href="/proyectos-admitidos">Proyectos admitidos</a>
-          </Box>
-          <Box>
-            <a href="/paises">Paises a los que llegamos</a>
-          </Box>
+
+
 		  <Box>
             <a href="/alianzas">Alianzas estratégicas</a>
           </Box>
@@ -53,9 +46,6 @@ const FooterAccesos = () => {
           </Box>
           <Box>
             <a href="/prensa">Prensa</a>
-          </Box>
-          <Box>
-            <a href="/historias-de-exito">Historias de éxito</a>
           </Box>
         </Grid>
       </Grid>
