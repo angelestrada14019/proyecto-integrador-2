@@ -1,0 +1,39 @@
+server:
+  port: ${SERVER_PORT:0}
+spring:
+  application:
+    name: mc-productos
+  ## MySQL
+  datasource:
+    username: ${mysql_username}
+    password: ${mysql_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
+
+#eureka
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
+#actuator
+management:
+#  health:
+#    circuitbreakers:
+#      enabled: true
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+info:
+  name: mc-productos
+  description: mc-productos
+  version: 1.0.0
+  date: 2023-11-02
