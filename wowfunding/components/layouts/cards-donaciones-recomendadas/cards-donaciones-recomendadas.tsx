@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Grid, Typography } from '@mui/material'
 import MediaCard from '../ui/media-card'
+import LandingTitles from '../ui/landing-titles';
 
 const arrayDeMediCards = [
     {
@@ -77,7 +78,7 @@ const CardsDonacionesRecomendadas = () => {
         <Grid container direction="column" alignItems="center" spacing={2} >
           <Grid item>
             <Typography variant="h5" align="center" gutterBottom>
-              Proyectos que necesitan tu ayuda
+              Proyectos que necesitan tu apoyo
             </Typography>
           </Grid>
           <Grid item container justifyContent="center" spacing={7}>
