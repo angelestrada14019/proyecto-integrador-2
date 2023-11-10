@@ -39,7 +39,7 @@ const Header: FC<Props> = ({variant}: Props) => {
             </Box>}
 
             {usuarioLogueado && <Box sx={{marginLeft: "auto", display:"flex", alignItems:"center" }}>
-                <NextLink href="/registro" passHref>
+                <NextLink href="/mis-donaciones-proyectos" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 3 }}>Donaciones y proyectos</MUILink>
                 </NextLink>
                 <NextLink href="/" passHref >
