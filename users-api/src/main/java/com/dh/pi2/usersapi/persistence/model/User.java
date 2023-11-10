@@ -12,7 +12,7 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 
-@Entity(name = "user")
+@Entity(name = "usuarios")
 @Data
 public class User {
 
@@ -30,7 +30,7 @@ public class User {
     private ZonedDateTime lastUpdated;
     private Long type;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
-    @JoinColumn(name = "type")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @JoinColumn(name = "TIPO_USUARIO_id")
     private UserType userType;
 }

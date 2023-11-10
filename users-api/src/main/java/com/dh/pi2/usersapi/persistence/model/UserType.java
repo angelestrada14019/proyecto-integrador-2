@@ -1,5 +1,6 @@
 package com.dh.pi2.usersapi.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,5 +26,6 @@ public class UserType {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
+    @JsonIgnore
     private User user;
 }
