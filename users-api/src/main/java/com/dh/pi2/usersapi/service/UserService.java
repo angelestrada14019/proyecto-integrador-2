@@ -27,9 +27,9 @@ public class UserService {
     public UserResponseTO create(UserRequestTO userRequestTO) {
         var user = userMapper.mapCreateRequest(userRequestTO);
 
-        var userType = userTypeRepository.findById(userRequestTO.getType());
+        var userType = userTypeRepository.findById(userRequestTO.getUserType().getId());
         if (userType.isEmpty()) {
-            log.error("User type {} not found", userRequestTO.getType());
+            log.error("User type {} not found", userRequestTO.getUserType());
             throw new RuntimeException("User type not found");
         }
 
@@ -57,10 +57,10 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
 
-        if (ObjectUtils.isNotEmpty(userRequestTO.getType())) {
-            var userType = userTypeRepository.findById(userRequestTO.getType());
+        if (ObjectUtils.isNotEmpty(userRequestTO.getUserType())) {
+            var userType = userTypeRepository.findById(userRequestTO.getUserType().getId());
             if (userType.isEmpty()) {
-                log.error("User type {} not found", userRequestTO.getType());
+                log.error("User type {} not found", userRequestTO.getUserType());
                 throw new RuntimeException("User type not found");
             }
         }

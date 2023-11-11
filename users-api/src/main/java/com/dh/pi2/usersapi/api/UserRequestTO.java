@@ -1,5 +1,6 @@
 package com.dh.pi2.usersapi.api;
 
+import com.dh.pi2.usersapi.persistence.model.UserType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,5 +13,5 @@ public class UserRequestTO {
     private String email;
     private String password;
     private String profileUrl;
-    private Long type;
+    private UserType userType;
 }

@@ -21,7 +21,6 @@ public class User {
 
     private ZonedDateTime creationDate;
     private ZonedDateTime lastUpdated;
-    private Long type;
 
     @ManyToOne
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
