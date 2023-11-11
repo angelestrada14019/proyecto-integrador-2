@@ -9,10 +9,6 @@ spring:
     password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
-  jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
 
 info:
   application:

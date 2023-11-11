@@ -24,8 +24,4 @@ public class UserType {
     private ZonedDateTime creationDate;
     private ZonedDateTime lastUpdated;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    @JsonIgnore
-    private User user;
 }
