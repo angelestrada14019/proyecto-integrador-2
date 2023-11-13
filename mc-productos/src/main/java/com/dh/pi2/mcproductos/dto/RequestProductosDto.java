@@ -1,6 +1,7 @@
 package com.dh.pi2.mcproductos.dto;
 
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestProductosDto {
 
     private String nombre;

@@ -1,5 +1,6 @@
 package com.dh.pi2.mcproductos.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -20,10 +21,6 @@ public class Productos {
     private int id;
     @Column(name = "Nombre")
     private String nombre;
-    @Column(name = "Resumen")
-    private String resumen;
-    @Column(name = "Descripcion")
-    private String descripcion;
     @Column(name = "Fecha_Publicacion")
     private LocalDateTime fechaPublicacion;
     @Column(name = "Fecha_Finalizacion")
@@ -36,7 +33,10 @@ public class Productos {
     @JoinColumn(name = "CATEGORIAS_id", referencedColumnName = "id")
     private Categorias categoriasId;
 
-    @OneToMany(mappedBy = "productosId", orphanRemoval = true)
+    @OneToMany(mappedBy = "productosId",orphanRemoval = true)
     private List<Multimedias> multimediasList;
+
+    @OneToMany(mappedBy = "productosId", orphanRemoval = true)
+    private List<Descripciones> descripciones;
 
 }

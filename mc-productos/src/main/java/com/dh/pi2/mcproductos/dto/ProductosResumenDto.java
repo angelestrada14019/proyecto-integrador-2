@@ -1,7 +1,9 @@
 package com.dh.pi2.mcproductos.dto;
 
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
+import com.dh.pi2.mcproductos.persistence.entity.Descripciones;
 import com.dh.pi2.mcproductos.persistence.entity.Multimedias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
@@ -12,13 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductosResumenDto {
 
     private int id;
     private String nombre;
-    private String resumen;
     private String fechaPublicacion;
     private double monto;
     private double montoTotalDonaciones;
-    private Multimedias multimedias; // debe ser de tipo 1 para portada
+    private List<Multimedias> multimedias;
+    private List<Descripciones> descripciones;
 }

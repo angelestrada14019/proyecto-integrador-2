@@ -6,26 +6,24 @@ import lombok.*;
 
 import java.util.Objects;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "multimedias")
-public class Multimedias {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "descripciones")
+public class Descripciones {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private int id;
-    @Column(name = "Url")
-    private String url;
-
+    @Column(name = "descripcion")
+    private String descripcion;
     @Column(name = "tipo")
-    private int tipo;
-
+    private Integer tipo;
     @ManyToOne
-    @JoinColumn(name = "PRODUCTOS_id", referencedColumnName = "id")
+    @JoinColumn(name = "productos_id", referencedColumnName = "id")
     private Productos productosId;
 
 }
