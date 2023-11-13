@@ -3,8 +3,10 @@ package com.dh.pi2.apidonacion.controller;
 import com.dh.pi2.apidonacion.dto.DonacionDTO;
 import com.dh.pi2.apidonacion.exceptions.BadRequestException;
 import com.dh.pi2.apidonacion.exceptions.ResourceNotFoundException;
+import com.dh.pi2.apidonacion.message.CustomMessageMonto;
 import com.dh.pi2.apidonacion.service.DonacionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api-donaciones/donacion")
@@ -60,7 +63,12 @@ public class DonacionController {
         List<DonacionDTO> donacionsDTO = donacionService.findDonacionesByProducto(id);
         return ResponseEntity.ok(donacionsDTO);
     }
-
-
+    @GetMapping("/producto_usuario")
+    public ResponseEntity<CustomMessageMonto> countCantidadWithUserAndProduct(
+            @RequestParam(name = "usuario_id") int usuarioId,
+            @RequestParam(name = "producto_id") int productoId)  throws BadRequestException {
+        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct(usuarioId,productoId);
+        return ResponseEntity.ok(customMessageMonto);
+    }
 
 }
