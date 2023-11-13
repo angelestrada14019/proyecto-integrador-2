@@ -1,6 +1,11 @@
 server:
   port: ${SERVER_PORT:0}
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   application:
     name: mc-productos
   ## MySQL
@@ -9,6 +14,13 @@ spring:
     password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db.ctd.academy:3306/${mysql_database}
+
+
+#cola
+queue:
+  pi2:
+    gp2:
+      prductos_donaciones: queue.pi2.gp2.productos_donaciones
 
 #eureka
 eureka:
