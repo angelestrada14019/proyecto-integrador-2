@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: gateway
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     gateway:
       discovery:
@@ -24,6 +29,11 @@ spring:
           predicates:
             - Path=/api-productos/**
 
+#cola
+queue:
+  pi2:
+    gp2:
+      prductos_donaciones: queue.pi2.gp2.productos_donaciones
 
 info:
   app:
