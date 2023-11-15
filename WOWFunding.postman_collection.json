@@ -332,7 +332,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos/39",
+							"raw": "http://localhost:8080/api-productos/productos/41",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -341,7 +341,7 @@
 							"path": [
 								"api-productos",
 								"productos",
-								"39"
+								"41"
 							]
 						}
 					},
@@ -354,7 +354,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"string\",\r\n  \"resumen\": \"string\",\r\n  \"descripcion\": \"string\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 0,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 1\r\n      }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"nombre\": \"producto3\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 80000,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -362,7 +362,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos",
+							"raw": "http://localhost:8080/api-productos/productos/creatAll",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -370,7 +370,8 @@
 							"port": "8080",
 							"path": [
 								"api-productos",
-								"productos"
+								"productos",
+								"creatAll"
 							]
 						}
 					},
@@ -413,7 +414,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 39,\r\n    \"nombre\": \"hola\",\r\n    \"resumen\": \"string\",\r\n    \"descripcion\": \"string\",\r\n    \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n    \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n    \"monto\": 0.0,\r\n    \"usuariosId\": 1,\r\n    \"categoriasId\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"categoria1\",\r\n        \"descripcion\": \"esta es una categoria\"\r\n    },\r\n    \"multimedias\": []\r\n}",
+							"raw": "{\r\n  \"id\": 43,\r\n  \"nombre\": \"hola\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 80000,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -437,12 +438,12 @@
 					"response": []
 				},
 				{
-					"name": "borrar categoria Copy",
+					"name": "borrar producto",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos/38",
+							"raw": "http://localhost:8080/api-productos/productos/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -451,7 +452,7 @@
 							"path": [
 								"api-productos",
 								"productos",
-								"38"
+								"39"
 							]
 						}
 					},
