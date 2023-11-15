@@ -1,12 +1,15 @@
 package com.dh.pi2.mcproductos.mapper;
 
+import com.dh.pi2.mcproductos.dto.MultimediasDto;
 import com.dh.pi2.mcproductos.dto.ProductosDto;
+import com.dh.pi2.mcproductos.dto.ProductosWithoutMAndDDto;
 import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Component
 public class ProductosMapper extends AbstractConverter<Productos, ProductosDto> {
@@ -18,14 +21,13 @@ public class ProductosMapper extends AbstractConverter<Productos, ProductosDto> 
         return ProductosDto.builder()
                 .id(entity.getId())
                 .nombre(entity.getNombre())
-                .descripcion(entity.getDescripcion())
-                .resumen(entity.getResumen())
                 .fechaPublicacion(entity.getFechaPublicacion().format(formatter))
                 .fechaFinalizacion(entity.getFechaFinalizacion().format(formatter))
                 .usuariosId(entity.getUsuariosId())
                 .monto(entity.getMonto())
                 .categoriasId(entity.getCategoriasId())
                 .multimedias(entity.getMultimediasList())
+                .descripciones(entity.getDescripciones())
                 .build();
     }
 
@@ -34,13 +36,27 @@ public class ProductosMapper extends AbstractConverter<Productos, ProductosDto> 
         return Productos.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
-                .descripcion(dto.getDescripcion())
-                .resumen(dto.getResumen())
                 .fechaPublicacion(LocalDateTime.parse(dto.getFechaPublicacion(),formatter))
                 .fechaFinalizacion(LocalDateTime.parse(dto.getFechaFinalizacion(),formatter))
                 .usuariosId(dto.getUsuariosId())
                 .monto(dto.getMonto())
                 .multimediasList(dto.getMultimedias())
+                .descripciones(dto.getDescripciones())
+                .categoriasId(dto.getCategoriasId())
+                .build();
+    }
+
+
+
+
+    public ProductosWithoutMAndDDto fromDtoJustProduct(ProductosDto dto) {
+        return ProductosWithoutMAndDDto.builder()
+                .id(dto.getId())
+                .nombre(dto.getNombre())
+                .fechaPublicacion(LocalDateTime.parse(dto.getFechaPublicacion(),formatter))
+                .fechaFinalizacion(LocalDateTime.parse(dto.getFechaFinalizacion(),formatter))
+                .usuariosId(dto.getUsuariosId())
+                .monto(dto.getMonto())
                 .categoriasId(dto.getCategoriasId())
                 .build();
     }

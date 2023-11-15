@@ -1,7 +1,9 @@
 package com.dh.pi2.mcproductos.dto;
 
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
+import com.dh.pi2.mcproductos.persistence.entity.Descripciones;
 import com.dh.pi2.mcproductos.persistence.entity.Multimedias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.util.List;
@@ -12,16 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductosDto {
 
     private int id;
     private String nombre;
-    private String resumen;
-    private String descripcion;
     private String fechaPublicacion;
     private String fechaFinalizacion;
     private double monto;
     private int usuariosId;
     private Categorias categoriasId;
+    @JsonIgnoreProperties(value = {"productosId"})
     private List<Multimedias> multimedias;
+    @JsonIgnoreProperties(value = {"productosId"})
+    private List<Descripciones> descripciones;
 }

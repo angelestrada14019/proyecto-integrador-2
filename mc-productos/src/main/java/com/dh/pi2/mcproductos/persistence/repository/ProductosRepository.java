@@ -1,6 +1,7 @@
 package com.dh.pi2.mcproductos.persistence.repository;
 
 
+import com.dh.pi2.mcproductos.dto.ProductosDto;
 import com.dh.pi2.mcproductos.dto.RequestProductosDto;
 import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,8 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer> {
     """)
     Page<Productos> listPRoductsByFilterRequestProductosDto(@Param("filtro") RequestProductosDto filtro,
                                                             @Param("pageable") Pageable pageable);
+
+
 
 
 }

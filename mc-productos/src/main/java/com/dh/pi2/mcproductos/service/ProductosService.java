@@ -9,4 +9,5 @@ public interface ProductosService {
     Page<ProductosDto> listPRoductsByFilterRequestProductosDto(RequestProductosDto filtro,
                                                                Pageable pageable);
 
+    ProductosDto crearProductWithMultiMediaAndDescription(ProductosDto dto);
 }

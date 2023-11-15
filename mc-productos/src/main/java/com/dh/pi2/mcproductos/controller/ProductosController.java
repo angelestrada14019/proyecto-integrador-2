@@ -1,8 +1,10 @@
 package com.dh.pi2.mcproductos.controller;
 
+import com.dh.pi2.mcproductos.dto.CategoriasDto;
 import com.dh.pi2.mcproductos.dto.ProductosDto;
 import com.dh.pi2.mcproductos.dto.RequestProductosDto;
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
+import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import com.dh.pi2.mcproductos.service.CrudService;
 import com.dh.pi2.mcproductos.service.ProductosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +60,10 @@ public class ProductosController extends BaseController<ProductosDto>{
         return ResponseEntity.ok(productosList);
     }
 
+    @PostMapping("/creatAll")
+    public ResponseEntity<ProductosDto> crearProductWithMultiMediaAndDescription(@RequestBody ProductosDto dto) {
 
+        ProductosDto nDtl = productoService.crearProductWithMultiMediaAndDescription(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nDtl);
+    }
 }
