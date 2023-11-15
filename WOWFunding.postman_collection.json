@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"comentario\": \"string\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 1\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 1\r\n}",
+							"raw": "{\r\n  \"comentario\": \"hola\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 8\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 37\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,13 +24,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:55123/donacion",
+							"raw": "http://localhost:8080/api-donaciones/donacion",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "55123",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"donacion"
 							]
 						}
@@ -39,31 +40,20 @@
 				},
 				{
 					"name": "get donacion por id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"comentario\": \"string\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 1\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:18635/donacion/8",
+							"raw": "http://localhost:8080/api-donaciones/donacion/13",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"donacion",
-								"8"
+								"13"
 							]
 						}
 					},
@@ -75,13 +65,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/donacion/8",
+							"raw": "http://localhost:8080/api-donaciones/donacion/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"donacion",
 								"8"
 							]
@@ -95,15 +86,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/donacion/usuario/1",
+							"raw": "http://localhost:8080/api-donaciones/donacion/producto/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"donacion",
-								"usuario",
+								"producto",
 								"1"
 							]
 						}
@@ -116,13 +108,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/donacion/usuario/1",
+							"raw": "http://localhost:8080/api-donaciones/donacion/usuario/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"donacion",
 								"usuario",
 								"1"
@@ -151,13 +144,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:18635/metodoPago",
+							"raw": "http://localhost:8080/api-donaciones/metodoPago",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"metodoPago"
 							]
 						}
@@ -170,15 +164,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/metodoPago/4",
+							"raw": "http://localhost:8080/api-donaciones/metodoPago/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"metodoPago",
-								"4"
+								"6"
 							]
 						}
 					},
@@ -190,15 +185,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/metodoPago/4",
+							"raw": "http://localhost:8080/api-donaciones/metodoPago/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"metodoPago",
-								"4"
+								"7"
 							]
 						}
 					},
@@ -210,14 +206,464 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:18635/metodoPago",
+							"raw": "http://localhost:8080/api-donaciones/metodoPago",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "18635",
+							"port": "8080",
 							"path": [
+								"api-donaciones",
 								"metodoPago"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ControllerUser",
+			"item": [
+				{
+					"name": "crear user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"agus\",\r\n  \"lastname\": \"damelio\",\r\n  \"email\": \"a@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"nada\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get donacion por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch donacion",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"lastname\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"profileUrl\": \"string\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ControllerProductos",
+			"item": [
+				{
+					"name": "Get producto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/productos/39",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"productos",
+								"39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear Producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"string\",\r\n  \"resumen\": \"string\",\r\n  \"descripcion\": \"string\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 0,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 1\r\n      }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get productos por page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/productos?pageNumber=0&pageSize=12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"productos"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update producto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 39,\r\n    \"nombre\": \"hola\",\r\n    \"resumen\": \"string\",\r\n    \"descripcion\": \"string\",\r\n    \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n    \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n    \"monto\": 0.0,\r\n    \"usuariosId\": 1,\r\n    \"categoriasId\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"categoria1\",\r\n        \"descripcion\": \"esta es una categoria\"\r\n    },\r\n    \"multimedias\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/productos/39",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"productos",
+								"39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar categoria Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/productos/38",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"productos",
+								"38"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ControllerCategorias",
+			"item": [
+				{
+					"name": "crear categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categoria por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 4,\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"nada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ControllerMultimedias",
+			"item": [
+				{
+					"name": "crear multimedia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categoria por id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update categoria Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 4,\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"nada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar categoria Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api-productos/categorias/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api-productos",
+								"categorias",
+								"3"
 							]
 						}
 					},
