@@ -1,6 +1,8 @@
 package com.dh.pi2.apidonacion.service;
 import com.dh.pi2.apidonacion.dto.DonacionDTO;
 import com.dh.pi2.apidonacion.exceptions.ResourceNotFoundException;
+import com.dh.pi2.apidonacion.message.CustomMessageMonto;
+import com.dh.pi2.apidonacion.message.queue.DonacionesSend;
 import com.dh.pi2.apidonacion.model.Donacion;
 import com.dh.pi2.apidonacion.model.MetodoPago;
 import com.dh.pi2.apidonacion.repository.IDonacionRepository;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DonacionService {
@@ -21,6 +24,9 @@ public class DonacionService {
 
     @Autowired
     private MetodoPagoService metodoPagoService;
+
+    @Autowired
+    private DonacionesSend donacionesSend;
 
     @Autowired
     ObjectMapper mapper;
@@ -83,6 +89,17 @@ public class DonacionService {
         }
 
         return donacionDTOS;
+    }
+    public CustomMessageMonto countCantidadWithUserAndProduct(int idUsuarios, int idProductos){
+        double sumatoriaDonaciones = donacionRepository.countCantidadWithUserAndProduct(idUsuarios, idProductos);
+        CustomMessageMonto customMessageMonto = CustomMessageMonto.builder()
+                .messageId(UUID.randomUUID().toString())
+                .sumatoriaDonaciones(sumatoriaDonaciones)
+                .idProductos(idProductos)
+                .idUsuarios(idUsuarios)
+                .build();
+        donacionesSend.send(customMessageMonto);
+        return customMessageMonto;
     }
 }
 
