@@ -4,6 +4,7 @@ import com.dh.pi2.mcproductos.persistence.entity.Categorias;
 import com.dh.pi2.mcproductos.persistence.entity.Descripciones;
 import com.dh.pi2.mcproductos.persistence.entity.Multimedias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.ws.rs.DefaultValue;
 import lombok.*;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public class ProductosDto {
     private String fechaPublicacion;
     private String fechaFinalizacion;
     private double monto;
+    @DefaultValue(value = "0")
+    private double montoSumatoriaDonaciones;
     private int usuariosId;
     private Categorias categoriasId;
     @JsonIgnoreProperties(value = {"productosId"})

@@ -36,6 +36,7 @@ public class ProductosServiceImpl implements ProductosService, CrudService<Produ
 
     @Autowired
     private ProductosMapper productosMapper;
+
     @Override
     public Page<ProductosDto> listPRoductsByFilterRequestProductosDto(RequestProductosDto filtro, Pageable pageable) {
         try {

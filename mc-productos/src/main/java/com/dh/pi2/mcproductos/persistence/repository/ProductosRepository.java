@@ -7,11 +7,12 @@ import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 @Repository
 public interface ProductosRepository extends JpaRepository<Productos, Integer> {
     @Query("""
@@ -24,6 +25,13 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer> {
     """)
     Page<Productos> listPRoductsByFilterRequestProductosDto(@Param("filtro") RequestProductosDto filtro,
                                                             @Param("pageable") Pageable pageable);
+
+    @Transactional
+    @Modifying
+    @Query("update Productos p set p.montoSumatoriaDonaciones = ?1 where p.usuariosId = ?2 and p.id = ?3")
+    void updateMontoTotalDonaciones(double montoSumatoriaDonaciones, int usuariosId, int id);
+
+
 
 
 

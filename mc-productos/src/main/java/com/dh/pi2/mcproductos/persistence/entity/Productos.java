@@ -2,6 +2,7 @@ package com.dh.pi2.mcproductos.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.ws.rs.DefaultValue;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class Productos {
     private double monto;
     @Column(name = "USUARIOS_id")
     private int usuariosId;
+    @Column(name = "monto_sumatoria_donaciones")
+    @DefaultValue(value = "0")
+    private double montoSumatoriaDonaciones;
     @ManyToOne
     @JoinColumn(name = "CATEGORIAS_id", referencedColumnName = "id")
     private Categorias categoriasId;
