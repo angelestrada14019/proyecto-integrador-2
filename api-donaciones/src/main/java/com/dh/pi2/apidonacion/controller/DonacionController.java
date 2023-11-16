@@ -30,7 +30,9 @@ public class DonacionController {
     // ADMIN
     @PostMapping
     public ResponseEntity<DonacionDTO> createDonacion(@RequestBody DonacionDTO donacionDTO) throws Exception {
-        return ResponseEntity.ok(donacionService.createDonacion(donacionDTO));
+        DonacionDTO dto = donacionService.createDonacion(donacionDTO);
+        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct(donacionDTO.getIdUsuarios(), donacionDTO.getIdProductos());
+        return ResponseEntity.ok(dto);
     }
 
     // ALL
@@ -63,12 +65,12 @@ public class DonacionController {
         List<DonacionDTO> donacionsDTO = donacionService.findDonacionesByProducto(id);
         return ResponseEntity.ok(donacionsDTO);
     }
-    @GetMapping("/producto_usuario")
-    public ResponseEntity<CustomMessageMonto> countCantidadWithUserAndProduct(
-            @RequestParam(name = "usuario_id") int usuarioId,
-            @RequestParam(name = "producto_id") int productoId)  throws BadRequestException {
-        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct(usuarioId,productoId);
-        return ResponseEntity.ok(customMessageMonto);
-    }
+//    @GetMapping("/producto_usuario")
+//    public ResponseEntity<CustomMessageMonto> countCantidadWithUserAndProduct(
+//            @RequestParam(name = "usuario_id") int usuarioId,
+//            @RequestParam(name = "producto_id") int productoId)  throws BadRequestException {
+//        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct(usuarioId,productoId);
+//        return ResponseEntity.ok(customMessageMonto);
+//    }
 
 }

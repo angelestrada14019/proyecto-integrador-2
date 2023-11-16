@@ -14,7 +14,7 @@ public interface IDonacionRepository extends JpaRepository<Donacion, Integer> {
     @Query("SELECT d FROM Donacion d WHERE d.idProductos = ?1")
     List<Donacion> findDonacionesByProducto(int id);
 
-    @Query("select count(d.cantidad) from Donacion d where d.idUsuarios = ?1 and d.idProductos = ?2")
+    @Query("select sum(d.cantidad) from Donacion d where d.idUsuarios = ?1 and d.idProductos = ?2")
     double countCantidadWithUserAndProduct(int idUsuarios, int idProductos);
 
 

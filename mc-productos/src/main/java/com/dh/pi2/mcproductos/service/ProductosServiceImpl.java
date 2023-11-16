@@ -4,6 +4,7 @@ import com.dh.pi2.mcproductos.dto.ProductosDto;
 import com.dh.pi2.mcproductos.dto.RequestProductosDto;
 import com.dh.pi2.mcproductos.mapper.ProductosMapper;
 import com.dh.pi2.mcproductos.persistence.entity.Productos;
+import com.dh.pi2.mcproductos.persistence.queue.DonacionesListener;
 import com.dh.pi2.mcproductos.persistence.repository.ProductosRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ProductosServiceImpl implements ProductosService, CrudService<Produ
 
     @Autowired
     private ProductosMapper productosMapper;
+
     @Override
     public Page<ProductosDto> listPRoductsByFilterRequestProductosDto(RequestProductosDto filtro, Pageable pageable) {
         try {

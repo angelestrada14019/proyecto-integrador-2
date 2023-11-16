@@ -30,7 +30,7 @@ eureka:
 queue:
   pi2:
     gp2:
-      prductos_donaciones: queue.pi2.gp2.productos_donaciones
+      productos_donaciones: queue.pi2.gp2.productos_donaciones
 
 
 

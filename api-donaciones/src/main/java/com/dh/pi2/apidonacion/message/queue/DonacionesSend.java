@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DonacionesSend {
+
     private final RabbitTemplate rabbitTemplate;
     private final Queue queue;
 
