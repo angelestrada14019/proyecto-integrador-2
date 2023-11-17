@@ -15,7 +15,9 @@ import BigCall from 'components/layouts/call-to-actions/big-call';
 import Noticias from 'components/layouts/noticias/noticias';
 import CardsLanding from 'components/layouts/cards-landing/cards-landing';
 import { getProyectos } from 'services/proyectos/proyectos.service';
-import { Proyectos } from 'interfaces/proyect.type';
+import { ProyectoFinal, Proyectos } from 'interfaces/proyect.type';
+import { Spinner } from 'components/layouts/ui/spinner';
+import { useState } from 'react';
 
 
 
@@ -30,12 +32,26 @@ const theme = createTheme({
 
 
 interface Props {
-    proyectos: Proyectos[]
+    proyectos: ProyectoFinal[]
+    proyectosCargados:boolean
 }
 
 
-const Index: NextPage<Props> = ({proyectos }: Props) => {
-    console.log('proyectos', proyectos)
+const Index: NextPage<Props> = ({proyectos,proyectosCargados }: Props) => {
+  console.log('proyectos', proyectos)
+  
+    
+    if (!proyectosCargados) {
+      return (
+        <LayoutGeneral>
+          <ThemeProvider theme={theme}>
+            <Grid sx={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Spinner />
+            </Grid>
+          </ThemeProvider>
+        </LayoutGeneral>
+      );
+    }
 
     return (<LayoutGeneral>
         <Head>
@@ -51,7 +67,7 @@ const Index: NextPage<Props> = ({proyectos }: Props) => {
                     <div>
                         <SimpleCall />
 
-                        <CardsLanding/>
+                        <CardsLanding listaProyectos={proyectos}/>
 
                         <ComoFunciona />
                         <ReporteLanding />
@@ -86,20 +102,27 @@ const Index: NextPage<Props> = ({proyectos }: Props) => {
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    const proyectos = await getProyectos(0, 12);
-    console.log('proyectosConsulta', proyectos)
-
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate'
-    )
-
-
-    return {
+    try {
+      const proyectos = await getProyectos(0, 10);
+  
+      res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
+      
+      return {
         props: {
-            proyectos: proyectos
+          proyectos: proyectos,
+          proyectosCargados:true
         },
-    };
-};
+      };
+    } catch (error) {
+      console.error('Error al cargar proyectos', error);
+      return {
+        props: {
+          proyectos: [],
+          proyectosCargados:false
+        },
+      };
+    }
+  };
+  
 
 export default Index

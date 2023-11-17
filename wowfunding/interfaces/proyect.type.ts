@@ -2,30 +2,9 @@ export type Proyectos = {
     resultados: ProyectoFinal[]
 }
 
-
-// export type Proyecto = {
-//     id: number;
-//     titulo: string;
-//     imagenPortada: string;
-//     descripcionCorta: string;
-//     montoRecaudado: number;
-//     montoARecaudar: number;
-//     fechaInicio:string;
-//     fechaLimite: string;
-//     nombreCreador: string;
-//     contacto: string;
-//     categoria: ProyectoCategoria;
-//     quienesSomos: string;
-//     quienesSomosImg: string;
-//     descipcionGeneral: string;
-//     descipcionGeneralImg: string;
-//     conclusion: string;
-//     conclusionImg: string;
-// }
-
 export type ProyectoFinal = {
-    categoriaID: Categoria;
-    descripcion: string;
+    categoriasId: Categoria;
+    descripciones: ListaDescripciones[];
     fechaFinalizacion: string;
     fechaPublicacion: string;
     id: number;
@@ -43,11 +22,11 @@ export type ProyectoCategoria ={
 
 }
 
-export type ListaProyectos = {
-    offset: number;
-    limit: number;
-    results: ProyectoFinal[]
-}
+// export type ListaProyectos = {
+//     offset: number;
+//     limit: number;
+//     results: ProyectoFinal[]
+// }
 
 export type Categoria = {
     id: number;
@@ -57,7 +36,13 @@ export type Categoria = {
 }
 export type ListaMultimedias = {
     id: number;
-    descripcion: string;
-    nombre: string;
+    url: string;
+    tipo: number;
 
+}
+
+export type ListaDescripciones = {
+    id: number;
+    tipo: number;
+    descripcion: string;
 }

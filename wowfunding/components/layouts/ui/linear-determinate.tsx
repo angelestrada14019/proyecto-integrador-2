@@ -20,8 +20,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const LinearDeterminate =({amount,finalAmount} : Prop) => {
-  const [progress, setProgress] = React.useState((amount / finalAmount) * 100);
+  const [progress, setProgress] = React.useState<number>(0);
 
+React.useEffect(() => {
+  setProgress((amount / finalAmount) * 100)
+}, [amount])
 
   return (
     <Box sx={{ width: '100%' }}>

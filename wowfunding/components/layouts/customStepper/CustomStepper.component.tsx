@@ -57,11 +57,11 @@ export default function HorizontalLinearStepper(props: Props) {
                 //cuando esta todo completo
                 <>
                     <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
+                        Todos los pasos finalizados correctamente!
                     </Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
+                        <Button onClick={handleReset}>Reiniciar</Button>
                     </Box>
                 </>
             ) : (
@@ -75,12 +75,12 @@ export default function HorizontalLinearStepper(props: Props) {
                             onClick={handleBack}
                             sx={{ mr: 1 }}
                         >
-                            Back
+                            Atras
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
 
                         <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            {activeStep === steps.length - 1 ? 'Finalizar' : 'siguiente'}
                         </Button>
                     </Box>
                 </>

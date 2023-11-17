@@ -8,45 +8,23 @@ const fetchApi = async (endpoint: string, urlParams?: string) => {
 }
 
 export const getProyectos = async (offset?: number, limit?: number) => {
-    console.log('offset', offset,limit)
     const params = new URLSearchParams();
     if (offset) params.set("pageNumber", `${offset}`);
     if (limit) params.set("pageSize", `${limit}`);
-    return fetchApi(`api-productos/productos?pageNumber=0&pageSize=12`);
+    const data = await fetchApi(`api-productos/productos?pageNumber=${offset}&pageSize=${limit}`);
+    return data || {}; // Devuelve un objeto vacío si los datos son undefined
 }
 
+export const getProyecto = async (proyectoId: number) => {
+    return fetchApi(`api-productos/productos/${proyectoId}`)
 
-export const getProyecto = async (proyectoId: number) =>{
-    const data = await fetch(`${API_URL}/productos/${proyectoId}`)
-    console.log('data', data)
-
-    const results = [{
-        proyectoResumido: {
-          id: 1,
-          titulo: 'Proyecto de Demostración',
-          imagenPortada: 'imagenPortada.jpg',
-          descripcionCorta: 'Este es un proyecto de demostración',
-          montoRecaudado: 5000,
-          montoARecaudar: 10000,
-          fechaInicio: '2023-11-01',
-          fechaLimite: '2023-12-01',
-        },
-        nombreCreador: 'John Doe',
-        contacto: 'john.doe@example.com',
-        categoria: 'Categoría de Demo',
-        quienesSomos: 'Somos un equipo dedicado a demostraciones',
-        quienesSomosImg: 'imagenQuienesSomos.jpg',
-        descipcionGeneral: 'Descripción general del proyecto de demostración',
-        descipcionGeneralImg: 'imagenDescripcionGeneral.jpg',
-        conclusion: 'Conclusión del proyecto de demostración',
-        conclusionImg: 'imagenConclusion.jpg',
-      }]
-
-
-    if (results.length > 0) {
-        const proyecto = results[0];
-        return proyecto;
-    } else return null;
 }
 
+export const getProyectoById = async (proyectoId: number): Promise<any> => {
+    const response = await fetch(`/api/proyectos/${proyectoId}`);
+    
+    return await response.json();
+};
 
+
+//TODO agregar post de proyectos
