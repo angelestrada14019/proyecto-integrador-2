@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Grid, Typography } from '@mui/material'
 import MiProyectoCard from '../ui/mi-proyecto-card';
+import LandingTitles from '../ui/landing-titles';
 
 const arrayDeMediCards = [
     {
@@ -53,11 +54,12 @@ const arrayDeMediCards = [
 const CardsMisProyectos = () => {
     return (
         <>
-        <Grid sx={{backgroundColor: "#4BC6B9", paddingBottom: '30px'}} container direction="column" alignItems="center" spacing={4} style={{ marginBottom: '50px' }}>
+        <Grid sx={{backgroundColor: "#FF595E", paddingBottom: '30px'}} container direction="column" alignItems="center" spacing={4} style={{ marginBottom: '50px' }}>
           <Grid item>
-            <Typography variant="h4" align="center" gutterBottom>
+          <LandingTitles smallTitle='Campañas iniciadas' title='Mis proyectos' color="black"/>
+            {/* <Typography variant="h4" align="center" gutterBottom>
               Mis Proyectos
-            </Typography>
+            </Typography> */}
           </Grid>
           <Grid item container justifyContent="center" spacing={2}>
             {arrayDeMediCards.map((card, index) => (

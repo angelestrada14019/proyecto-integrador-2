@@ -33,7 +33,7 @@ const RegistroForm = () => {
             if (!response.error) {
                 console.log("200");
                 
-                router.push('/');
+                router.push('/registro-exitoso');
             }
             else {
                 
