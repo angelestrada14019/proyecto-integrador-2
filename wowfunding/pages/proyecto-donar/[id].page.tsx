@@ -25,8 +25,6 @@ interface Props {
 
 
 const ProyectoID = ({ proyecto, proyectos }: Props) => {
-    console.log('proyecto', proyecto)
-    console.log('proyectos', proyectos)
 
     const router = useRouter();
 
@@ -36,7 +34,6 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
     const LISTA_MULTIMEDIAS = proyecto.multimedias
     const LISTA_DESCRIPCIONES = proyecto.descripciones
-    const TIPO_LANDING = 1;
 
 
     return (

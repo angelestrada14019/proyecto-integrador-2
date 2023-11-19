@@ -97,6 +97,7 @@ export const obtenerFechaActualFormateada = () => {
     const minutos = String(fechaActual.getMinutes()).padStart(2, '0');
     const segundos = String(fechaActual.getSeconds()).padStart(2, '0');
   
-    const fechaFormateada = `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+    // const fechaFormateada = `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+    const fechaFormateada = `${año}-${mes}-${dia}`;
     return fechaFormateada;
   };

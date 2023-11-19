@@ -10,5 +10,5 @@ export type Donaciones =
 
 
     export type MetodoPago = {
-        id: number
+        id: number;
     }

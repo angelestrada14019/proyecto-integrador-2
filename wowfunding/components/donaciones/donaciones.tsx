@@ -29,7 +29,8 @@ const DonacionesForm = () => {
         const dataValues = getValues();
         const comentario = dataValues.comentario ?? "";
 
-        const dataDonacion :Donaciones = {
+        const dataDonacion: Donaciones =
+        {
             comentario,
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
@@ -37,13 +38,15 @@ const DonacionesForm = () => {
                 id: 8
             },
             idUsuarios: 1,
-            idProductos: 37
-        };
+            idProductos: 49
+        }
 
         const response = await postDonacionApi(dataDonacion);
 
         try {
             if (!response.error) {
+                setError(`Su donacion se realizo con exito`);
+                setOpenSnackbar(true);
                 router.push("/")
             } else {
 
@@ -56,6 +59,10 @@ const DonacionesForm = () => {
             setOpenSnackbar(true);
         }
     };
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
+
 
 
     return <Grid container spacing={0} sx={{ maxWidth: "650px" }}>
@@ -123,6 +130,13 @@ const DonacionesForm = () => {
                     </Typography>
                 </Grid>
             </Grid>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+                message={error || ""} //TODO  modificar modal para notificaciones
+            />
+           
         </Grid>
 
     </Grid>
