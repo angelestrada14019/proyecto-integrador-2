@@ -1,3 +1,5 @@
+import { ListaDescripciones, ListaMultimedias } from "interfaces/proyect.type";
+
 export const calcularDiasFaltantes = (fechaLimiteStr: string): number => {
     const partes = fechaLimiteStr.split(' ');
 
@@ -51,8 +53,50 @@ export const calcularDiasFaltantes = (fechaLimiteStr: string): number => {
 
 export const truncateString = (str: string) => {
     if (str.length > 90) {
-        return str.slice(0, 80) + "..."; // Add an ellipsis at the end3
+        return str.slice(0, 80) + "...";
     } else {
         return str;
     }
 }
+
+
+
+
+export const buscarMultimediaPorTipo = (multimedias: ListaMultimedias[], tipoBuscado: number): string => {
+    const multimediaEncontrada = multimedias.find(multimedia => multimedia.tipo === tipoBuscado);
+    return multimediaEncontrada ? multimediaEncontrada.url : "undefined";
+};
+
+export const buscarDescipcionPorTipo = (descripciones: ListaDescripciones[], tipoBuscado: number): string => {
+    const descripcionEncontrada = descripciones.find(descripcion => descripcion.tipo === tipoBuscado);
+    return descripcionEncontrada ? descripcionEncontrada.descripcion : "undefined";
+};
+
+
+export const esFechaExpirada = (fechaFinalizacion: string):boolean => {
+    const fechaActual = new Date();
+
+    const fechaFinalizacionObj = new Date(fechaFinalizacion);
+
+    if (fechaActual > fechaFinalizacionObj) {
+        return false
+    } else {
+        return true
+
+    }
+}
+
+
+
+export const obtenerFechaActualFormateada = () => {
+    const fechaActual = new Date();
+    const año = fechaActual.getFullYear();
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+    const dia = String(fechaActual.getDate()).padStart(2, '0');
+    const horas = String(fechaActual.getHours()).padStart(2, '0');
+    const minutos = String(fechaActual.getMinutes()).padStart(2, '0');
+    const segundos = String(fechaActual.getSeconds()).padStart(2, '0');
+  
+    const fechaFormateada = `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+    return fechaFormateada;
+  };

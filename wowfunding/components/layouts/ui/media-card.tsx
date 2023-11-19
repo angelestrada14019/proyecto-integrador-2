@@ -8,7 +8,7 @@ import NextLink from 'next/link'
 import { Grid, Link as MUILink } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { calcularDiasFaltantes, truncateString } from 'utils/utils';
+import { buscarDescipcionPorTipo, buscarMultimediaPorTipo, calcularDiasFaltantes, truncateString } from 'utils/utils';
 import { ListaDescripciones, ListaMultimedias, ProyectoFinal } from 'interfaces/proyect.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -21,28 +21,14 @@ interface Props {
 }
 
 const MediaCard = ({ proyecto, widthParam }: Props) => {
-    const [montoRecaudado, setMontoRecaudado] = useState<number>(0);
+
     const router = useRouter();
-
-
-    const buscarMultimediaPorTipo = (multimedias: ListaMultimedias[], tipoBuscado: number): string | undefined => {
-        const multimediaEncontrada = multimedias.find(multimedia => multimedia.tipo === tipoBuscado);
-        return multimediaEncontrada ? multimediaEncontrada.url : undefined;
-    };
-
-    const buscarDescipcionPorTipo = (descripciones: ListaDescripciones[], tipoBuscado: number): string => {
-        const descripcionEncontrada = descripciones.find(descripcion => descripcion.tipo === tipoBuscado);
-        return descripcionEncontrada ? descripcionEncontrada.descripcion : "undefined";
-    };
 
     const LISTA_MULTIMEDIAS = proyecto.multimedias
     const LISTA_DESCRIPCIONES = proyecto.descripciones
     const TIPO_LANDING = 1;
 
-    useEffect(() => {
-        const randomAmount = Math.floor(Math.random() * 10) * 5000;
-        setMontoRecaudado(randomAmount);
-    }, []);
+
 
 
 
@@ -72,11 +58,15 @@ const MediaCard = ({ proyecto, widthParam }: Props) => {
                 <Button variant='contained' sx={{ color: "white", marginRight: "5px" }} color='secondary'>{proyecto.categoriasId.nombre}</Button>
                 <Typography variant="body2" color="text.secondary" sx={{ display: "flex", alignItems: "center" }}>
                     <AccessTimeIcon />
-                    Quedan {calcularDiasFaltantes(proyecto.fechaFinalizacion)} dias
+                    {calcularDiasFaltantes(proyecto.fechaFinalizacion) > 0 ?
+                        `Quedan ${calcularDiasFaltantes(proyecto.fechaFinalizacion)} dias`
+                        :
+                        "Campaña finalizada"
+                    }
                 </Typography>
             </CardContent>
             <CardContent>
-                <NextLink href={`/proyecto-donar/${proyecto.id}`}>
+                <NextLink href={`/proyecto-donar/${proyecto.id}`} passHref>
                     <MUILink variant="h6" sx={{ fontWeight: 800, textAlign: "initial" }}>{proyecto.nombre}</MUILink>
                 </NextLink>
 
@@ -87,13 +77,13 @@ const MediaCard = ({ proyecto, widthParam }: Props) => {
             <CardContent>
                 <Grid sx={{ display: 'flex', justifyContent: "space-between" }}>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        Recaudados $ {montoRecaudado}
+                        Recaudados $ {proyecto.montoSumatoriaDonaciones}
                     </Typography>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        % {Math.round((montoRecaudado / proyecto.monto) * 100)}
+                        % {Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)}
                     </Typography>
                 </Grid>
-                <LinearDeterminate amount={montoRecaudado} finalAmount={proyecto.monto} />
+                <LinearDeterminate amount={proyecto.montoSumatoriaDonaciones} finalAmount={proyecto.monto} />
                 <Typography variant="body1" marginTop={1} fontWeight={"bold"} color="primary">
                     Objetivo:  $ {proyecto.monto}
                 </Typography>

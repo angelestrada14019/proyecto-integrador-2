@@ -1,11 +1,5 @@
+import { fetchApi } from "utils/servicesUtils";
 
-const API_URL = "http://localhost:8080"
-
-const fetchApi = async (endpoint: string, urlParams?: string) => {
-    const url = `${API_URL}/${endpoint}${urlParams || ''}`
-    const response = await fetch(url);
-    return await response.json();
-}
 
 export const getProyectos = async (offset?: number, limit?: number) => {
     const params = new URLSearchParams();

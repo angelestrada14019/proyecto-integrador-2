@@ -1,6 +1,4 @@
-export type Proyectos = {
-    resultados: ProyectoFinal[]
-}
+export type Proyectos = ProyectoFinal[]
 
 export type ProyectoFinal = {
     categoriasId: Categoria;
@@ -9,9 +7,9 @@ export type ProyectoFinal = {
     fechaPublicacion: string;
     id: number;
     monto: number;
+    montoSumatoriaDonaciones: number;
     multimedias: ListaMultimedias[]
     nombre: string;
-    resumen: string;
     usuarioId: number;
 
 }
@@ -21,12 +19,6 @@ export type ProyectoCategoria ={
     categoria: string;
 
 }
-
-// export type ListaProyectos = {
-//     offset: number;
-//     limit: number;
-//     results: ProyectoFinal[]
-// }
 
 export type Categoria = {
     id: number;

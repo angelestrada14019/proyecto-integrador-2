@@ -2,13 +2,18 @@ import { Button, Grid, Snackbar, Typography } from '@mui/material';
 import { CustomTextField } from '../layouts/ui/custom-text-field-props';
 import { ErrorMessage } from '@hookform/error-message';
 import * as yup from "yup";
-import { schema } from '../layouts/login/schema';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
+import { schema } from './schema';
+import { obtenerFechaActualFormateada } from 'utils/utils';
+import { postDonacionApi, postDonaciones } from 'services/donaciones/donaciones.service';
+import { useRouter } from 'next/router';
+import { Donaciones } from 'interfaces/donaciones.type';
 
-const DonacionesForm = () =>{
+const DonacionesForm = () => {
+    const router = useRouter();
     const [error, setError] = useState<string | null>(null);
     type DataForm = yup.InferType<typeof schema>
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -17,20 +22,50 @@ const DonacionesForm = () =>{
         control,
         formState: { errors },
         handleSubmit,
+        getValues,
     } = useForm<DataForm>({ resolver: yupResolver(schema), defaultValues: {} });
 
     const onSubmit = async (data: any) => {
-        
+        const dataValues = getValues();
+        const comentario = dataValues.comentario ?? "";
+
+        const dataDonacion :Donaciones = {
+            comentario,
+            cantidad: parseFloat(dataValues.cantidad),
+            fechaDonacion: obtenerFechaActualFormateada(),
+            metodoPagoID: {
+                id: 8
+            },
+            idUsuarios: 1,
+            idProductos: 37
+        };
+
+        const response = await postDonacionApi(dataDonacion);
+
+        try {
+            if (!response.error) {
+                router.push("/")
+            } else {
+
+                setError(`${response.error}- - -${response.message}`);
+                setOpenSnackbar(true);
+            }
+
+        } catch (error: any) {
+            setError(`${response.error}- - -${response.message}`);
+            setOpenSnackbar(true);
+        }
     };
 
-    return <Grid container spacing={0} sx={{maxWidth:"650px"}}>
-        <Grid container sx={{ display:"flex", justifyContent:"center", marginTop:6 }}>
+
+    return <Grid container spacing={0} sx={{ maxWidth: "650px" }}>
+        <Grid container sx={{ display: "flex", justifyContent: "center", marginTop: 6 }}>
             <Grid item xs={5}>
-                <Image src="https://placekitten.com/239/136"  width={"239px"} height={"136px"} alt="Perfil" ></Image>
-                <Typography variant='body1' sx={{fontSize:"13px", fontWeight:"400", marginTop:4}}>
+                <Image src="https://placekitten.com/239/136" width={"239px"} height={"136px"} alt="Perfil" ></Image>
+                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400", marginTop: 4 }}>
                     Estás donando a Nombre del proyecto
                 </Typography>
-                <Typography variant='body1' sx={{fontSize:"13px", fontWeight:"400", marginTop: 1}}>
+                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400", marginTop: 1 }}>
                     Beneficiario del proyecto: Nombre
                 </Typography>
             </Grid>
@@ -47,20 +82,29 @@ const DonacionesForm = () =>{
                             Indique la cantidad a donar
                         </Typography>
                         <CustomTextField
-                            name="
-                            email"
+                            name="cantidad"
                             label="$"
+                            type="number"
+                            control={control}
+                        />
+                        <Typography variant='caption' color='red'>
+                            <ErrorMessage errors={errors} name="cantidad" />
+                        </Typography>
+
+                        <Typography variant='body1'>
+                            Dejar un comentario
+                        </Typography>
+                        <CustomTextField
+                            name="comentario"
+                            label="Comentario"
                             type="text"
                             control={control}
                         />
                         <Typography variant='caption' color='red'>
-                            <ErrorMessage errors={errors} name="username" />
+                            <ErrorMessage errors={errors} name="comentario" />
                         </Typography>
-                        
-                        <Typography variant='caption' color='red'>
-                            <ErrorMessage errors={errors} name="password" />
-                        </Typography>
-                        <Button type='submit' size='large' variant="contained" color="primary" sx={{ fontWeight: "bold"}} >Aceptar</Button>
+
+                        <Button type='submit' size='large' variant="contained" color="primary" sx={{ fontWeight: "bold" }} >Aceptar</Button>
                     </Grid>
                 </form>
             </Grid>
@@ -68,13 +112,13 @@ const DonacionesForm = () =>{
 
         <Grid container>
             <Grid item xs={12}>
-                <Typography variant='body1' sx={{fontSize:"13px", fontWeight:"400"}}>
+                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400" }}>
                     Tu donativo
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                <Grid container sx={{display:"flex", justifyContent:"center"}}>
-                    <Typography variant='body1' sx={{fontSize:"20px", fontWeight:"400"}}>
+                <Grid container sx={{ display: "flex", justifyContent: "center" }}>
+                    <Typography variant='body1' sx={{ fontSize: "20px", fontWeight: "400" }}>
                         $ XXX,XX
                     </Typography>
                 </Grid>

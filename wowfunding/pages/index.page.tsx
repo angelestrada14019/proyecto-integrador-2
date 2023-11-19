@@ -38,7 +38,6 @@ interface Props {
 
 
 const Index: NextPage<Props> = ({proyectos,proyectosCargados }: Props) => {
-  console.log('proyectos', proyectos)
   
     
     if (!proyectosCargados) {
