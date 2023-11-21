@@ -25,8 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     try {
 
         const result = await postRegistro(req.body);
+        localStorage.setItem("user-info", JSON.stringify(result));
+        res.setHeader('set-cookie', 'user-info=true; path=/; semesite=lax; httponly')
         res.status(200).json({ data: result });
-        localStorage.setItem("checkoutData", JSON.stringify(result));
     } catch (err) {
         res.status(500).json(ERROR_SERVER);
     }
