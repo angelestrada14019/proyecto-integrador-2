@@ -31,7 +31,6 @@ const RegistroForm = () => {
         const response = await postRegistro(dataValues);
         try {
             if (!response.error) {
-                console.log("200");
                 
                 router.push('/registro-exitoso');
             }
@@ -90,16 +89,29 @@ const RegistroForm = () => {
                     >
 
                         <Typography variant='body1'>
-                            Usuario*
+                            Nombre*
                         </Typography>
                         <CustomTextField
-                            name="username"
-                            label="Usuario"
+                            name="name"
+                            label="Name"
                             type="text"
                             control={control}
                         />
                         <Typography variant='caption' color='red'>
-                            <ErrorMessage errors={errors} name="username" />
+                            <ErrorMessage errors={errors} name="name" />
+                        </Typography>
+
+                        <Typography variant='body1'>
+                            Apellido*
+                        </Typography>
+                        <CustomTextField
+                            name="lastname"
+                            label="lastname"
+                            type="text"
+                            control={control}
+                        />
+                        <Typography variant='caption' color='red'>
+                            <ErrorMessage errors={errors} name="lastname" />
                         </Typography>
 
 
