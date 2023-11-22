@@ -1,4 +1,5 @@
 export const API_URL = "http://localhost:8080"
+export const URL_DOMAIN = "http://localhost:8080"
 
 export const fetchApsi = async (endpoint: string, urlParams?: string) => {
     const url = `${API_URL}/${endpoint}${urlParams || ''}`

@@ -38,7 +38,7 @@ const DonacionesForm = () => {
                 id: 8
             },
             idUsuarios: 1,
-            idProductos: 49
+            idProductos: 50
         }
 
         const response = await postDonacionApi(dataDonacion);

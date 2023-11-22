@@ -26,14 +26,15 @@ interface Props {
 
 const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
+    const LISTA_MULTIMEDIAS = proyecto.multimedias
+    const LISTA_DESCRIPCIONES = proyecto.descripciones
+    const porcentajeFinal = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
+
     const router = useRouter();
 
     if (router.isFallback === true) {
         return <Spinner />;
     }
-
-    const LISTA_MULTIMEDIAS = proyecto.multimedias
-    const LISTA_DESCRIPCIONES = proyecto.descripciones
 
 
     return (
@@ -68,15 +69,15 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                         </Grid>
                                     </Grid>
 
-                                    <LinearDeterminate amount={5000} finalAmount={proyecto.monto} />
+                                    <LinearDeterminate amount={proyecto.monto} finalAmount={proyecto.montoSumatoriaDonaciones} />
                                     <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={2}>
                                         <Grid sx={{ display: "flex" }}>
 
-                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {proyecto.montoSumatoriaDonaciones}</Typography>
+                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {Math.round(proyecto.montoSumatoriaDonaciones)}</Typography>
                                             <Typography variant='body1'>recaudados de ${proyecto.monto}</Typography>
 
                                         </Grid>
-                                        <Typography variant='h6' marginRight={1} fontWeight={"bold"}>{(proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100}%</Typography>
+                                        <Typography variant='h6' marginRight={1} fontWeight={"bold"}>{porcentajeFinal > 100 ? 100 : porcentajeFinal}%</Typography>
 
                                     </Grid>
                                     <Typography variant="body2" color="text.secondary" marginTop={2} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
@@ -138,7 +139,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const id = parseInt(params?.id as string);
     const data = await getProyecto(id);
-    const proyectos = await getProyectos(0, 100);
+    const proyectos = await getProyectos(0, 10);
     return {
         props: {
             proyecto: data,

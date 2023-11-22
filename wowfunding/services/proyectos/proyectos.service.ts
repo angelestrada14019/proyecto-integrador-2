@@ -1,3 +1,4 @@
+import { ProyectoFinal } from "interfaces/proyect.type";
 import { fetchApi } from "utils/servicesUtils";
 
 
@@ -16,9 +17,22 @@ export const getProyecto = async (proyectoId: number) => {
 
 export const getProyectoById = async (proyectoId: number): Promise<any> => {
     const response = await fetch(`/api/proyectos/${proyectoId}`);
-    
+
     return await response.json();
 };
 
 
-//TODO agregar post de proyectos
+export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
+    const dataProyecto = JSON.stringify(proyecto);
+    const response = await fetch(`/api-productos/productos/creatAll`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: dataProyecto,
+    });
+
+    return await response.json();
+}
+

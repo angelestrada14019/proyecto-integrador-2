@@ -21,9 +21,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const LinearDeterminate = ({ amount, finalAmount }: Prop) => {
 
-  const progressValue = (amount / finalAmount) * 100
-
-
   return (
     <Box sx={{ width: '100%' }}>
       <BorderLinearProgress
@@ -31,7 +28,7 @@ const LinearDeterminate = ({ amount, finalAmount }: Prop) => {
           color: (theme) =>
             theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
         }}
-        variant="determinate" value={progressValue > 100 ? 100 : progressValue} />
+        variant="determinate" value={(amount / finalAmount) * 100 > 100 ? 100 : (amount / finalAmount) * 100} />
     </Box>
   );
 }
