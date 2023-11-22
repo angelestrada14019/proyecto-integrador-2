@@ -37,6 +37,7 @@ public class ProductosController extends BaseController<ProductosDto>{
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fechaFinalizacion,
             @RequestParam(required = false) Double monto,
             @RequestParam(required = false) String categoriasIdNombre,
+            @RequestParam(required = false) int usuariosId,
             @RequestParam int pageNumber,
             @RequestParam int pageSize
     ) {
@@ -48,6 +49,7 @@ public class ProductosController extends BaseController<ProductosDto>{
                 .fechaPublicacion(fechaPublicacion)
                 .fechaFinalizacion(fechaFinalizacion)
                 .categoriasId(categoriaNombre)
+                .usuariosId(usuariosId)
                 .build();
         if (monto != null){
             filtro.setMonto(monto);

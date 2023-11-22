@@ -21,6 +21,7 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer> {
     and (:#{#filtro.fechaPublicacion} is null or p.fechaPublicacion = :#{#filtro.fechaPublicacion})
     and (:#{#filtro.fechaFinalizacion} is null or p.fechaFinalizacion = :#{#filtro.fechaFinalizacion})
     and (:#{#filtro.monto} is null or p.monto = :#{#filtro.monto})
+    and (:#{#filtro.usuariosId} is null or p.usuariosId = :#{#filtro.usuariosId})
     and (:#{#filtro.categoriasId.nombre} is null or p.categoriasId.nombre = :#{#filtro.categoriasId.nombre})
     """)
     Page<Productos> listPRoductsByFilterRequestProductosDto(@Param("filtro") RequestProductosDto filtro,
