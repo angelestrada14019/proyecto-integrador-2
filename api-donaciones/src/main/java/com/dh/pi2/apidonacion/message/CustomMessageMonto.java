@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CustomMessageMonto {
     private String messageId;
     private double sumatoriaDonaciones;
-    private int idUsuarios;
     private int idProductos;
 }

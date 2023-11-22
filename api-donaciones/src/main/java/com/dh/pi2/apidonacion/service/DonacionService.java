@@ -8,6 +8,7 @@ import com.dh.pi2.apidonacion.model.MetodoPago;
 import com.dh.pi2.apidonacion.repository.IDonacionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.BadRequestException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class DonacionService {
 
     @Autowired
@@ -90,14 +92,14 @@ public class DonacionService {
 
         return donacionDTOS;
     }
-    public CustomMessageMonto countCantidadWithUserAndProduct(int idUsuarios, int idProductos){
-        double sumatoriaDonaciones = donacionRepository.countCantidadWithUserAndProduct(idUsuarios, idProductos);
+    public CustomMessageMonto countCantidadWithUserAndProduct( int idProductos){
+        double sumatoriaDonaciones = donacionRepository.countCantidadWithUserAndProduct(idProductos);
         CustomMessageMonto customMessageMonto = CustomMessageMonto.builder()
                 .messageId(UUID.randomUUID().toString())
                 .sumatoriaDonaciones(sumatoriaDonaciones)
                 .idProductos(idProductos)
-                .idUsuarios(idUsuarios)
                 .build();
+        log.info("sumatoria: " + customMessageMonto);
         donacionesSend.send(customMessageMonto);
         return customMessageMonto;
     }
