@@ -30,7 +30,7 @@ public class ProductosController extends BaseController<ProductosDto>{
         super(crudService);
     }
 
-    @GetMapping
+    @GetMapping("/getProducto")
     public ResponseEntity<List<ProductosDto>> obtenerProductosPorFiltro(
             @RequestParam(name = "nombre", required = false) String nombre,
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  LocalDateTime fechaPublicacion,
@@ -65,5 +65,11 @@ public class ProductosController extends BaseController<ProductosDto>{
 
         ProductosDto nDtl = productoService.crearProductWithMultiMediaAndDescription(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nDtl);
+    }
+
+    @GetMapping("/getProductoPorId/{id}")
+    public ResponseEntity<ProductosDto> obtenerId(int id) {
+        ProductosDto productosDto = productoService.obtenerId(id);
+        return ResponseEntity.ok(productosDto);
     }
 }
