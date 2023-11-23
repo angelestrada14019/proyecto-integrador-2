@@ -18,11 +18,11 @@ public class AuthService {
     public String saveUser(User credential){
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
         userCredentialRepository.save(credential);
-        return "user added to the system, token: " + generateToken(credential.getEmail());
+        return "user added to the system, token: " + generateToken(credential.getName());
     }
 
-    public String generateToken(String email){
-        return jwtService.generateToken(email);
+    public String generateToken(String username){
+        return jwtService.generateToken(username);
     }
 
     public void validateToken(String token){
