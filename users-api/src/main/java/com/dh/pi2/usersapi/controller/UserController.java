@@ -18,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping
-    public ResponseEntity<UserResponseTO> create(@RequestBody UserRequestTO userRequestTO) {
-        return ResponseEntity.ok(userService.create(userRequestTO));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.getById(id));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id, @RequestBody UserRequestTO userRequestTO) {
-        return ResponseEntity.ok(userService.update(id, userRequestTO));
-    }
-
-    @GetMapping()
-    public ResponseEntity<UserSearchResponseTo> findAll() {
-        return ResponseEntity.ok(userService.findAll());
-    }
+//    private final UserService userService;
+//
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<UserResponseTO> create(@RequestBody UserRequestTO userRequestTO) {
+//        return ResponseEntity.ok(userService.create(userRequestTO));
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok(userService.getById(id));
+//    }
+//
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id, @RequestBody UserRequestTO userRequestTO) {
+//        return ResponseEntity.ok(userService.update(id, userRequestTO));
+//    }
+//
+//    @GetMapping()
+//    public ResponseEntity<UserSearchResponseTo> findAll() {
+//        return ResponseEntity.ok(userService.findAll());
+//    }
 }

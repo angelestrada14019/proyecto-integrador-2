@@ -1,6 +1,6 @@
-package com.dh.pi2.usersapi.persistence.repository;
+package com.dh.pi2.usersapi.repository;
 
-import com.dh.pi2.usersapi.persistence.model.UserType;
+import com.dh.pi2.usersapi.entity.UserType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

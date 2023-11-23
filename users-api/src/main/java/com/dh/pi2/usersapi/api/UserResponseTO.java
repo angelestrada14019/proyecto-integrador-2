@@ -1,6 +1,6 @@
 package com.dh.pi2.usersapi.api;
 
-import com.dh.pi2.usersapi.persistence.model.UserType;
+import com.dh.pi2.usersapi.entity.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
