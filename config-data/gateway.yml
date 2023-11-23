@@ -14,7 +14,7 @@ spring:
         - id: users-api
           uri: lb://users-api
           predicates:
-            - Path=/users/**
+            - Path=/auth/**
         - id: api-donaciones
           uri: lb://api-donaciones
           predicates:

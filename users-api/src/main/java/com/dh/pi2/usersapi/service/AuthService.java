@@ -18,7 +18,7 @@ public class AuthService {
     public String saveUser(User credential){
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
         userCredentialRepository.save(credential);
-        return "user added to the system, token: " + generateToken(credential.getName());
+        return "user added to the system, token: " + generateToken(credential.getEmail());
     }
 
     public String generateToken(String username){
