@@ -12,7 +12,7 @@ spring:
       routes:
 
         - id: users-api
-          uri: lb://users-api
+          uri: lb://USERS-API
           predicates:
             - Path=/auth/**
         - id: api-donaciones
