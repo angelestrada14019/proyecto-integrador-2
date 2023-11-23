@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api-donaciones/donacion")
 public class DonacionController {

@@ -1,10 +1,7 @@
 package com.dh.pi2.mcproductos.controller;
-
-import com.dh.pi2.mcproductos.dto.CategoriasDto;
 import com.dh.pi2.mcproductos.dto.ProductosDto;
 import com.dh.pi2.mcproductos.dto.RequestProductosDto;
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
-import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import com.dh.pi2.mcproductos.service.CrudService;
 import com.dh.pi2.mcproductos.service.ProductosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api-productos/productos")
 public class ProductosController extends BaseController<ProductosDto>{
