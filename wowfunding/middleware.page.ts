@@ -9,7 +9,7 @@ export function middleware(req:NextRequest, res: NextResponse) {
   if(url.includes("/registro") && !cookieUser) {
     // Si no existe la cookie, redireccionar a la página de login
     // return NextResponse.redirect(`${API_URL}/login`);
-    return NextResponse.redirect(`http://localhost:3000/login`);
+    // return NextResponse.redirect(`http://localhost:3000/login`);
   }
 
   return NextResponse.next();

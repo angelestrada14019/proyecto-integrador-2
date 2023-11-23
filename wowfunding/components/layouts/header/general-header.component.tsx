@@ -12,7 +12,7 @@ type Props = {
     variant?: "simple" | "general"
 }
 
-const usuarioLogueado = true; // temporal mientras implementamos la conexión al backend
+const usuarioLogueado = false; // temporal mientras implementamos la conexión al backend
 const Header: FC<Props> = ({variant}: Props) => {
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth:"1490px" }}>
         <Toolbar disableGutters sx={{ paddingX: "40px", background: "#F7F7FF", marginTop:"17px", height:"10px" }} >
