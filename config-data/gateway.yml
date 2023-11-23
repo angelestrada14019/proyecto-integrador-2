@@ -19,10 +19,14 @@ spring:
           uri: lb://api-donaciones
           predicates:
             - Path=/api-donaciones/**
+          filters:
+            - AuthenticationFilter
         - id: mc-productos
           uri: lb://mc-productos
           predicates:
             - Path=/api-productos/**
+          filters:
+            - AuthenticationFilter
 
 
 info:
