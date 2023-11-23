@@ -1,5 +1,6 @@
 export type Donaciones =
     {
+        id: number,
         comentario: string,
         cantidad: number,
         fechaDonacion: string,
