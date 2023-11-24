@@ -9,7 +9,7 @@ import { schema } from './schema';
 import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { postRegistroApi } from 'services/sesion/user-sesion.service';
+import { postRegistro, postRegistroApi } from 'services/sesion/user-sesion.service';
 import { useForm } from 'react-hook-form';
 
 
@@ -28,10 +28,10 @@ const RegistroForm = () => {
 
     const onSubmit = async (data: any) => {
         const dataValues = getValues()
-        const response = await postRegistroApi(dataValues);
+        const response = await postRegistro(dataValues);
         try {
             if (!response.error) {
-                
+               
                 router.push('/registro-exitoso');
             }
             else {
@@ -93,7 +93,7 @@ const RegistroForm = () => {
                         </Typography>
                         <CustomTextField
                             name="name"
-                            label="Name"
+                            label="Nombre"
                             type="text"
                             control={control}
                         />
@@ -106,7 +106,7 @@ const RegistroForm = () => {
                         </Typography>
                         <CustomTextField
                             name="lastname"
-                            label="lastname"
+                            label="Apellido"
                             type="text"
                             control={control}
                         />

@@ -8,7 +8,7 @@ import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
-import { getProyecto, getProyectos } from 'services/proyectos/proyectos.service';
+import { getProyecto, getProyectoById, getProyectos } from 'services/proyectos/proyectos.service';
 import NextLink from 'next/link'
 import { Link as MUILink } from '@mui/material';
 import GeneralHeader from 'components/layouts/header/general-header.component';
@@ -36,6 +36,21 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
         return <Spinner />;
     }
 
+    const handleDonate = async (id: number) => {
+        const response: ProyectoFinal = await getProyectoById(id);
+
+
+        if (response) {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            router.push({
+                pathname: "/donaciones",
+                query: { id: response.id },
+            });
+        } else {
+            router.push(`/`);
+        }
+    };
 
     return (
         <>
@@ -91,11 +106,11 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                 </Grid>
                                 <Grid sx={{ display: "flex", justifyContent: "center" }} marginTop={5} marginBottom={5}>
                                     {esFechaExpirada(proyecto.fechaFinalizacion) ?
-                                        <NextLink href="/donaciones" passHref >
-                                            <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} >
+                                        // <NextLink href="/donaciones" passHref >
+                                            <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} onClick={() =>handleDonate(proyecto.id)}>
                                                 Donar a la campaña
                                             </Button>
-                                        </NextLink>
+                                        // </NextLink>
                                         :
 
                                         <Typography variant='h6' marginRight={1} fontWeight={"bold"}>Lo sentimos esta campaña ya finalizo</Typography>
