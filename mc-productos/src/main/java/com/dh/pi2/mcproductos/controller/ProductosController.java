@@ -5,6 +5,7 @@ import com.dh.pi2.mcproductos.persistence.entity.Categorias;
 import com.dh.pi2.mcproductos.service.CrudService;
 import com.dh.pi2.mcproductos.service.ProductosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ public class ProductosController extends BaseController<ProductosDto>{
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fechaFinalizacion,
             @RequestParam(required = false) Double monto,
             @RequestParam(required = false) String categoriasIdNombre,
-            @RequestParam(required = false) int usuariosId,
+            @RequestParam(required = false) Integer usuariosId,
             @RequestParam int pageNumber,
             @RequestParam int pageSize
     ) {
@@ -50,6 +51,9 @@ public class ProductosController extends BaseController<ProductosDto>{
                 .build();
         if (monto != null){
             filtro.setMonto(monto);
+        }
+        if (usuariosId != null){
+            filtro.setUsuariosId(usuariosId);
         }
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<ProductosDto> productos = productoService.listPRoductsByFilterRequestProductosDto(filtro, pageable);
