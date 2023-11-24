@@ -20,5 +20,14 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
     return await response.json();
 };
 
+export const deleteProyecto = async (proyectoId: number): Promise<void> => {
+    const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
+      method: "DELETE",
+    });
+  
+    if (!response.ok) {
+      throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
+    }
+  };
 
 //TODO agregar post de proyectos
