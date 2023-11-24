@@ -6,6 +6,8 @@ spring:
     name: ms-discovery
 
 eureka:
+  instance:
+    hostname: ${IP_EUREKA:localhost}
   client:
     registerWithEureka: false
     fetchRegistry: false
