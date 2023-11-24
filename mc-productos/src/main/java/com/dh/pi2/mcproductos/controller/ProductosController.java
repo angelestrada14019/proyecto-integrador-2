@@ -71,7 +71,7 @@ public class ProductosController extends BaseController<ProductosDto>{
     }
 
     @GetMapping("/getProductoPorId/{id}")
-    public ResponseEntity<ProductosDto> obtenerId(int id) {
+    public ResponseEntity<ProductosDto> obtenerId(@PathVariable int id) {
         ProductosDto productosDto = productoService.obtenerId(id);
         return ResponseEntity.ok(productosDto);
     }

@@ -13,8 +13,8 @@ public class RouterValidator {
             "/auth/register",
             "/auth/token",
             "/eureka",
-            "/api-productos/productos/getProducto/**",
-            "/api-productos/productos/getProductoPorId/**"
+            "/api-productos/productos/getProducto",
+            "/api-productos/productos/getProductoPorId/"
     );
 
     public Predicate<ServerHttpRequest> isSecured =
