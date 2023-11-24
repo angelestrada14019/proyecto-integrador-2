@@ -18,8 +18,33 @@ export const postLogin = async (data: ILogin): Promise<any> => {
   return await response.json();
 };
 
+export const postActualizacion = async (data: IUserRegister) => {
+  const response = await fetchApi(`users`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      
+    },
+    method: "Patch",
+    body: data
+  });
+  return await response;
+}
 
-export const postRegistro = async (data: IUserRegister): Promise<any> => {
+export const postRegistro = async (data: IUserRegister) => {
+  const response = await fetchApi(`users`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      
+    },
+    method: "POST",
+    body: data
+  });
+  return await response;
+}
+
+export const postRegistroApi = async (data: IUserRegister): Promise<any> => {
   const transformData =
   {
     ...data,

@@ -22,14 +22,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.status(405).json(ERROR_METHOD_NOT_ALLOWED);
         return;
     }
-    try {
+    
 
+    try {
+    
         const result = await postRegistro(req.body);
-        localStorage.setItem("user-info", JSON.stringify(result));
         res.setHeader('set-cookie', 'user-info=true; path=/; semesite=lax; httponly')
         res.status(200).json({ data: result });
-    } catch (err) {
-        res.status(500).json(ERROR_SERVER);
-    }
+        
+      } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "en el error 500  ", message: "error 500" });
+      }
 
 }

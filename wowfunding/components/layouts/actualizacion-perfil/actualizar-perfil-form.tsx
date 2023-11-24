@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import { Button, Grid, Snackbar, TextField, Typography, Avatar } from '@mui/material';
 import NextLink from 'next/link'
 import { Link as MUILink } from '@mui/material';
 import { ErrorMessage } from '@hookform/error-message';
@@ -9,11 +9,11 @@ import { schema } from './schema';
 import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { postRegistroApi } from 'services/sesion/user-sesion.service';
+import { postRegistro, postActualizacion } from 'services/sesion/user-sesion.service';
 import { useForm } from 'react-hook-form';
 
 
-const RegistroForm = () => {
+const ActualizarPerfilForm = () => {
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
     type DataForm = yup.InferType<typeof schema>
@@ -28,7 +28,7 @@ const RegistroForm = () => {
 
     const onSubmit = async (data: any) => {
         const dataValues = getValues()
-        const response = await postRegistroApi(dataValues);
+        const response = await postActualizacion(dataValues);
         try {
             if (!response.error) {
                 
@@ -36,7 +36,7 @@ const RegistroForm = () => {
             }
             else {
                 
-                console.log(response.message);
+                console.log("error");
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }
@@ -57,28 +57,20 @@ const RegistroForm = () => {
             container
             spacing={0}
             direction="column"
-            alignItems="center"
-            marginTop={10}>
-            <Grid item sm={10} lg={10} sx={{ backgroundColor: "#4bc6b929" }} padding={8} >
-                <Typography variant='h2' textAlign="center" fontWeight="bold">Registro</Typography >
-                <Typography sx={{
-                    height: "4px",
-                    width: "100px",
-                    display: "block",
-                    margin: "0px auto 0",
-                    backgroundColor: "#ff3366"
-                }}
+            alignItems="left"
+            marginTop={5}
+            sx={{ maxWidth: "800px" }}>
+                
+            <Grid item padding={3} >
+                <Typography variant='h6' textAlign="left" fontWeight="bold">Configuración de la cuenta</Typography >
 
-                >
-                </Typography>
-                <Typography
-                    variant='body1'
-                    marginTop={2}>
-                    Ya tenes una cuenta?
-                    <NextLink href="/login" passHref>
-                        <MUILink variant="body2" sx={{ fontSize: 18, marginRight: 5 }}> Ingresa aqui</MUILink>
-                    </NextLink>
-                </Typography >
+                <Typography variant='body1' textAlign="center" fontWeight="bold" marginTop={3}>Foto de perfil</Typography >
+                <Avatar
+                alt="profile photo"
+                src="https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                sx={{ width: 100, height: 100, marginLeft:"auto", marginRight:"auto" }}
+                />
+                
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid
@@ -114,6 +106,32 @@ const RegistroForm = () => {
                             <ErrorMessage errors={errors} name="lastname" />
                         </Typography>
 
+                        <Typography variant='body1'>
+                            Pais*
+                        </Typography>
+                        <CustomTextField
+                            name="country"
+                            label="Pais"
+                            type="text"
+                            control={control}
+                        />
+                        <Typography variant='caption' color='red'>
+                            <ErrorMessage errors={errors} name="country" />
+                        </Typography>
+
+                        <Typography variant='body1'>
+                            Número de celular*
+                        </Typography>
+                        <CustomTextField
+                            name="phone"
+                            label="Telefono"
+                            type="text"
+                            control={control}
+                        />
+                        <Typography variant='caption' color='red'>
+                            <ErrorMessage errors={errors} name="phone" />
+                        </Typography>
+
 
                         <Typography variant='body1'>
                             Email*
@@ -129,21 +147,7 @@ const RegistroForm = () => {
                         </Typography>
 
 
-                        <Typography variant='body1'>
-                            Contraseña*
-                        </Typography>
-                        <CustomTextField
-                            name="password"
-                            label="Contraseña"
-                            type="password"
-                            control={control}
-                        />
-                        <Typography variant='caption' color='red'>
-                            <ErrorMessage errors={errors} name="password" />
-                        </Typography>
-
-
-                        <Button type='submit' size='large' variant="contained" color="primary" sx={{ fontWeight: "bold", marginTop: "4px", marginBottom: "10px" }} >REGISTRARME</Button>
+                        <Button type='submit' size='large' variant="contained" color="primary" sx={{ fontWeight: "bold", marginTop: "4px", marginBottom: "10px" }} >Guardar</Button>
                     </Grid>
                 </form>
 
@@ -159,4 +163,4 @@ const RegistroForm = () => {
     )
 }
 
-export default RegistroForm
+export default ActualizarPerfilForm
