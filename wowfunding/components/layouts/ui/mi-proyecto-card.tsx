@@ -14,8 +14,6 @@ import { Alert, Box, Grid, Link as MUILink, Snackbar } from '@mui/material';
 import { deleteProyecto } from 'services/proyectos/proyectos.service';
 import { useState } from 'react';
 
-
-
 interface Props {
     proyecto: ProyectoFinal,
     widthParam: boolean
@@ -46,16 +44,15 @@ const MiProyectoCard = ({ proyecto, widthParam }: Props) => {
       };
       
     return (
-        <Card sx={{ display: 'flex', boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
+        <Card sx={{ display: 'flex', height: 250, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
             <CardMedia
                 sx={{ width: 200, flexShrink: 0 }}
                 component="img"
                 alt="Proyecto Image"
-                height="270"
+                height="250"
                 image={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, TIPO_LANDING)}
             />
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-
                 <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: '1 0 auto' }}>
                     <div>
                         <NextLink href={`/proyecto-donar/${proyecto.id}`} passHref>
@@ -66,7 +63,7 @@ const MiProyectoCard = ({ proyecto, widthParam }: Props) => {
                         </Typography>
                     </div>
                     
-                    <Grid sx={{ display: 'flex', justifyContent: "space-between", marginTop: 2 }}>
+                    <Grid sx={{ display: 'flex', justifyContent: "space-between", marginTop: 4 }}>
                         <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
                             Recaudados $ {proyecto.montoSumatoriaDonaciones}
                         </Typography>
@@ -75,36 +72,36 @@ const MiProyectoCard = ({ proyecto, widthParam }: Props) => {
                         </Typography>
                     </Grid>
                     <LinearDeterminate amount={proyecto.montoSumatoriaDonaciones} finalAmount={proyecto.monto} />
-                    <Typography variant="body1" marginTop={1} fontWeight={"bold"} color="primary">
+                    <Typography variant="body1" marginTop={1} fontWeight={"bold"} color="primary" marginBottom={1}>
                         Objetivo:  $ {proyecto.monto}
                     </Typography>
-                    <CardContent sx={{ display: "flex", alignItems: "center", paddingBottom: "0px", flex: '1 0 auto' }}>
-                    <Button variant='contained' sx={{ color: "white", marginRight: "5px" }} color='secondary'>{proyecto.categoriasId.nombre}</Button>
-                    <Typography variant="body2" color="text.secondary" sx={{ display: "flex", alignItems: "center" }}>
-                    {calcularDiasFaltantes(proyecto.fechaFinalizacion) > 0 ?
-                        `Quedan ${calcularDiasFaltantes(proyecto.fechaFinalizacion)} dias`
-                        :
-                        "Campaña finalizada"
-                    }
-                    </Typography>
-                </CardContent>
-                <Box mt={2}>
-          <Button variant="outlined" color="error" onClick={handleEliminarClick}>
-            ELIMINAR
-          </Button>
-        </Box>
+
+                    <CardContent sx={{ display: "flex", justifyContent: 'space-between', alignItems: "center", paddingTop: "20 px", flex: '1 0 auto' }}>
+                        <Button variant='contained' sx={{ color: "white", marginRight: "5px" }} color='secondary'>{proyecto.categoriasId.nombre}</Button>
+                        <Typography variant="body2" color="text.secondary" sx={{ display: "flex", alignItems:"center" }}>
+                        {calcularDiasFaltantes(proyecto.fechaFinalizacion) > 0 ?
+                            `Quedan ${calcularDiasFaltantes(proyecto.fechaFinalizacion)} dias`
+                            :
+                            "Campaña finalizada"
+                        }
+                        </Typography>
+                        <Button variant="outlined" color="error" onClick={handleEliminarClick}>
+                        ELIMINAR
+                        </Button>
+                    </CardContent>
+
                 </CardContent>
             </Box>
             <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-      >
-      <Alert elevation={6} variant="filled" onClose={handleSnackbarClose} severity={snackbarSeverity}>
-          {snackbarSeverity === 'success' ? 'Proyecto eliminado con éxito' : 'Error al eliminar el proyecto'}
-        </Alert>
-      </Snackbar>
+            open={snackbarOpen}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+            <Alert elevation={6} variant="filled" onClose={handleSnackbarClose} severity={snackbarSeverity}>
+            {snackbarSeverity === 'success' ? 'Proyecto eliminado con éxito' : 'Error al eliminar el proyecto'}
+            </Alert>
+            </Snackbar>
         </Card>
     );
 }
