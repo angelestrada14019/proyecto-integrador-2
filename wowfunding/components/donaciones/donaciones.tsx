@@ -35,10 +35,10 @@ const DonacionesForm = () => {
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
             metodoPagoID: {
-                id: 8
+                id: 11
             },
-            idUsuarios: 1,
-            idProductos: 49
+            idUsuarios: 18,
+            idProductos: 57
         }
 
         const response = await postDonacionApi(dataDonacion);
@@ -47,7 +47,7 @@ const DonacionesForm = () => {
             if (!response.error) {
                 setError(`Su donacion se realizo con exito`);
                 setOpenSnackbar(true);
-                router.push("/")
+                // router.push("/")
             } else {
 
                 setError(`${response.error}- - -${response.message}`);
@@ -65,7 +65,7 @@ const DonacionesForm = () => {
 
 
 
-    return <Grid container spacing={0} sx={{ maxWidth: "650px" }}>
+    return (<Grid container spacing={0} sx={{ maxWidth: "650px" }}>
         <Grid container sx={{ display: "flex", justifyContent: "center", marginTop: 6 }}>
             <Grid item xs={5}>
                 <Image src="https://placekitten.com/239/136" width={"239px"} height={"136px"} alt="Perfil" ></Image>
@@ -139,7 +139,7 @@ const DonacionesForm = () => {
            
         </Grid>
 
-    </Grid>
+    </Grid>)
 }
 
 export default DonacionesForm;
