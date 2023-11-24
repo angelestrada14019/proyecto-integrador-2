@@ -1,22 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { URL_DOMAIN } from 'utils/servicesUtils';
 
+const excludedRoutes = ['/', '/login', '/registro'];
+
 export function middleware(req: NextRequest, res: NextResponse) {
 
   const cookieUser = req.cookies.get("user-info");
   const url = req.nextUrl.pathname;
 
-  if (url.includes("/login") &&!cookieUser) {
-    // return NextResponse.redirect(`${URL_DOMAIN}/login`);
-    return NextResponse.redirect(`http://localhost:3000/login`);
-  }
+  // Verificar si la ruta está excluida
+  // if (excludedRoutes.includes(url)) {
+  //   return NextResponse.next();
+  // }
+
+  // // // Realizar la comprobación del cookie solo para las rutas no excluidas
+  // if ((!url.includes("/") || !url.includes("/login") || !url.includes("/register")) && !cookieUser) {
+
+  //   return NextResponse.redirect(`http://localhost:3000/`);
+  // }
+
+
 
   return NextResponse.next();
 
 }
 // export const config = {
-//   matcher: [
-//     '/(().*)',
-//   ],
+//   matcher: ['/', '/login', '/register'],
 // };
 

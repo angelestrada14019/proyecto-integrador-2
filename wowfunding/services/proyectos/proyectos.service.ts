@@ -36,3 +36,17 @@ export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
     return await response.json();
 }
 
+// export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
+//     const dataProyecto = JSON.stringify(proyecto);
+//     const response = await fetch(`/api/proyecto`, {
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//         },
+//         method: "POST",
+//         body: dataProyecto,
+//     });
+
+//     return await response.json();
+// }
+
