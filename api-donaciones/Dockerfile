@@ -5,6 +5,8 @@ ARG SERVER_PORT=${SERVER_PORT}
 ARG mysql_username=${mysql_username}
 ARG mysql_password=${mysql_password}
 ARG mysql_database=${mysql_database}
+ARG CONFIG_SERVER=${CONFIG_SERVER}
+ARG IP_EUREKA=${IP_EUREKA}
 RUN mvn package
 
 FROM openjdk:17-alpine
