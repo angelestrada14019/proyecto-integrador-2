@@ -14,6 +14,8 @@ export const postDonaciones = async (data: Donaciones) => {
   return await response;
 }
 
+
+
 export const postDonacionApi = async (data: Donaciones): Promise<any> => {
 
   const dataCkeckout = JSON.stringify(data);
@@ -25,23 +27,6 @@ export const postDonacionApi = async (data: Donaciones): Promise<any> => {
     method: "POST",
     body: dataCkeckout,
   });
-
-  return await response.json();
-};
-
-
-export const getDonacionesPorUsuario = async (usuarioId: number): Promise<Donaciones[]> => {
-  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "GET",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error al obtener las donaciones del usuario ${usuarioId}`);
-  }
 
   return await response.json();
 };

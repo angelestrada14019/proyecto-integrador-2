@@ -20,19 +20,6 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
     return await response.json();
 };
 
-export const getProyectosPorUsuario = async (usuariosId: number, offset?: number, limit?: number) => {
-    const params = new URLSearchParams();
-    if (offset) params.set("pageNumber", `${offset}`);
-    if (limit) params.set("pageSize", `${limit}`);
-    params.set("usuariosId", `${usuariosId}`);
-  
-    const queryString = params.toString();
-    const url = `api-productos/productos?${queryString}`;
-  
-    const data = await fetchApi(url);
-    return data || {}; 
-  };
-
   
   export const deleteProyecto = async (proyectoId: number): Promise<void> => {
     const response = await fetchApi(`api-productos/productos/${proyectoId}`, {

@@ -94,7 +94,7 @@ const MisDonaciones: React.FC<Props> = ({ listaDonaciones, listaProyectos }) => 
           </Typography>
           {donacionesUsuario.map((donacion) => (
             <Typography key={donacion.id} align="left" noWrap style={{ ...coloredTextStyle, marginBottom: '15px' }}>
-              USD {getRecaudadoHastaFecha(donacion.idProductos)}
+              $ {getRecaudadoHastaFecha(donacion.idProductos)}
             </Typography>
           ))}
         </div>
@@ -105,7 +105,7 @@ const MisDonaciones: React.FC<Props> = ({ listaDonaciones, listaProyectos }) => 
           </Typography>
           {donacionesUsuario.map((donacion) => (
             <Typography key={donacion.id} align="left" noWrap style={{ ...coloredTextStyle, marginBottom: '15px' }}>
-              USD {donacion.cantidad}
+              $ {donacion.cantidad}
             </Typography>
           ))}
         </div>
