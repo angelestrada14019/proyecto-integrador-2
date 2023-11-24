@@ -1,13 +1,11 @@
 package com.dh.pi2.mcproductos.controller;
-
-import com.dh.pi2.mcproductos.dto.CategoriasDto;
 import com.dh.pi2.mcproductos.dto.ProductosDto;
 import com.dh.pi2.mcproductos.dto.RequestProductosDto;
 import com.dh.pi2.mcproductos.persistence.entity.Categorias;
-import com.dh.pi2.mcproductos.persistence.entity.Productos;
 import com.dh.pi2.mcproductos.service.CrudService;
 import com.dh.pi2.mcproductos.service.ProductosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api-productos/productos")
 public class ProductosController extends BaseController<ProductosDto>{
@@ -37,6 +35,7 @@ public class ProductosController extends BaseController<ProductosDto>{
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fechaFinalizacion,
             @RequestParam(required = false) Double monto,
             @RequestParam(required = false) String categoriasIdNombre,
+            @RequestParam(required = false) Integer usuariosId,
             @RequestParam int pageNumber,
             @RequestParam int pageSize
     ) {
@@ -48,9 +47,13 @@ public class ProductosController extends BaseController<ProductosDto>{
                 .fechaPublicacion(fechaPublicacion)
                 .fechaFinalizacion(fechaFinalizacion)
                 .categoriasId(categoriaNombre)
+                .usuariosId(usuariosId)
                 .build();
         if (monto != null){
             filtro.setMonto(monto);
+        }
+        if (usuariosId != null){
+            filtro.setUsuariosId(usuariosId);
         }
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<ProductosDto> productos = productoService.listPRoductsByFilterRequestProductosDto(filtro, pageable);

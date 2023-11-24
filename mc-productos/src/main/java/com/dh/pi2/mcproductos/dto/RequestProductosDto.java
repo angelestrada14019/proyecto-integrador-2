@@ -20,4 +20,5 @@ public class RequestProductosDto {
     private LocalDateTime fechaFinalizacion;
     private Double monto;
     private Categorias categoriasId;
+    private Integer usuariosId;
 }
