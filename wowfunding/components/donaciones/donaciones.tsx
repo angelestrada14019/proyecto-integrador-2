@@ -1,22 +1,31 @@
-import { Button, Grid, Snackbar, Typography } from '@mui/material';
+import { Button, Grid, InputLabel, MenuItem, Snackbar, ThemeProvider, Typography, createTheme } from '@mui/material';
 import { CustomTextField } from '../layouts/ui/custom-text-field-props';
 import { ErrorMessage } from '@hookform/error-message';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import { schema } from './schema';
-import { obtenerFechaActualFormateada } from 'utils/utils';
+import { buscarMultimediaPorTipo, obtenerFechaActualFormateada } from 'utils/utils';
 import { postDonacionApi, postDonaciones } from 'services/donaciones/donaciones.service';
 import { useRouter } from 'next/router';
 import { Donaciones } from 'interfaces/donaciones.type';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { getProyectoById } from 'services/proyectos/proyectos.service';
+import { ProyectoFinal } from 'interfaces/proyect.type';
+import { Spinner } from 'components/layouts/ui/spinner';
+
 
 const DonacionesForm = () => {
     const router = useRouter();
+    const { id } = router.query;
     const [error, setError] = useState<string | null>(null);
     type DataForm = yup.InferType<typeof schema>
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [pago, setPago] = useState('11');
+    const [proyecto, setProyecto] = useState<ProyectoFinal>()
+
 
     const {
         control,
@@ -35,10 +44,10 @@ const DonacionesForm = () => {
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
             metodoPagoID: {
-                id: 11
+                id: parseInt(pago)
             },
-            idUsuarios: 18,
-            idProductos: 57
+            idUsuarios: 23,
+            idProductos: proyecto?.id || 23
         }
 
         const response = await postDonacionApi(dataDonacion);
@@ -47,7 +56,7 @@ const DonacionesForm = () => {
             if (!response.error) {
                 setError(`Su donacion se realizo con exito`);
                 setOpenSnackbar(true);
-                // router.push("/")
+                router.push("/mis-donaciones-proyectos")
             } else {
 
                 setError(`${response.error}- - -${response.message}`);
@@ -64,20 +73,48 @@ const DonacionesForm = () => {
     };
 
 
+    const handleChange = (event: SelectChangeEvent) => {
+        setPago(event.target.value as string);
+    };
 
-    return (<Grid container spacing={0} sx={{ maxWidth: "650px" }}>
-        <Grid container sx={{ display: "flex", justifyContent: "center", marginTop: 6 }}>
-            <Grid item xs={5}>
-                <Image src="https://placekitten.com/239/136" width={"239px"} height={"136px"} alt="Perfil" ></Image>
-                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400", marginTop: 4 }}>
-                    Estás donando a Nombre del proyecto
+    useEffect(() => {
+        if (typeof id === 'string' || typeof id === 'number') {
+            const idNumber = typeof id === 'string' ? parseInt(id, 10) : id;
+
+            if (idNumber) {
+                getProyectoById(idNumber).then((data) => {
+                    setProyecto(data)
+                });
+            }
+        }
+
+    }, [id]);
+
+    if (!proyecto) {
+        return (
+
+            <Grid sx={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Spinner />
+            </Grid>
+        );
+    }
+
+
+
+
+    return (<Grid container spacing={0} sx={{ maxWidth: "950px" }}>
+        <Grid container sx={{ display: "flex", justifyContent: "center", marginTop: 6 }} spacing={1}>
+            <Grid item xs={6}>
+                <Image src={buscarMultimediaPorTipo(proyecto?.multimedias || [{ id: 1, tipo: 1, url: "https://placekitten.com/239/136" }], 1)} width={"440px"} height={"220px"} alt="Perfil" />
+                <Typography variant='h6' sx={{ fontWeight: "400", marginTop: 2 }}>
+                    {proyecto?.nombre}
                 </Typography>
-                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400", marginTop: 1 }}>
-                    Beneficiario del proyecto: Nombre
+                <Typography variant='body1' sx={{ fontWeight: "400", marginTop: 1 }}>
+                    Tu contribucion suma a que esta campaña alcanze su objetivo
                 </Typography>
             </Grid>
 
-            <Grid item xs={7}>
+            <Grid item xs={6}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid
                         container
@@ -111,6 +148,18 @@ const DonacionesForm = () => {
                             <ErrorMessage errors={errors} name="comentario" />
                         </Typography>
 
+                        <InputLabel id="demo-simple-select-label">Forma de pago</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={pago}
+                            label="Age"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={11}>Tarjeta</MenuItem>
+                            <MenuItem value={13}>Paypal</MenuItem>
+                            <MenuItem value={12}>Mercado Pago</MenuItem>
+                        </Select>
                         <Button type='submit' size='large' variant="contained" color="primary" sx={{ fontWeight: "bold" }} >Aceptar</Button>
                     </Grid>
                 </form>
@@ -118,25 +167,13 @@ const DonacionesForm = () => {
         </Grid>
 
         <Grid container>
-            <Grid item xs={12}>
-                <Typography variant='body1' sx={{ fontSize: "13px", fontWeight: "400" }}>
-                    Tu donativo
-                </Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <Grid container sx={{ display: "flex", justifyContent: "center" }}>
-                    <Typography variant='body1' sx={{ fontSize: "20px", fontWeight: "400" }}>
-                        $ XXX,XX
-                    </Typography>
-                </Grid>
-            </Grid>
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
                 message={error || ""} //TODO  modificar modal para notificaciones
             />
-           
+
         </Grid>
 
     </Grid>)

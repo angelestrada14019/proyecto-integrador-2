@@ -8,7 +8,7 @@ import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
-import { getProyecto, getProyectos } from 'services/proyectos/proyectos.service';
+import { getProyecto, getProyectoById, getProyectos } from 'services/proyectos/proyectos.service';
 import NextLink from 'next/link'
 import { Link as MUILink } from '@mui/material';
 import GeneralHeader from 'components/layouts/header/general-header.component';
@@ -26,15 +26,31 @@ interface Props {
 
 const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
+    const LISTA_MULTIMEDIAS = proyecto.multimedias
+    const LISTA_DESCRIPCIONES = proyecto.descripciones
+    const porcentajeFinal = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
+
     const router = useRouter();
 
     if (router.isFallback === true) {
         return <Spinner />;
     }
 
-    const LISTA_MULTIMEDIAS = proyecto.multimedias
-    const LISTA_DESCRIPCIONES = proyecto.descripciones
+    const handleDonate = async (id: number) => {
+        const response: ProyectoFinal = await getProyectoById(id);
 
+
+        if (response) {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            router.push({
+                pathname: "/donaciones",
+                query: { id: response.id },
+            });
+        } else {
+            router.push(`/`);
+        }
+    };
 
     return (
         <>
@@ -68,15 +84,15 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                         </Grid>
                                     </Grid>
 
-                                    <LinearDeterminate amount={5000} finalAmount={proyecto.monto} />
+                                    <LinearDeterminate amount={proyecto.monto} finalAmount={proyecto.montoSumatoriaDonaciones} />
                                     <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={2}>
                                         <Grid sx={{ display: "flex" }}>
 
-                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {proyecto.montoSumatoriaDonaciones}</Typography>
+                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {Math.round(proyecto.montoSumatoriaDonaciones)}</Typography>
                                             <Typography variant='body1'>recaudados de ${proyecto.monto}</Typography>
 
                                         </Grid>
-                                        <Typography variant='h6' marginRight={1} fontWeight={"bold"}>{(proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100}%</Typography>
+                                        <Typography variant='h6' marginRight={1} fontWeight={"bold"}>{porcentajeFinal > 100 ? 100 : porcentajeFinal}%</Typography>
 
                                     </Grid>
                                     <Typography variant="body2" color="text.secondary" marginTop={2} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
@@ -90,11 +106,11 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                 </Grid>
                                 <Grid sx={{ display: "flex", justifyContent: "center" }} marginTop={5} marginBottom={5}>
                                     {esFechaExpirada(proyecto.fechaFinalizacion) ?
-                                        <NextLink href="/donaciones" passHref >
-                                            <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} >
+                                        // <NextLink href="/donaciones" passHref >
+                                            <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} onClick={() =>handleDonate(proyecto.id)}>
                                                 Donar a la campaña
                                             </Button>
-                                        </NextLink>
+                                        // </NextLink>
                                         :
 
                                         <Typography variant='h6' marginRight={1} fontWeight={"bold"}>Lo sentimos esta campaña ya finalizo</Typography>
@@ -138,7 +154,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const id = parseInt(params?.id as string);
     const data = await getProyecto(id);
-    const proyectos = await getProyectos(0, 100);
+    const proyectos = await getProyectos(0, 10);
     return {
         props: {
             proyecto: data,

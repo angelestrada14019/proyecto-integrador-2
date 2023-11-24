@@ -1,6 +1,5 @@
 import { IUser, ILogin, IUserRegister } from "interfaces/user.type";
-import { API_URL } from "utils/servicesUtils";
-import { fetchApi } from "utils/servicesUtils";
+import { API_URL, fetchApi } from "utils/servicesUtils";
 
 
 export const postLogin = async (data: ILogin): Promise<any> => {
@@ -24,7 +23,7 @@ export const postActualizacion = async (data: IUserRegister) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      
+
     },
     method: "Patch",
     body: data
@@ -32,18 +31,7 @@ export const postActualizacion = async (data: IUserRegister) => {
   return await response;
 }
 
-export const postRegistro = async (data: IUserRegister) => {
-  const response = await fetchApi(`users`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      
-    },
-    method: "POST",
-    body: data
-  });
-  return await response;
-}
+
 
 export const postRegistroApi = async (data: IUserRegister): Promise<any> => {
   const transformData =
@@ -55,14 +43,39 @@ export const postRegistroApi = async (data: IUserRegister): Promise<any> => {
     }
   }
   const dataRegistro = JSON.stringify(transformData);
-  const response = await fetch(`/api/registro`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: dataRegistro,
-  });
+
+  const response = await fetchApi(`${API_URL}/users`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: dataRegistro,
+    });
+
+  return await response
+};
+export const postRegistro = async (data: IUserRegister): Promise<any> => {
+  const transformData =
+  {
+    ...data,
+    profileUrl: "https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg",
+    userType: {
+      id: 1
+    }
+  }
+  const dataRegistro = JSON.stringify(transformData);
+
+  const response = await fetch(`/api/registro`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: dataRegistro,
+    });
 
   return await response.json();
 };

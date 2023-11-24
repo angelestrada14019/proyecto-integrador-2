@@ -4,7 +4,7 @@ import {
     ERROR_INCORRECT_DATA,
     ERROR_METHOD_NOT_ALLOWED
 } from "services/sesion/user-sesion.errors";
-import { postRegistro } from 'services/sesion/user-sesion.service';
+import { postRegistro, postRegistroApi } from 'services/sesion/user-sesion.service';
 
 type Data = {
     data: any;
@@ -22,17 +22,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.status(405).json(ERROR_METHOD_NOT_ALLOWED);
         return;
     }
-    
+
 
     try {
-    
-        const result = await postRegistro(req.body);
-        res.setHeader('set-cookie', 'user-info=true; path=/; semesite=lax; httponly')
+
+        const result = await postRegistroApi(req.body);
+        console.log('result', result)
+        const resultJSON = JSON.stringify(result);
+        res.setHeader('Set-Cookie', `user-info=${resultJSON}; Path=; HttpOnly; SameSite=Lax`);
         res.status(200).json({ data: result });
-        
-      } catch (err) {
+
+    } catch (err) {
         console.log(err)
         res.status(500).json({ error: "en el error 500  ", message: "error 500" });
-      }
+    }
 
 }

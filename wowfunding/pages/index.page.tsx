@@ -17,7 +17,6 @@ import CardsLanding from 'components/layouts/cards-landing/cards-landing';
 import { getProyectos } from 'services/proyectos/proyectos.service';
 import { ProyectoFinal, Proyectos } from 'interfaces/proyect.type';
 import { Spinner } from 'components/layouts/ui/spinner';
-import { useState } from 'react';
 
 
 

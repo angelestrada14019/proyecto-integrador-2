@@ -29,7 +29,7 @@ const MediaCard = ({ proyecto, widthParam }: Props) => {
     const TIPO_LANDING = 1;
 
 
-
+const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
 
 
     return (
@@ -77,10 +77,10 @@ const MediaCard = ({ proyecto, widthParam }: Props) => {
             <CardContent>
                 <Grid sx={{ display: 'flex', justifyContent: "space-between" }}>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        Recaudados $ {proyecto.montoSumatoriaDonaciones}
+                        Recaudados $ {Math.round(proyecto.montoSumatoriaDonaciones)}
                     </Typography>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        % {Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)}
+                        % {porcentajeCalculado > 100 ? 100 : porcentajeCalculado}
                     </Typography>
                 </Grid>
                 <LinearDeterminate amount={proyecto.montoSumatoriaDonaciones} finalAmount={proyecto.monto} />

@@ -15,6 +15,30 @@ interface Props {
     activeStep: number,
 }
 
+const STEP_TEXTS =
+    [
+        {
+            title: "¡Empecemos!",
+            subtitle: "Es importante que la descripción corta y la imagen de portada sean llamativos para que los usuarios quieran saber más"
+        },
+        {
+            title: "Quiénes somos",
+            subtitle: " Contále al mundo quién está detrás de este proyecto"
+        },
+        {
+            title: "El proyecto",
+            subtitle: "Contá detalladamente de que trata el proyecto. ¿Cómo se va a desarrollar?"
+        },
+        {
+            title: "Conclusión",
+            subtitle: "Explicale a los usuarios cuáles es el objetivo final de recaudación y algunas conclusiones finales"
+        },
+        {
+            title: " Fijá objetivos",
+            subtitle: "Indicá el monto total que necesita el proyecto y las fechas"
+        },
+    ]
+
 const CustomForm: FC<Props> = ({ activeStep }) => {
 
 
@@ -42,62 +66,20 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
 
 
     return (
-        <Grid container spacing={3} sx={{ alignSelf: "center", marginTop: "2rem", display:"flex" }}>
+        <Grid container spacing={3} sx={{ alignSelf: "center", marginTop: "2rem", display: "flex" }}>
             <Grid item xs={4}>
-                {activeStep === 0 && <>
-                    <Typography variant='body1' sx={{fontSize:"18px", fontWeight:"400"}}>
-                        ¡Empecemos!
-                    </Typography>
+                < Typography variant='body1' sx={{ fontSize: "18px", fontWeight: "400" }}>
+                    {STEP_TEXTS[activeStep].title}
+                </Typography>
 
-                    <Typography variant='body1' sx={{fontSize:"17px", fontWeight:"400", marginTop:"2em"}}>
-                        Es importante que la descripción corta y la imagen de portada sean llamativos para que los usuarios quieran saber más
-                    </Typography></>
-                }
-
-                {activeStep === 1 && <>
-                    <Typography variant='body1' sx={{fontSize:"18px", fontWeight:"400"}}>
-                        Quiénes somos
-                    </Typography>
-
-                    <Typography variant='body1' sx={{fontSize:"17px", fontWeight:"400", marginTop:"2em"}}>
-                        Contále al mundo quién está detrás de este proyecto
-                    </Typography></>
-                }
-
-                {activeStep === 2 && <>
-                    <Typography variant='body1' sx={{fontSize:"18px", fontWeight:"400"}}>
-                        El proyecto
-                    </Typography>
-
-                    <Typography variant='body1' sx={{fontSize:"17px", fontWeight:"400", marginTop:"2em"}}>
-                        Contá detalladamente de que trata el proyecto. ¿Cómo se va a desarrollar?
-                    </Typography></>
-                }
-
-                {activeStep === 3 && <>
-                    <Typography variant='body1' sx={{fontSize:"18px", fontWeight:"400"}}>
-                        Conclusión
-                    </Typography>
-
-                    <Typography variant='body1' sx={{fontSize:"17px", fontWeight:"400", marginTop:"2em"}}>
-                        Explicale a los usuarios cuáles es el objetivo final de recaudación y algunas conclusiones finales
-                    </Typography></>
-                }
-
-                {activeStep === 4 && <>
-                    <Typography variant='body1' sx={{fontSize:"18px", fontWeight:"400"}}>
-                        Fijá objetivos
-                    </Typography>
-
-                    <Typography variant='body1' sx={{fontSize:"17px", fontWeight:"400", marginTop:"2em"}}>
-                        Indicá el monto total que necesita el proyecto y las fechas
-                    </Typography></>
-                }
-            </Grid>
+                <Typography variant='body1' sx={{ fontSize: "17px", fontWeight: "400", marginTop: "2em" }}>
+                    {STEP_TEXTS[activeStep].subtitle}
+                </Typography>
+            </Grid >
             <Grid item xs={8}>
                 <Paper
-                elevation={8}
-                sx={{ p: "32px", display: "flex", flexDirection: "column", gap: 3 }}
+                    elevation={8}
+                    sx={{ p: "32px", display: "flex", flexDirection: "column", gap: 3 }}
                 >
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {activeStep === 0 && (
@@ -124,17 +106,17 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                     control={control}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
-                                        <Select 
-                                        {...field} 
-                                        variant="outlined"
-                                        fullWidth
-                                        options={[
-                                            { value: "chocolate", label: "Chocolate" },
-                                            { value: "strawberry", label: "Strawberry" },
-                                            { value: "vanilla", label: "Vanilla" }
-                                        ]} 
-                                        sx={{ mb: 2 }}
-                                    />
+                                        <Select
+                                            {...field}
+                                            variant="outlined"
+                                            fullWidth
+                                            options={[
+                                                { value: "chocolate", label: "Chocolate" },
+                                                { value: "strawberry", label: "Strawberry" },
+                                                { value: "vanilla", label: "Vanilla" }
+                                            ]}
+                                            sx={{ mb: 2 }}
+                                        />
                                     )}
                                 />
 
@@ -379,19 +361,19 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                 </Paper>
 
             </Grid>
-           
 
-        <Snackbar
-        open={open}
-        autoHideDuration={6000} // Duración en milisegundos
-        onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        >
-            <Alert severity={error ? 'error' : 'success'} onClose={handleClose}>
-            {mensaje}
-            </Alert>
-      </Snackbar>
-        </Grid>
+
+            <Snackbar
+                open={open}
+                autoHideDuration={6000} // Duración en milisegundos
+                onClose={handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert severity={error ? 'error' : 'success'} onClose={handleClose}>
+                    {mensaje}
+                </Alert>
+            </Snackbar>
+        </Grid >
     )
 }
 
