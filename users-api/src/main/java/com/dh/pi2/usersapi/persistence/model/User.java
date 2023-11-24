@@ -19,9 +19,6 @@ public class User {
     private String password;
     private String profileUrl;
 
-    private ZonedDateTime creationDate;
-    private ZonedDateTime lastUpdated;
-
     @ManyToOne
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
     private UserType userType;

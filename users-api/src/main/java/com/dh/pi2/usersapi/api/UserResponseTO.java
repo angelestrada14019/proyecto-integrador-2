@@ -20,7 +20,5 @@ public class UserResponseTO {
     private String password;
 
     private String profileUrl;
-    private ZonedDateTime creationDate;
-    private ZonedDateTime lastUpdated;
     private UserType userType;
 }

@@ -18,8 +18,6 @@ public class UserMapper {
         user.setProfileUrl(userRequestTO.getProfileUrl());
         user.setEmail(userRequestTO.getEmail());
         user.setUserType(userRequestTO.getUserType());
-        user.setCreationDate(ZonedDateTime.now());
-        user.setLastUpdated(ZonedDateTime.now());
 
         return user;
     }
@@ -30,7 +28,6 @@ public class UserMapper {
         user.setProfileUrl(userRequestTO.getProfileUrl());
         user.setEmail(userRequestTO.getEmail());
         user.setUserType(userRequestTO.getUserType());
-        user.setLastUpdated(ZonedDateTime.now());
 
         return user;
     }
@@ -42,8 +39,6 @@ public class UserMapper {
                 .id(user.getId())
                 .email(user.getEmail())
                 .profileUrl(user.getProfileUrl())
-                .creationDate(user.getCreationDate())
-                .lastUpdated(user.getLastUpdated())
                 .userType(user.getUserType())
                 .build();
     }

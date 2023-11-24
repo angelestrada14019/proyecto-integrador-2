@@ -19,9 +19,5 @@ public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-
-    private ZonedDateTime creationDate;
-    private ZonedDateTime lastUpdated;
-
+    private String name;
 }
