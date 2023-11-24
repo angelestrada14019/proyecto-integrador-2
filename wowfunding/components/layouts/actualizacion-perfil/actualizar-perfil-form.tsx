@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import { Button, Grid, Snackbar, TextField, Typography, Avatar } from '@mui/material';
 import NextLink from 'next/link'
 import { Link as MUILink } from '@mui/material';
 import { ErrorMessage } from '@hookform/error-message';
@@ -9,7 +9,7 @@ import { schema } from './schema';
 import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { postRegistro } from 'services/sesion/user-sesion.service';
+import { postRegistro, postActualizacion } from 'services/sesion/user-sesion.service';
 import { useForm } from 'react-hook-form';
 
 
@@ -27,8 +27,8 @@ const ActualizarPerfilForm = () => {
     } = useForm<DataForm>({ resolver: yupResolver(schema), defaultValues: {} });
 
     const onSubmit = async (data: any) => {
-        /*const dataValues = getValues()
-        const response = await postRegistro(dataValues);
+        const dataValues = getValues()
+        const response = await postActualizacion(dataValues);
         try {
             if (!response.error) {
                 
@@ -45,7 +45,7 @@ const ActualizarPerfilForm = () => {
             console.log("error");
             setError(`${response.error}- - -${response.message}`);
             setOpenSnackbar(true);
-        }*/
+        }
     };
 
     const handleCloseSnackbar = () => {
@@ -65,6 +65,12 @@ const ActualizarPerfilForm = () => {
                 <Typography variant='h6' textAlign="left" fontWeight="bold">Configuración de la cuenta</Typography >
 
                 <Typography variant='body1' textAlign="center" fontWeight="bold" marginTop={3}>Foto de perfil</Typography >
+                <Avatar
+                alt="profile photo"
+                src="https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                sx={{ width: 100, height: 100, marginLeft:"auto", marginRight:"auto" }}
+                />
+                
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid

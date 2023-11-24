@@ -9,7 +9,7 @@ import { schema } from './schema';
 import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { postRegistro } from 'services/sesion/user-sesion.service';
+import { postRegistroApi } from 'services/sesion/user-sesion.service';
 import { useForm } from 'react-hook-form';
 
 
@@ -28,7 +28,7 @@ const RegistroForm = () => {
 
     const onSubmit = async (data: any) => {
         const dataValues = getValues()
-        const response = await postRegistro(dataValues);
+        const response = await postRegistroApi(dataValues);
         try {
             if (!response.error) {
                 
@@ -36,7 +36,7 @@ const RegistroForm = () => {
             }
             else {
                 
-                console.log("error");
+                console.log(response.message);
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }

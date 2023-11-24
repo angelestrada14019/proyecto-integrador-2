@@ -19,8 +19,33 @@ export const postLogin = async (data: ILogin): Promise<any> => {
   return await response.json();
 };
 
+export const postActualizacion = async (data: IUserRegister) => {
+  const response = await fetchApi(`users`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      
+    },
+    method: "Patch",
+    body: data
+  });
+  return await response;
+}
 
-export const postRegistro = async (data: IUserRegister): Promise<any> => {
+export const postRegistro = async (data: IUserRegister) => {
+  const response = await fetchApi(`users`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      
+    },
+    method: "POST",
+    body: data
+  });
+  return await response;
+}
+
+export const postRegistroApi = async (data: IUserRegister): Promise<any> => {
   const transformData =
   {
     ...data,
@@ -30,16 +55,14 @@ export const postRegistro = async (data: IUserRegister): Promise<any> => {
     }
   }
   const dataRegistro = JSON.stringify(transformData);
+  const response = await fetch(`/api/registro`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: dataRegistro,
+  });
 
-  const response = await fetchApi(`${API_URL}/users`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: dataRegistro,
-    });
-  
-  return response;
+  return await response.json();
 };
