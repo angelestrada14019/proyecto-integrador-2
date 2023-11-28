@@ -7,8 +7,6 @@ import GeneralFooter from "components/layouts/footer-general/general-footer.comp
 import { Donaciones } from 'interfaces/donaciones.type';
 import { ProyectoFinal } from 'interfaces/proyect.type';
 
-
-
 interface MisDonacionesProyectosProps {
   listaDonacionesUsuario: Donaciones[];
   listaProyectos: ProyectoFinal[];
@@ -26,43 +24,6 @@ const MisDonacionesProyectos: React.FC<MisDonacionesProyectosProps> = ({ listaDo
     </>
   );
 };
-
-// export const getServerSideProps: GetServerSideProps<MisDonacionesProyectosProps> = async (context) => {
-//   try {
-
-    // const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('user-info') : null;
-    // const usuarioLogueado: IUser = localStorageUser ? JSON.parse(localStorageUser) : null;
-    
-    //Cookies, usuario id=1
-    // const cookieUser = context.req.cookies && context.req.cookies["user-info"];
-    // const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
-//     const usuarioLogueado = {id:1};
-
-
-//     const donacionesUsuario = await getDonacionesPorUsuario(usuarioLogueado.id);
-//     console.log(donacionesUsuario)
-
-//     const proyectosUsuario = await getProyectosPorUsuario(usuarioLogueado.id);
-//     const proyectos = await getProyectos();
-
-//     return {
-//       props: {
-//         listaProyectosUsuario: proyectosUsuario,
-//         listaProyectos: proyectos,
-//         listaDonacionesUsuario: donacionesUsuario,
-//       },
-//     };
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//     return {
-//       props: {
-//         listaProyectosUsuario: [],
-//         listaProyectos: [],
-//         listaDonacionesUsuario: [],
-//       },
-//     };
-//   }
-// };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
@@ -116,3 +77,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default MisDonacionesProyectos;
+
+
