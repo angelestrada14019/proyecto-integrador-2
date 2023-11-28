@@ -57,7 +57,7 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   return (
     <Card sx={{ boxShadow: '3px 1px 18px 2px rgba(0,0,0,0.05)' }}>
       <Grid container spacing={3}>
-        <Grid item xs={8} md={4}>
+        <Grid item xs={12} md={4}>
         <CardMedia
             component="img"
             alt="Proyecto Image"

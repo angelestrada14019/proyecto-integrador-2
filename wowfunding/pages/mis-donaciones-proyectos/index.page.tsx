@@ -27,7 +27,7 @@ const MisDonacionesProyectos: React.FC<MisDonacionesProyectosProps> = ({ listaDo
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const API_URL = 'http://localhost:8080';
+    const API_URL = 'http://44.202.51.198:8080';
     const usuarioId = 18;
     const donacionesResponse = await fetch(`${API_URL}/api-donaciones/donacion/usuario/${usuarioId}`);
 
