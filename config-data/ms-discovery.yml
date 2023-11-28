@@ -9,7 +9,11 @@ eureka:
   instance:
     hostname: ${IP_EUREKA:localhost}
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    leaseRenewalIntervalInSeconds: 15
+    leaseExpirationDurationInSeconds: 30
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname:localhost}:${server.port}/eureka/
