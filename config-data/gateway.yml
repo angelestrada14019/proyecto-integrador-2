@@ -1,0 +1,46 @@
+server:
+  port:  ${PORT:${SERVER_PORT:8080}}
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+
+        - id: users-api
+          uri: http://52.207.236.56:8082
+          predicates:
+            - Path=/users/**
+        - id: api-donaciones
+          uri: http://34.205.20.203:8083
+          predicates:
+            - Path=/api-donaciones/**
+        - id: mc-productos
+          uri: http://3.82.230.170:8084
+          predicates:
+            - Path=/api-productos/**
+
+
+info:
+  app:
+    name: ${spring.application.name}
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+
