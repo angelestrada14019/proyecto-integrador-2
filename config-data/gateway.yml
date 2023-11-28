@@ -12,15 +12,15 @@ spring:
       routes:
 
         - id: users-api
-          uri: http://52.207.236.56:8082
+          uri: lb://users-api
           predicates:
             - Path=/users/**
         - id: api-donaciones
-          uri: http://34.205.20.203:8083
+          uri: lb://api-donaciones
           predicates:
             - Path=/api-donaciones/**
         - id: mc-productos
-          uri: http://3.82.230.170:8084
+          uri: lb://mc-productos
           predicates:
             - Path=/api-productos/**
 
