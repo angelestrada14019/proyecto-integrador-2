@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private AuthService authService;
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponseById> get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(authService.getById(id));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserResponse> get(@PathVariable("id") Long id, @RequestBody UserRequest userRequest) {
-        return ResponseEntity.ok(authService.update(id, userRequest));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        authService.delete(id);
-        return ResponseEntity.ok("usuario eliminado");
-    }
-
-//    @GetMapping()
-//    public ResponseEntity<UserSearchResponse> findAll() {
-//        return ResponseEntity.ok(userService.findAll());
+//    @Autowired
+//    private AuthService authService;
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<UserResponseById> get(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok(authService.getById(id));
 //    }
+//
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<UserResponse> get(@PathVariable("id") Long id, @RequestBody UserRequest userRequest) {
+//        return ResponseEntity.ok(authService.update(id, userRequest));
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+//        authService.delete(id);
+//        return ResponseEntity.ok("usuario eliminado");
+//    }
+//
+////    @GetMapping()
+////    public ResponseEntity<UserSearchResponse> findAll() {
+////        return ResponseEntity.ok(userService.findAll());
+////    }
 }
