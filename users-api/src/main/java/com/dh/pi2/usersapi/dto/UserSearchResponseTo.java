@@ -1,5 +1,6 @@
-package com.dh.pi2.usersapi.api;
+package com.dh.pi2.usersapi.dto;
 
+import com.dh.pi2.usersapi.dto.UserResponse;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,5 +11,5 @@ import java.util.List;
 public class UserSearchResponseTo {
 
     private Integer total;
-    private List<UserResponseTO> users;
+    private List<UserResponse> users;
 }

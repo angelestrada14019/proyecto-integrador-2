@@ -1,15 +1,13 @@
-package com.dh.pi2.usersapi.api;
+package com.dh.pi2.usersapi.dto;
 
 import com.dh.pi2.usersapi.entity.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.ZonedDateTime;
-
 @Data
 @Builder
-public class UserResponseTO {
+public class UserResponseToken {
 
     private Long id;
     private String name;
@@ -20,7 +18,6 @@ public class UserResponseTO {
     private String password;
 
     private String profileUrl;
-    private ZonedDateTime creationDate;
-    private ZonedDateTime lastUpdated;
     private UserType userType;
+    private String token;
 }

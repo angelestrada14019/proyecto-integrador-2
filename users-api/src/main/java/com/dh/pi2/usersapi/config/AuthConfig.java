@@ -28,8 +28,8 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth->{
-                    auth.requestMatchers("/auth/register","/auth/validate", "/auth/token").permitAll();
-//                            .requestMatchers("/products/**").authenticated();
+                    auth.requestMatchers("/auth/register","/auth/validate", "/auth/token", "/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").permitAll();
+//                    auth.requestMatchers("/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").authenticated();
                 })
                 .build();
     }
