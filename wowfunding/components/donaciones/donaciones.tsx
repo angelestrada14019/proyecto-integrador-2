@@ -40,6 +40,7 @@ const DonacionesForm = () => {
 
         const dataDonacion: Donaciones =
         {
+            id:1,
             comentario,
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
