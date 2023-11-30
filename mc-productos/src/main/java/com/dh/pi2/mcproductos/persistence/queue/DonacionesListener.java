@@ -20,8 +20,8 @@ public class DonacionesListener {
     @RabbitListener(queues = {"${queue.pi2.gp2.productos_donaciones}"})
     public void receiveMovie(@Payload CustomMessageMonto customMessageMonto){
         try {
-            productosRepository.updateMontoTotalDonaciones(customMessageMonto.getSumatoriaDonaciones(),
-                    customMessageMonto.getIdUsuarios(),customMessageMonto.getIdProductos());
+            log.info("leyendo la cola: " + customMessageMonto);
+            productosRepository.updateMontoTotalDonaciones(customMessageMonto.getSumatoriaDonaciones(),customMessageMonto.getIdProductos());
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }

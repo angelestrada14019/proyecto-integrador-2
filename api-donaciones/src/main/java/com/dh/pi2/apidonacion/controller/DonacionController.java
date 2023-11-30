@@ -32,7 +32,7 @@ public class DonacionController {
     @PostMapping
     public ResponseEntity<DonacionDTO> createDonacion(@RequestBody DonacionDTO donacionDTO) throws Exception {
         DonacionDTO dto = donacionService.createDonacion(donacionDTO);
-        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct(donacionDTO.getIdUsuarios(), donacionDTO.getIdProductos());
+        CustomMessageMonto customMessageMonto = donacionService.countCantidadWithUserAndProduct( donacionDTO.getIdProductos());
         return ResponseEntity.ok(dto);
     }
 

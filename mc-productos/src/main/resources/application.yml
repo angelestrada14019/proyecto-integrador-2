@@ -3,6 +3,9 @@ spring:
     name: mc-productos
   config:
     import: optional:configserver:${CONFIG_SERVER:http://localhost:8888}
+  jpa:
+    hibernate:
+      ddl-auto:
 
 queue:
   pi2:
