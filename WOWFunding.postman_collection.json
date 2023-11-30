@@ -226,13 +226,42 @@
 			"name": "ControllerUser",
 			"item": [
 				{
+					"name": "crear user sinAuth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"nuevo8\",\r\n  \"lastname\": \"nuevo8\",\r\n  \"email\": \"nuevo8@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "crear user",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"agus\",\r\n  \"lastname\": \"damelio\",\r\n  \"email\": \"a@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"nada\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Damelio\",\r\n  \"email\": \"agusdamelio@dh.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"www.nohay.com\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,53 +269,85 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users",
+							"raw": "http://localhost:8080/auth/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"users"
+								"auth",
+								"register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get donacion por id",
+					"name": "obtener token",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "patch donacion",
-					"request": {
-						"method": "PATCH",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"string\",\r\n  \"lastname\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"profileUrl\": \"string\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"raw": "{\r\n  \"username\": \"agusdamelio@dh.com\",\r\n  \"password\": 123456\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
+						"url": {
+							"raw": "http://localhost:8080/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validar token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzhAZ21haWwuY29tIiwiaWF0IjoxNzAwNzc1MTUzLCJleHAiOjE3MDA3NzY5NTN9.CuNN0fwkSRMsAZx2XOe3-dzg4_e36Z4iwRp4g7XhU20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzhAZ21haWwuY29tIiwiaWF0IjoxNzAwNzc1MTUzLCJleHAiOjE3MDA3NzY5NTN9.CuNN0fwkSRMsAZx2XOe3-dzg4_e36Z4iwRp4g7XhU20"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user por id",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/users/1",
 							"protocol": "http",
@@ -303,19 +364,66 @@
 					"response": []
 				},
 				{
-					"name": "get all users",
+					"name": "update user",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"password\": \"123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/users",
+							"raw": "http://localhost:8080/auth/updateUser/32",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"users"
+								"auth",
+								"updateUser",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"password\": \"123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/deleteUser/36",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"deleteUser",
+								"36"
 							]
 						}
 					},
@@ -354,7 +462,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"producto3\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 80000,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"nombre\": \"Educación Digital para Todos\",\r\n  \"fechaPublicacion\": \"2023-11-15 21:55:00\",\r\n  \"fechaFinalizacion\": \"2024-01-15 03:00:00\",\r\n  \"monto\": 2500,\r\n  \"usuariosId\": 3,\r\n  \"categoriasId\": {\r\n    \"id\": 6\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/PortadaArteEnLaCalle.jpg\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img1ArteEnLaCalle.jpg\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img2ArteEnLaCalle.jpg\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img3ArteEnLaCalle.jpg\",\r\n      \"tipo\": 4\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"¡Queremos embellecer nuestra ciudad con arte callejero de primer nivel! Cada donación contribuye a la transformación de espacios públicos grises en galerías al aire libre llenas de color y creatividad.\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"descripcion\": \"Arte en la Calle es una iniciativa respaldada por un grupo de artistas urbanos apasionados y amantes del arte que han estado contribuyendo a la escena del arte callejero durante años. Nuestro equipo está formado por muralistas, grafiteros y defensores del arte público comprometidos con la transformación de entornos urbanos a través del arte.\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"descripcion\": \"Colaboraremos con propietarios de edificios, gobiernos locales y comunidades para seleccionar ubicaciones ideales para la creación de murales. Nuestros artistas transformarán estas áreas grises en obras de arte callejero vibrantes y significativas que reflejen la identidad y la cultura de la comunidad. Además, organizaremos eventos de arte público, talleres y exhibiciones para involucrar a la comunidad.\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"descripcion\": \"El objetivo final de Arte en la Calle es inspirar, unir y revitalizar nuestras ciudades a través del arte. Cada mural que creamos es una expresión de identidad, un recordatorio de la belleza en lo cotidiano y una fuente de orgullo comunitario. Con tu apoyo, podemos convertir nuestras calles en galerías de arte al aire libre, promoviendo la creatividad y la inspiración en toda la comunidad.\",\r\n      \"tipo\": 4\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -470,7 +578,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"string\"\r\n}",
+							"raw": "{\r\n  \"nombre\": \"Salud\",\r\n  \"descripcion\": \"Aquí encontraras todo lo relacionado que el mundo sea mas saludable\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -671,6 +779,12 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzZAZ21haWwuY29tIiwiaWF0IjoxNzAwNzgwOTg4LCJleHAiOjE3MDA3ODI3ODh9.08zKw-TbwNt-AKJfi1X7G277lXPEQbMe3LzHszEvo74"
 		}
 	]
 }
