@@ -14,10 +14,10 @@ export function middleware(req: NextRequest, res: NextResponse) {
   // }
 
   // // // Realizar la comprobación del cookie solo para las rutas no excluidas
-  // if ((!url.includes("/") || !url.includes("/login") || !url.includes("/register")) && !cookieUser) {
+  if (url.includes("/reportes") && !cookieUser) {
 
-  //   return NextResponse.redirect(`http://localhost:3000/`);
-  // }
+    return NextResponse.redirect(`http://localhost:3000/`);
+  }
 
 
 

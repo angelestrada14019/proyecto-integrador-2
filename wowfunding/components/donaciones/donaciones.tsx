@@ -46,7 +46,7 @@ const DonacionesForm = () => {
             metodoPagoID: {
                 id: parseInt(pago)
             },
-            idUsuarios: 23,
+            idUsuarios: 18,
             idProductos: proyecto?.id || 23
         }
 
