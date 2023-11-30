@@ -6,7 +6,6 @@ export const postDonaciones = async (data: Donaciones) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      
     },
     method: "POST",
     body: data
@@ -14,10 +13,7 @@ export const postDonaciones = async (data: Donaciones) => {
   return await response;
 }
 
-
-
 export const postDonacionApi = async (data: Donaciones): Promise<any> => {
-
   const dataCkeckout = JSON.stringify(data);
   const response = await fetch(`/api/donations`, {
     headers: {
@@ -27,6 +23,5 @@ export const postDonacionApi = async (data: Donaciones): Promise<any> => {
     method: "POST",
     body: dataCkeckout,
   });
-
   return await response.json();
 };

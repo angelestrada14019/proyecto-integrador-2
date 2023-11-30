@@ -21,15 +21,37 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
     return await response.json();
 };
 
+
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
-    const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
+  try{
+    const response = await fetchApi(`/api-productos/productos/${proyectoId}`, {
       method: "DELETE",
     });
-  
-    if (!response.ok) {
-      throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
+    if(!response.ok) {
+      console.error("Error al eliminar el proyeto", response.statusText);
+    throw new Error(response.statusText);
     }
+  } catch (error) {
+    console.error("Error al eliminar el proyecto", error);
+    throw error;
+  }
+}
+
+export const deleteProyectoAPI = async (proyectoId: number): Promise<void> => {
+  try {
+    const response = await fetch(`/api/proyectos/${proyectoId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      console.error("Error al eliminar el proyecto:", response.statusText);
+      throw new Error(response.statusText);
+    }
+  } catch (error) {
+    console.error("Error al eliminar el proyecto", error);
+    throw error;
+  }
   };
+
 
 export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
     const dataProyecto = JSON.stringify(proyecto);

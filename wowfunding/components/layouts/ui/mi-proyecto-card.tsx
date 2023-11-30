@@ -18,11 +18,11 @@ import {
   buscarDescipcionPorTipo,
   buscarMultimediaPorTipo,
   calcularDiasFaltantes,
-  truncateString,
 } from 'utils/utils';
 import LinearDeterminate from './linear-determinate';
 import { useState } from 'react';
-import { deleteProyecto } from 'services/proyectos/proyectos.service';
+import { deleteProyecto, deleteProyectoAPI } from 'services/proyectos/proyectos.service';
+
 
 interface Props {
   proyecto: ProyectoFinal;
@@ -40,10 +40,11 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const [snackbarSeverity, setSnackbarSeverity] =
     useState<'success' | 'warning'>('success');
 
-  const handleEliminarClick = async () => {
+  const handleEliminar = async () => {
     try {
-      await deleteProyecto(proyecto.id);
+      await deleteProyectoAPI(proyecto.id);
       setSnackbarOpen(true);
+      setSnackbarSeverity('success');
     } catch (error) {
       setSnackbarSeverity('warning');
       setSnackbarOpen(true);
@@ -164,7 +165,7 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
               <Button
                 variant="outlined"
                 color="error"
-                onClick={handleEliminarClick}
+                onClick={handleEliminar}
               >
                 ELIMINAR
               </Button>
@@ -175,20 +176,15 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
 
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert
-          elevation={6}
-          variant="filled"
-          onClose={handleSnackbarClose}
-          severity={snackbarSeverity}
-        >
-          {snackbarSeverity === 'success'
-            ? 'Proyecto eliminado con éxito'
-            : 'Error al eliminar el proyecto'}
-        </Alert>
+  <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
+    {snackbarSeverity === 'success'
+      ? 'Proyecto eliminado con éxito.'
+      : 'Error al eliminar el proyecto.'}
+  </Alert>
       </Snackbar>
     </Card>
   );

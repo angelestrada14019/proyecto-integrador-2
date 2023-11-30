@@ -1,3 +1,4 @@
+// export const API_URL = "http://localhost:8080"
 export const API_URL = "http://44.202.51.198:8080"
 export const URL_DOMAIN = "http://localhost:3080"
 
