@@ -29,14 +29,21 @@ const Header: FC<Props> = ({variant}: Props) => {
                 </NextLink>
             </Box>
 
-            {!usuarioLogueado && <Box sx={{marginLeft: "auto" }}>
+            {/* {!usuarioLogueado && <Box sx={{marginLeft: "auto" }}>
                 <NextLink href="/registro" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5 }}>Registrarse</MUILink>
                 </NextLink>
                 <NextLink href="/login" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400}}>Iniciar Sesion</MUILink>
                 </NextLink>
+            </Box>} */}
+
+            {!usuarioLogueado && <Box sx={{marginLeft: "auto" }}>
+                <NextLink href="/mis-donaciones-proyectos" passHref>
+                    <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5 }}>Mis donaciones y proyectos</MUILink>
+                </NextLink>
             </Box>}
+
 
             {usuarioLogueado && <Box sx={{marginLeft: "auto", display:"flex", alignItems:"center" }}>
                 <NextLink href="/mis-donaciones-proyectos" passHref>
