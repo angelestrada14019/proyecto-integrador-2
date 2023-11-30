@@ -12,11 +12,21 @@
 				{
 					"name": "crear donacion",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyQGRoLmNvbSIsImlhdCI6MTcwMTIwNTc3MSwiZXhwIjoxNzAxMjA3NTcxfQ.5DxrPVuLg9aO88H3gU_2xoNUt1APKTMrSn_KGOcXxFs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"comentario\": \"hola\",\r\n  \"cantidad\": 100,\r\n  \"fechaDonacion\": \"2023-11-08\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 8\r\n  },\r\n  \"idUsuarios\": 1,\r\n  \"idProductos\": 37\r\n}",
+							"raw": "{\r\n  \"comentario\": \"donación\",\r\n  \"cantidad\": 700,\r\n  \"fechaDonacion\": \"2023-11-24\",\r\n  \"metodoPagoID\": {\r\n    \"id\": 11\r\n  },\r\n  \"idUsuarios\": 19,\r\n  \"idProductos\": 59\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,6 +51,16 @@
 				{
 					"name": "get donacion por id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzZAZ21haWwuY29tIiwiaWF0IjoxNzAwNzgwOTg4LCJleHAiOjE3MDA3ODI3ODh9.08zKw-TbwNt-AKJfi1X7G277lXPEQbMe3LzHszEvo74",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -83,10 +103,20 @@
 				{
 					"name": "donaciones por producto",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api-donaciones/donacion/producto/1",
+							"raw": "http://localhost:8080/api-donaciones/donacion/producto/49",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -96,7 +126,7 @@
 								"api-donaciones",
 								"donacion",
 								"producto",
-								"1"
+								"49"
 							]
 						}
 					},
@@ -105,6 +135,16 @@
 				{
 					"name": "donaciones por usuario",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -136,7 +176,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"tarjeta\"\r\n}",
+							"raw": "{\r\n  \"name\": \"PayPal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"nuevo8\",\r\n  \"lastname\": \"nuevo8\",\r\n  \"email\": \"nuevo8@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Damelio\",\r\n  \"email\": \"agusdamelio@dh.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"www.nohay.com\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,15 +280,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/register",
+							"raw": "http://localhost:8080/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"auth",
-								"register"
+								"users"
 							]
 						}
 					},
@@ -261,7 +300,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Damelio\",\r\n  \"email\": \"agusdamelio@dh.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"www.nohay.com\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"raw": "{\r\n  \"name\": \"1\",\r\n  \"lastname\": \"1\",\r\n  \"email\": \"GUS@dh.com\",\r\n  \"password\": \"123456\",\r\n  \"profileUrl\": \"www.nohay.com\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -318,7 +357,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzhAZ21haWwuY29tIiwiaWF0IjoxNzAwNzc1MTUzLCJleHAiOjE3MDA3NzY5NTN9.CuNN0fwkSRMsAZx2XOe3-dzg4_e36Z4iwRp4g7XhU20",
+							"raw": "http://localhost:8080/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODU4MzksImV4cCI6MTcwMTM4NzYzOX0.zk44ZLTEjsTodEzPu7lNrL7st5Bk4CjqdlJFIOG_PaA",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -331,7 +370,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWV2bzhAZ21haWwuY29tIiwiaWF0IjoxNzAwNzc1MTUzLCJleHAiOjE3MDA3NzY5NTN9.CuNN0fwkSRMsAZx2XOe3-dzg4_e36Z4iwRp4g7XhU20"
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODU4MzksImV4cCI6MTcwMTM4NzYzOX0.zk44ZLTEjsTodEzPu7lNrL7st5Bk4CjqdlJFIOG_PaA"
 								},
 								{
 									"key": "",
@@ -346,18 +385,22 @@
 				{
 					"name": "get user por id",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/1",
+							"raw": "http://localhost:8080/auth/getUser/23",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"users",
-								"1"
+								"auth",
+								"getUser",
+								"23"
 							]
 						}
 					},
@@ -373,7 +416,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n  \"password\": \"123456\"\r\n\r\n}",
+							"raw": "{\r\n  \"name\": \"2\",\r\n  \"lastname\": \"1\",\r\n  \"email\": \"2@dh.com\",\r\n  \"profileUrl\": \"www.nohay.com\",\r\n  \"userType\": {\r\n    \"id\": 1\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -458,11 +501,21 @@
 				{
 					"name": "crear Producto",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODU4MzksImV4cCI6MTcwMTM4NzYzOX0.zk44ZLTEjsTodEzPu7lNrL7st5Bk4CjqdlJFIOG_PaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"Educación Digital para Todos\",\r\n  \"fechaPublicacion\": \"2023-11-15 21:55:00\",\r\n  \"fechaFinalizacion\": \"2024-01-15 03:00:00\",\r\n  \"monto\": 2500,\r\n  \"usuariosId\": 3,\r\n  \"categoriasId\": {\r\n    \"id\": 6\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/PortadaArteEnLaCalle.jpg\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img1ArteEnLaCalle.jpg\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img2ArteEnLaCalle.jpg\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img3ArteEnLaCalle.jpg\",\r\n      \"tipo\": 4\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"¡Queremos embellecer nuestra ciudad con arte callejero de primer nivel! Cada donación contribuye a la transformación de espacios públicos grises en galerías al aire libre llenas de color y creatividad.\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"descripcion\": \"Arte en la Calle es una iniciativa respaldada por un grupo de artistas urbanos apasionados y amantes del arte que han estado contribuyendo a la escena del arte callejero durante años. Nuestro equipo está formado por muralistas, grafiteros y defensores del arte público comprometidos con la transformación de entornos urbanos a través del arte.\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"descripcion\": \"Colaboraremos con propietarios de edificios, gobiernos locales y comunidades para seleccionar ubicaciones ideales para la creación de murales. Nuestros artistas transformarán estas áreas grises en obras de arte callejero vibrantes y significativas que reflejen la identidad y la cultura de la comunidad. Además, organizaremos eventos de arte público, talleres y exhibiciones para involucrar a la comunidad.\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"descripcion\": \"El objetivo final de Arte en la Calle es inspirar, unir y revitalizar nuestras ciudades a través del arte. Cada mural que creamos es una expresión de identidad, un recordatorio de la belleza en lo cotidiano y una fuente de orgullo comunitario. Con tu apoyo, podemos convertir nuestras calles en galerías de arte al aire libre, promoviendo la creatividad y la inspiración en toda la comunidad.\",\r\n      \"tipo\": 4\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"nombre\": \"Nuevos Horizontes\",\r\n  \"fechaPublicacion\": \"2023-11-30 21:55:00\",\r\n  \"fechaFinalizacion\": \"2025-02-30 03:00:00\",\r\n  \"monto\": 12000,\r\n  \"usuariosId\": 21,\r\n  \"categoriasId\": {\r\n    \"id\": 16\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/PortadaNuevosHorizontes.jpg\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img1NuevosHorizontes.jpg\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img2NuevosHorizontes.jpg\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img3NuevosHorizontes.jpg\",\r\n      \"tipo\": 4\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"¡Abre tu mente a nuevas experiencias! Únete a Nuevos Horizontes y apoya proyectos que fomentan el entendimiento cultural y la exploración.\",\r\n      \"tipo\": 1\r\n    },\r\n    {\r\n      \"descripcion\": \"Descubre Nuevos Horizontes es una iniciativa liderada por viajeros apasionados y defensores de la diversidad cultural. Nuestro equipo incluye exploradores, antropólogos y amantes de la aventura que creen en la importancia de conocer y apreciar las diversas culturas del mundo.\",\r\n      \"tipo\": 2\r\n    },\r\n    {\r\n      \"descripcion\": \"Colaboraremos con organizaciones de turismo sostenible, comunidades locales y expertos en cultura para financiar proyectos que promuevan el turismo responsable y la preservación cultural. Nuestra estrategia se centrará en la creación de programas educativos, intercambios culturales y la promoción de destinos turísticos que respeten el entorno y las tradiciones locales.\",\r\n      \"tipo\": 3\r\n    },\r\n    {\r\n      \"descripcion\": \"El objetivo final de Descubre Nuevos Horizontes es fomentar la comprensión global y el respeto por la diversidad cultural a través del turismo sostenible. Con tu apoyo, podremos financiar proyectos que permitan a las comunidades locales beneficiarse de manera equitativa del turismo y preservar su patrimonio cultural para las generaciones futuras.\",\r\n      \"tipo\": 4\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,10 +541,13 @@
 				{
 					"name": "get productos por page",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos?pageNumber=0&pageSize=12",
+							"raw": "http://localhost:8080/api-productos/productos/getProducto?pageNumber=0&pageSize=12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -499,7 +555,8 @@
 							"port": "8080",
 							"path": [
 								"api-productos",
-								"productos"
+								"productos",
+								"getProducto"
 							],
 							"query": [
 								{
@@ -509,6 +566,11 @@
 								{
 									"key": "pageSize",
 									"value": "12"
+								},
+								{
+									"key": "usuariosId",
+									"value": "3",
+									"disabled": true
 								}
 							]
 						}
@@ -522,7 +584,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 43,\r\n  \"nombre\": \"hola\",\r\n  \"fechaPublicacion\": \"2023-09-01 03:00:00\",\r\n  \"fechaFinalizacion\": \"2023-09-01 03:00:00\",\r\n  \"monto\": 80000,\r\n  \"usuariosId\": 1,\r\n  \"categoriasId\": {\r\n    \"id\": 1\r\n  },\r\n  \"multimedias\": [\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"url\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ],\r\n  \"descripciones\": [\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    },\r\n    {\r\n      \"descripcion\": \"string\",\r\n      \"tipo\": 0\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n        \"id\": 45,\r\n        \"nombre\": \"Planta una Semilla de Esperanza\",\r\n        \"fechaPublicacion\": \"2023-11-15 20:55:00\",\r\n        \"fechaFinalizacion\": \"2023-12-29 03:00:00\",\r\n        \"monto\": 3000.0,\r\n        \"montoSumatoriaDonaciones\": 0,\r\n        \"usuariosId\": 17,\r\n        \"categoriasId\": {\r\n            \"id\": 4\r\n        },\r\n        \"multimedias\": [\r\n            {\r\n                \"id\": 21,\r\n                \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/PlantaUnaSemillaDeEsperanza/PortadaPlantaUnaSemillaDeEsperanza.jpg\",\r\n                \"tipo\": 1\r\n            },\r\n            {\r\n                \"id\": 22,\r\n                \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/PlantaUnaSemillaDeEsperanza/Img1PlantaUnaSemillaDeEsperanza.png\",\r\n                \"tipo\": 2\r\n            },\r\n            {\r\n                \"id\": 23,\r\n                \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/PlantaUnaSemillaDeEsperanza/Img2PlantaUnaSemillaDeEsperanza.jpg\",\r\n                \"tipo\": 3\r\n            },\r\n            {\r\n                \"id\": 24,\r\n                \"url\": \"https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/PlantaUnaSemillaDeEsperanza/Img3PlantaUnaSemillaDeEsperanza.jpg\",\r\n                \"tipo\": 4\r\n            }\r\n        ],\r\n        \"descripciones\": [\r\n            {\r\n                \"id\": 15,\r\n                \"descripcion\": \"Cada donación es una semilla de esperanza para un futuro más verde.\",\r\n                \"tipo\": 1\r\n            },\r\n            {\r\n                \"id\": 16,\r\n                \"descripcion\": \"Nuestro proyecto, Planta una Semilla de Esperanza, es una iniciativa liderada por un grupo de apasionados defensores del medio ambiente con una amplia experiencia en reforestación y conservación. Nuestro equipo está compuesto por biólogos, ecologistas y voluntarios dedicados que comparten una visión común: restaurar los ecosistemas dañados y hacer frente al cambio climático.\",\r\n                \"tipo\": 2\r\n            },\r\n            {\r\n                \"id\": 17,\r\n                \"descripcion\": \"Trabajaremos en estrecha colaboración con organizaciones locales y comunidades para identificar áreas que requieren atención urgente. Nuestro enfoque se basa en la plantación de árboles nativos, la restauración de hábitats y la capacitación de comunidades locales en prácticas sostenibles. Utilizaremos métodos científicos sólidos para asegurar que nuestros esfuerzos de reforestación sean efectivos y beneficiosos a largo plazo.\",\r\n                \"tipo\": 3\r\n            },\r\n            {\r\n                \"id\": 18,\r\n                \"descripcion\": \"El objetivo final de Planta una Semilla de Esperanza es contribuir a la mitigación del cambio climático, la preservación de la biodiversidad y la creación de un futuro más sostenible para las generaciones venideras. Con tu apoyo, podremos plantar miles de árboles, restaurar ecosistemas vitales y proporcionar un entorno más saludable para todos. Cada donación es una semilla de esperanza para un mundo más verde y resiliente.\",\r\n                \"tipo\": 4\r\n            }\r\n        ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -530,7 +592,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos/39",
+							"raw": "http://localhost:8080/api-productos/productos/48",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -539,7 +601,7 @@
 							"path": [
 								"api-productos",
 								"productos",
-								"39"
+								"48"
 							]
 						}
 					},
@@ -548,10 +610,20 @@
 				{
 					"name": "borrar producto",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODU4MzksImV4cCI6MTcwMTM4NzYzOX0.zk44ZLTEjsTodEzPu7lNrL7st5Bk4CjqdlJFIOG_PaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api-productos/productos/39",
+							"raw": "http://localhost:8080/api-productos/productos/73",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -560,7 +632,7 @@
 							"path": [
 								"api-productos",
 								"productos",
-								"39"
+								"73"
 							]
 						}
 					},
@@ -574,11 +646,21 @@
 				{
 					"name": "crear categoria",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzNzY0MjIsImV4cCI6MTcwMTM3ODIyMn0.MAQJkimVLC4IWvPHqedLMyNCwblDyE02iiB6JTLOq64",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"Salud\",\r\n  \"descripcion\": \"Aquí encontraras todo lo relacionado que el mundo sea mas saludable\"\r\n}",
+							"raw": "{\r\n  \"nombre\": \"Viajes\",\r\n  \"descripcion\": \"Aquí encontraras todo lo relacionado para que el mundo este mas unido\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -628,7 +710,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 4,\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"nada\"\r\n}",
+							"raw": "{\r\n  \"id\": 4,\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"Aquí encontraras todo lo relacionado a proteger el medio ambiente\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,7 +766,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nombre\": \"Medio Ambiente\",\r\n  \"descripcion\": \"string\"\r\n}",
+							"raw": "{\r\n  \"url\": \"string\",\r\n  \"tipo\": 1,\r\n  \"productos_id\": 39\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -692,7 +774,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api-productos/categorias",
+							"raw": "http://localhost:8080/api-productos/multimedias",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -700,7 +782,7 @@
 							"port": "8080",
 							"path": [
 								"api-productos",
-								"categorias"
+								"multimedias"
 							]
 						}
 					},
