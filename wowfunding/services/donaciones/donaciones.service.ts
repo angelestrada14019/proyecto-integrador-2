@@ -6,7 +6,7 @@ export const postDonaciones = async (data: Donaciones) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      
+      Authorization: 'Bearer {eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODg0NjAsImV4cCI6MTcwMTM5MDI2MH0.rcS1G4ANifLyhy4nZv5xA3WerOSmbs4D7iU1-ooyuv8}'
     },
     method: "POST",
     body: data
@@ -23,7 +23,9 @@ export const postDonacionApi = async (data: Donaciones): Promise<any> => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: 'Bearer {eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDEzODg0NjAsImV4cCI6MTcwMTM5MDI2MH0.rcS1G4ANifLyhy4nZv5xA3WerOSmbs4D7iU1-ooyuv8}'
     },
+
     method: "POST",
     body: dataCkeckout,
   });

@@ -6,7 +6,8 @@ export const getProyectos = async (offset?: number, limit?: number) => {
     const params = new URLSearchParams();
     if (offset) params.set("pageNumber", `${offset}`);
     if (limit) params.set("pageSize", `${limit}`);
-    const data = await fetchApi(`api-productos/productos?pageNumber=${offset}&pageSize=${limit}`);
+    // const data = await fetchApi(`api-productos/productos?pageNumber=${offset}&pageSize=${limit}`);
+    const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}`);
     return data || {}; // Devuelve un objeto vacío si los datos son undefined
 }
 
@@ -23,13 +24,13 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
 
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
     const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
-      method: "DELETE",
+        method: "DELETE",
     });
-  
+
     if (!response.ok) {
-      throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
+        throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
     }
-  };
+};
 
 export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
     const dataProyecto = JSON.stringify(proyecto);

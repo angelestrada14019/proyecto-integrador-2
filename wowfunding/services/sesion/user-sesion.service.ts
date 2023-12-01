@@ -15,8 +15,22 @@ export const postLogin = async (data: ILogin): Promise<any> => {
       body: dataLogin,
     });
 
-  return await response.json();
+  return await response
 };
+
+export const postLoginAPI = async (data: ILogin): Promise<any> => {
+  const response = await fetchApi(`auth/token`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: data
+  });
+
+  return await response;
+};
+
 
 export const postActualizacion = async (data: IUserRegister) => {
   const response = await fetchApi(`users`, {

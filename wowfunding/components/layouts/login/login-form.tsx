@@ -21,7 +21,6 @@ const LoginForm = () => {
 
     const {
         control,
-        register,
         formState: { errors },
         handleSubmit,
         getValues,
@@ -32,7 +31,7 @@ const LoginForm = () => {
         const response = await postLogin(dataValues);
         try {
             if (!response.error) {
-                router.push('/');
+                // router.push('/');
             }
             else {
 

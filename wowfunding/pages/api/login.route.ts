@@ -1,10 +1,11 @@
-import { IUser } from 'interfaces/user.type';
-import type {NextApiRequest, NextApiResponse} from 'next';
+import { ILogin, IUser } from 'interfaces/user.type';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import {
     ERROR_SERVER,
     ERROR_INCORRECT_DATA,
     ERROR_METHOD_NOT_ALLOWED
 } from "services/sesion/user-sesion.errors";
+import { postLoginAPI } from 'services/sesion/user-sesion.service';
 
 type Data = {
     data: any;
@@ -14,21 +15,19 @@ type Data = {
 }
 
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
     if (req.method !== "POST") {
         res.status(405).json(ERROR_METHOD_NOT_ALLOWED);
         return;
     }
     try {
-        
-        const body: IUser = req.body;
-        if (body !== null) {
-            res.setHeader('set-cookie', 'access-confirmacion=true; path=/; semesite=lax; httponly')
-            res.status(200).json({data: body});
-            return
-        }
-        res.status(400).json(ERROR_INCORRECT_DATA);
+        const body: ILogin = req.body;
+        const result = await postLoginAPI(body);
+        const resultJSON = JSON.stringify(result);
+        res.setHeader('set-cookie', `access-confirmacion=${result.token}; path=/; semesite=lax; httponly`)
+        res.status(200).json({ data: result });
+        return
     } catch (err) {
         res.status(500).json(ERROR_SERVER);
     }

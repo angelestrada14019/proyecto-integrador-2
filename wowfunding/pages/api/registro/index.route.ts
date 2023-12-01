@@ -27,7 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     try {
 
         const result = await postRegistroApi(req.body);
-        console.log('result', result)
         const resultJSON = JSON.stringify(result);
         res.setHeader('Set-Cookie', `user-info=${resultJSON}; Path=; HttpOnly; SameSite=Lax`);
         res.status(200).json({ data: result });
