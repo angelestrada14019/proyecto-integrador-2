@@ -38,7 +38,7 @@ interface Props {
 }
 
 
-const Index: NextPage<Props> = () => {
+const Index: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
 
   if (!proyectosCargados) {
     return (
@@ -98,6 +98,28 @@ const Index: NextPage<Props> = () => {
   )
 }
 
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const proyectos = await getProyectos(0, 10);
+
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
+
+    return {
+      props: {
+        proyectos: proyectos,
+        proyectosCargados: true
+      },
+    };
+  } catch (error) {
+    console.error('Error al cargar proyectos', error);
+    return {
+      props: {
+        proyectos: [],
+        proyectosCargados: false
+      },
+    };
+  }
+};
 
 
 export default Index
