@@ -1,6 +1,7 @@
 package com.dh.pi2.usersapi.config;
 
 import com.dh.pi2.usersapi.service.CustomUserDetailsService;
+import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +40,7 @@ public class AuthConfig {
                     auth.requestMatchers("/auth/register","/auth/validate", "/auth/token", "/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").permitAll();
 //                    auth.requestMatchers("/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").authenticated();
                 })
+                .addFilter(corsFilter())
                 .build();
     }
     @Bean
@@ -72,9 +73,9 @@ public class AuthConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter() {
+    public Filter corsFilter() {
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
+        return (Filter) bean;
     }
 }
