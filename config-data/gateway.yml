@@ -12,17 +12,17 @@ spring:
       routes:
 
         - id: users-api
-          uri: lb://USERS-API
+          uri: http://52.207.236.56:8082
           predicates:
             - Path=/auth/**
         - id: api-donaciones
-          uri: lb://api-donaciones
+          uri: http://34.205.20.203:8083
           predicates:
             - Path=/api-donaciones/**
           filters:
             - AuthenticationFilter
         - id: mc-productos
-          uri: lb://mc-productos
+          uri: http://3.82.230.170:8084
           predicates:
             - Path=/api-productos/**
           filters:
