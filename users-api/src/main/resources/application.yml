@@ -3,3 +3,6 @@ spring:
     name: users-api
   config:
     import: optional:configserver:${CONFIG_SERVER:http://localhost:8888}
+
+secret:
+  jwt: ${SECRET}
