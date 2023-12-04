@@ -1,11 +1,13 @@
 package com.dh.pi2.usersapi.controller;
 
 
-import com.dh.pi2.usersapi.api.UserRequestTO;
-import com.dh.pi2.usersapi.api.UserResponseTO;
-import com.dh.pi2.usersapi.api.UserSearchResponseTo;
-import com.dh.pi2.usersapi.service.UserService;
+import com.dh.pi2.usersapi.dto.UserRequest;
+import com.dh.pi2.usersapi.dto.UserResponse;
+import com.dh.pi2.usersapi.dto.UserResponseById;
+import com.dh.pi2.usersapi.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,29 +22,27 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping
-    public ResponseEntity<UserResponseTO> create(@RequestBody UserRequestTO userRequestTO) {
-        return ResponseEntity.ok(userService.create(userRequestTO));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.getById(id));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserResponseTO> get(@PathVariable("id") Long id, @RequestBody UserRequestTO userRequestTO) {
-        return ResponseEntity.ok(userService.update(id, userRequestTO));
-    }
-
-    @GetMapping()
-    public ResponseEntity<UserSearchResponseTo> findAll() {
-        return ResponseEntity.ok(userService.findAll());
-    }
+//    @Autowired
+//    private AuthService authService;
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<UserResponseById> get(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok(authService.getById(id));
+//    }
+//
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<UserResponse> get(@PathVariable("id") Long id, @RequestBody UserRequest userRequest) {
+//        return ResponseEntity.ok(authService.update(id, userRequest));
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+//        authService.delete(id);
+//        return ResponseEntity.ok("usuario eliminado");
+//    }
+//
+////    @GetMapping()
+////    public ResponseEntity<UserSearchResponse> findAll() {
+////        return ResponseEntity.ok(userService.findAll());
+////    }
 }
