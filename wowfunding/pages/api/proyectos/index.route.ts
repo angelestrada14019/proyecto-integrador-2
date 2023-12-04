@@ -7,7 +7,8 @@ type Data = {
 } | { error: string, message: string }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    const { id } = req.query;
+    const { id } = req.body.id
+    //TODO ver como manejo el id del proyecto
     res.setHeader("Content-Type", "application/json");
     const idNumber = parseInt(`${id}`);
 

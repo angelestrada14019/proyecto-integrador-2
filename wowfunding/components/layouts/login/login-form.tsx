@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react';
 import { postLogin } from 'services/sesion/user-sesion.service';
 
-
 const LoginForm = () => {
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
@@ -58,7 +57,7 @@ const LoginForm = () => {
             alignItems="center"
             marginTop={10}>
             <Grid sx={{ backgroundColor: "#4bc6b929" }} padding={8} >
-                <Typography variant='h2' textAlign="center" fontWeight="bold">Form</Typography >
+                <Typography variant='h2' textAlign="center" fontWeight="bold">Inicio Sesión</Typography >
                 <Typography sx={{
                     height: "4px",
                     width: "100px",

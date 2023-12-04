@@ -1,5 +1,5 @@
 import { ProyectoFinal } from "interfaces/proyect.type";
-import { fetchApi } from "utils/servicesUtils";
+import { fetchApi, fetchApsi } from "utils/servicesUtils";
 
 
 export const getProyectos = async (offset?: number, limit?: number) => {
@@ -12,7 +12,6 @@ export const getProyectos = async (offset?: number, limit?: number) => {
 
 export const getProyecto = async (proyectoId: number) => {
     return fetchApi(`api-productos/productos/${proyectoId}`)
-
 }
 
 export const getProyectoById = async (proyectoId: number): Promise<any> => {
@@ -21,10 +20,22 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
     return await response.json();
 };
 
+//TODO getProyectoPorUsuario
+export const getProyectosUsuario = async (usuarioId: number) => {
+  const response = await fetchApi(`/api-productos/productos?pageNumber=0&pageSize=12&usuariosId=${usuarioId}`);
+  if (!response.ok) {
+    throw new Error('Error al obtener proyectos del usuario');
+  }
+  return response.json();
+};
 
+//TODO deleteProyecto
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
   try{
-    const response = await fetchApi(`/api-productos/productos/${proyectoId}`, {
+    // const response = await fetchApi(`/api-productos/productos/${proyectoId}`, {
+    //   method: "DELETE",
+    // });
+    const response = await fetch(`http://44.202.51.198:8080/api-productos/productos/66`, {
       method: "DELETE",
     });
     if(!response.ok) {
@@ -37,10 +48,14 @@ export const deleteProyecto = async (proyectoId: number): Promise<void> => {
   }
 }
 
-export const deleteProyectoAPI = async (proyectoId: number): Promise<void> => {
+export const deleteProyectoAPI = async (id: number): Promise<void> => {
   try {
-    const response = await fetch(`/api/proyectos/${proyectoId}`, {
+    const response = await fetch(`/api/proyectos/`, {
       method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
     });
     if (!response.ok) {
       console.error("Error al eliminar el proyecto:", response.statusText);

@@ -24,9 +24,10 @@ const CardsLanding = ({listaProyectos}: Props) => {
 
             </Grid>
             <Grid sx={{display:"flex"}} marginTop={3} justifyContent={"center"}>
-                <Button variant={"contained"}>Ver mas</Button>
+                <Button variant={"contained"}>Ver más</Button>
             </Grid>
         </>
+        //TODO Botón ver más landing
     )
 }
 

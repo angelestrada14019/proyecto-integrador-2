@@ -10,19 +10,19 @@ import Typography from '@mui/material/Typography';
 
 const news = [
     {
-        image: "/globant.png",
+        image: "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/Noticias/Noticias2.jpg",
         titulo: "Wowfunding: La plataforma revolucionaria ",
         descripcion: "Descubre cómo Wowfunding está cambiando la forma en que apoyamos proyectos y causas importantes. Únete a nuestra comunidad y sé parte del cambio.",
         fecha: "10 de Noviembre de 2023"
     },
     {
-        image: "/meli.png",
+        image: "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/Noticias/2Noticias.jpg",
         titulo: "¡Nuevos Proyectos Destacados!",
         descripcion: "Explora los proyectos más emocionantes que se sumaron a nuestra plataforma. Desde tecnología hasta arte y medio ambiente, tenemos algo para todos.",
         fecha: "5 de Diciembre de 2023"
     },
     {
-        image: "/accenture.png",
+        image: "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/MarLimpio/Img3MarLimpio.jpg",
         titulo: "Historias de Éxito: Proyectos que Hicieron Historia",
         descripcion: "Conoce a los creadores detrás de los proyectos que lograron superar sus objetivos. Sus historias inspiradoras te motivarán a apoyar tu próximo proyecto favorito.",
         fecha: "15 de Enero de 2024"

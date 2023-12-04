@@ -23,7 +23,6 @@ import LinearDeterminate from './linear-determinate';
 import { useState } from 'react';
 import { deleteProyecto, deleteProyectoAPI } from 'services/proyectos/proyectos.service';
 
-
 interface Props {
   proyecto: ProyectoFinal;
   widthParam: boolean;
@@ -112,7 +111,6 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
                 </Typography>
               </Grid>
             </Grid>
-
             <LinearDeterminate
               amount={proyecto.montoSumatoriaDonaciones}
               finalAmount={proyecto.monto}

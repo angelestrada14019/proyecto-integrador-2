@@ -6,14 +6,16 @@ import NextLink from 'next/link'
 import { Link as MUILink } from '@mui/material';
 
 const items: string[] = [
-    'https://www.unifranz.edu.bo/wp-content/uploads/2023/04/Captura-de-pantalla-2023-04-15-a-las-07.48.24-1024x580.png',
-    'https://www.acumar.gob.ar/wp-content/uploads/2023/10/Juntamos-libros-infantiles_Boletin_Web-Mail.png',
-    'https://www.campanario.es/wp-content/uploads/2018/03/Campa%C3%B1a-Ambiental-2018.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/CARRUSEL/1Carrusel.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/DDHHEnAccion/PortadaDDHHEnAccion.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/CARRUSEL/3Carrusel.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ExploraCiencia/PortadaExploraCiencia.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img1NuevosHorizontes.jpg',
+    'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img2ArteEnLaCalle.jpg',
     // Agrega más imágenes aquí
 ];
 
 const ImageCarousel = () => {
-
 
     const handleLabelClick = (index: any) => {
         console.log(index);
@@ -43,8 +45,9 @@ const ImageCarousel = () => {
                         textAlign: 'center',
                         opacity: '1',
                     }}>
+                        
                         <NextLink href="/login" passHref>
-                            <MUILink variant="h6" style={{ color: "white", fontWeight: "bold" }}>croquetitas</MUILink>
+                            <MUILink variant="h6" style={{ color: "white", fontWeight: "bold" }}>Descubrí más proyectos</MUILink>
                         </NextLink>
                     </p>
                 </div>
@@ -53,5 +56,7 @@ const ImageCarousel = () => {
         </Carousel >
     );
 }
+
+//TODO Descubri más proyectos Si queda tiempo hacer link página con filtros 
 
 export default ImageCarousel;

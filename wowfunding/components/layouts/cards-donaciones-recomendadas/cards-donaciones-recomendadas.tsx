@@ -1,10 +1,8 @@
 import React from 'react'
 import LandingTitles from '../ui/landing-titles'
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import MediaCard from '../ui/media-card'
 import { ProyectoFinal } from 'interfaces/proyect.type';
-
-
 interface Props {
     listaProyectos: ProyectoFinal[]
 }
@@ -23,9 +21,6 @@ const CardsLanding = ({listaProyectos}: Props) => {
                     />
                 )}
             </Grid>
-            {/* <Grid sx={{display:"flex"}} marginTop={3} justifyContent={"center"}>
-                <Button variant={"contained"}>Ver mas</Button>
-            </Grid> */}
         </>
     )
 }

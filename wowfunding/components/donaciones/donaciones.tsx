@@ -40,13 +40,14 @@ const DonacionesForm = () => {
 
         const dataDonacion: Donaciones =
         {
+            id:1,
             comentario,
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
             metodoPagoID: {
                 id: parseInt(pago)
             },
-            idUsuarios: 23,
+            idUsuarios: 18,
             idProductos: proyecto?.id || 23
         }
 

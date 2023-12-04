@@ -8,6 +8,22 @@ import { Button, Grid, ThemeProvider, createTheme } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import LandingTitles from 'components/layouts/ui/landing-titles';
 
+import type { GetServerSideProps, NextPage } from 'next'
+import { getProyectos } from 'services/proyectos/proyectos.service';
+import { ProyectoFinal, Proyectos } from 'interfaces/proyect.type';
+import { Spinner } from 'components/layouts/ui/spinner';
+
+
+
+
+interface Props {
+  proyectos: ProyectoFinal[]
+  proyectosCargados: boolean
+}
+
+
+
+
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -22,14 +38,14 @@ const columns: GridColDef[] = [
   {
     field: 'titulo',
     headerName: 'Titulo',
-    type:"string",
+    type: "string",
     width: 250,
     editable: true,
   },
   {
     field: 'resumen',
     headerName: 'resumen',
-    type:"string",
+    type: "string",
     width: 250,
     editable: true,
   },
@@ -217,9 +233,23 @@ const rows = [
     fechaFinal: '2022-05-31',
   },
 ];
+const Reportes: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
+  console.log('proyectos', proyectos[0])
 
 
-const reportes = () => {
+  if (!proyectosCargados) {
+    return (
+      <LayoutGeneral>
+        <ThemeProvider theme={theme}>
+          <Grid sx={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Spinner />
+          </Grid>
+        </ThemeProvider>
+      </LayoutGeneral>
+    );
+  }
+
+
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(rows);
     const workbook = XLSX.utils.book_new();
@@ -242,4 +272,29 @@ const reportes = () => {
     </LayoutGeneral>)
 }
 
-export default reportes
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const proyectos = await getProyectos(0, 20);
+
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
+
+    return {
+      props: {
+        proyectos: proyectos,
+        proyectosCargados: true
+      },
+    };
+  } catch (error) {
+    console.error('Error al cargar proyectos', error);
+    return {
+      props: {
+        proyectos: [],
+        proyectosCargados: false
+      },
+    };
+  }
+};
+
+
+export default Reportes
