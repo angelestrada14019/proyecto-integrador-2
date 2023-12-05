@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Image from "next/image";
-import {Grid, Link} from "@mui/material";
+import {Grid, Link, Typography} from "@mui/material";
 
 const socialMediaIcons = [
     { name: 'Facebook', iconUrl: '/Facebook.png', link: 'https://www.facebook.com/' },
@@ -18,24 +18,19 @@ const GeneralFooter = () => {
               borderTop={'1px solid #eaeaea'}
               sx={{backgroundColor: "#4BC6B9"}}>
         
-            <Grid container justifyContent="space-between" alignItems="center" maxWidth={"70%"}>
-                <Grid item xs={6}>
-                    <Link href="/terminos-de-uso" sx={{ marginRight: 3 }}>
-                        Términos de uso
+        <Grid container justifyContent="space-between" alignItems="center" maxWidth={"70%"}>
+            <Grid item container justifyContent="center" alignItems="center">
+                {socialMediaIcons.map((socialIcon) => (
+                    <Link key={socialIcon.name} href={socialIcon.link} sx={{ marginRight: 5 }}>
+                        <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={"30px"} height={"30px"} />
                     </Link>
-                    <Link href="/cookies">
-                        Cookies
-                    </Link>
-                </Grid>
-                <Grid item container xs={6} justifyContent="flex-end">
-                    {socialMediaIcons.map((socialIcon) => (
-                        <Link key={socialIcon.name} href={socialIcon.link} sx={{ marginRight: 5 }}>
-                            <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={"30px"} height={"30px"}/>
-                        </Link>
-                    ))}
-                </Grid>
+                ))}
             </Grid>
+        </Grid>
 
+            <Grid item xs={6}>
+                <Typography>Powered by DH</Typography>
+            </Grid>
        </Box>
     );
 };

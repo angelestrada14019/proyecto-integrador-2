@@ -30,7 +30,8 @@ const LoginForm = () => {
         const response = await postLogin(dataValues);
         try {
             if (!response.error) {
-                // router.push('/');
+                router.push('/');
+                // TODO estaba comentado por alguna razón?
             }
             else {
 
