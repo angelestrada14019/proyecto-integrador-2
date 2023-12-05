@@ -7,7 +7,7 @@ spring:
 
 eureka:
   instance:
-    preferIpAddress: true
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
     hostname: ${IP_EUREKA:localhost}
   client:
     registerWithEureka: false
