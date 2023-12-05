@@ -40,7 +40,6 @@ public class AuthConfig {
                     auth.requestMatchers("/auth/register","/auth/validate", "/auth/token", "/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").permitAll();
 //                    auth.requestMatchers("/auth/getUser/**","/auth/updateUser/**","/auth/deleteUser/**").authenticated();
                 })
-                .addFilter(corsFilter())
                 .build();
     }
     @Bean
@@ -58,24 +57,5 @@ public class AuthConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(Arrays.asList("*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowCredentials(true);
-        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-        UrlBasedCorsConfigurationSource cors = new UrlBasedCorsConfigurationSource();
-        cors.registerCorsConfiguration("/**", config);
-        return cors;
-    }
-
-    @Bean
-    public Filter corsFilter() {
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return (Filter) bean;
     }
 }
