@@ -2,50 +2,57 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
 const FooterAccesos = () => {
+  const boxStyles = {
+    margin: '10px', 
+};
+const containerStyles = {
+  maxWidth: '100%', 
+};
     return (
-        <Container>
-		<Grid container spacing={2}>
+        <Container style={containerStyles}>
+		<Grid container spacing={20}>
         <Grid item xs={12} sm={4}>
-          <Box>
-            <Typography variant="h6" component="h6">Ayuda</Typography>
+          <Box style={boxStyles}>
+            <Typography variant="h5" component="h5">Ayuda</Typography>
           </Box>
-		      <Box>
-            <a href="/centro-de-ayuda">Centro de ayuda</a>
+		      <Box style={boxStyles}>
+            <Link href="/centro-de-ayuda" underline="hover">Centro de ayuda</Link>
           </Box>
-          <Box>
-            <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+          <Box style={boxStyles}>
+            <Link href="/preguntas-frecuentes" underline="hover">Preguntas frecuentes</Link>
           </Box>
-          <Box>
-            <a href="/informacion-legal">Información legal</a>
+          <Box style={boxStyles}>
+            <Link href="/informacion-legal" underline="hover">Información legal</Link>
           </Box>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Box>
-            <Typography variant="h6" component="h6">Funcionamiento</Typography>
+          <Box style={boxStyles}>
+            <Typography variant="h5" component="h5">Funcionamiento</Typography>
           </Box>
-		      <Box>
-            <a href="/como-funciona">Cómo funciona</a>
+		      <Box style={boxStyles}>
+            <Link href="/como-funciona" underline="hover">Cómo funciona</Link>
           </Box>
-          <Box>
-            <a href="/ideas">Ideas para recaudar fondos</a>
+          <Box style={boxStyles}>
+            <Link href="/ideas" underline="hover">Ideas para recaudar fondos</Link>
           </Box>
 
 
-		  <Box>
-            <a href="/alianzas">Alianzas estratégicas</a>
+		  <Box style={boxStyles}>
+            <Link href="/alianzas" underline="hover">Alianzas estratégicas</Link>
           </Box>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Box>
-            <Typography variant="h6" component="h6">Acerca de WowFunding</Typography>
+          <Box style={boxStyles}>
+            <Typography variant="h5" component="h5">Acerca de WowFunding</Typography>
           </Box>
-		  <Box>
-            <a href="/quienes-somos">Quienes somos</a>
+		  <Box style={boxStyles}>
+            <Link href="/quienes-somos" underline="hover">Quienes somos</Link>
           </Box>
-          <Box>
-            <a href="/prensa">Prensa</a>
+          <Box style={boxStyles}>
+            <Link href="/prensa" underline="hover">Prensa</Link>
           </Box>
         </Grid>
       </Grid>
