@@ -33,20 +33,20 @@ info:
   app:
     name: ${spring.application.name}
 
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceURL:
-      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
-
 # eureka:
 #   client:
-#     serviceUrl:
+#     registerWithEureka: true
+#     fetchRegistry: true
+#     serviceURL:
 #       defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
-#   instance:
-#     hostName: 44.202.51.198
-#     # instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
+  instance:
+    hostName: 44.202.51.198
+    # instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 management:
   endpoint:
