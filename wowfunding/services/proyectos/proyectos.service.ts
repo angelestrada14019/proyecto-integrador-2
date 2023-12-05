@@ -34,7 +34,8 @@ export const getProyectosUsuario = async (usuarioId: number, offset?: number, li
 
 //TODO deleteProyecto
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxNzMxMDg3LCJleHAiOjE3MDE3MzI4ODd9.OXzv7oMEIvHI1smRBwAcnZGi1TtEAN_q7BDK0Mbx9-0'
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDE4MTU3NTgsImV4cCI6MTcwMTgxNzU1OH0.rvZF75-j_qU7nPhibERiRXTcGsm4gWxJjNYbP8BMkHI'
+  
   console.log("deletedID", proyectoId )
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
     headers: {
@@ -52,7 +53,7 @@ export const deleteProyecto = async (proyectoId: number): Promise<void> => {
 
 export const deleteProyectoAPI = async (id: number): Promise<void> => {
   try {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxNzMxMDg3LCJleHAiOjE3MDE3MzI4ODd9.OXzv7oMEIvHI1smRBwAcnZGi1TtEAN_q7BDK0Mbx9-0'
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDE4MTU3NTgsImV4cCI6MTcwMTgxNzU1OH0.rvZF75-j_qU7nPhibERiRXTcGsm4gWxJjNYbP8BMkHI'
     const response = await fetch(`/api/proyectos/`, {
       method: "DELETE",
       headers: {
