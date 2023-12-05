@@ -46,9 +46,13 @@ eureka:
       defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
   instance:
     hostName: 44.202.51.198
+    ipAddress: 44.202.51.198
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 management:
+  info:
+    env:
+      enabled: true
   endpoint:
     gateway:
       enabled: true
@@ -56,4 +60,9 @@ management:
     web:
       exposure:
         include: gateway
+info:
+  name: gateway
+  description: gateway
+  version: 1.0.0
+  date: 2023-12-05
 
