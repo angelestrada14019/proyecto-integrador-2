@@ -234,7 +234,6 @@ const rows = [
   },
 ];
 const Reportes: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
-  console.log('proyectos', proyectos[0])
 
 
   if (!proyectosCargados) {

@@ -12,7 +12,6 @@ const items: string[] = [
     'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ExploraCiencia/PortadaExploraCiencia.jpg',
     'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img1NuevosHorizontes.jpg',
     'https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/ArteEnLaCalle/Img2ArteEnLaCalle.jpg',
-    // Agrega más imágenes aquí
 ];
 
 const ImageCarousel = () => {
@@ -47,7 +46,7 @@ const ImageCarousel = () => {
                     }}>
                         
                         <NextLink href="/login" passHref>
-                            <MUILink variant="h6" style={{ color: "white", fontWeight: "bold" }}>Descubrí más proyectos</MUILink>
+                            <MUILink variant="h6" style={{ color: "white", fontWeight: "bold" }}>Descubre más proyectos</MUILink>
                         </NextLink>
                     </p>
                 </div>
@@ -57,6 +56,6 @@ const ImageCarousel = () => {
     );
 }
 
-//TODO Descubri más proyectos Si queda tiempo hacer link página con filtros 
+//TODO Descubre más proyectos Si queda tiempo hacer link página con filtros 
 
 export default ImageCarousel;

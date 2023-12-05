@@ -27,7 +27,7 @@ const CardsLanding = ({listaProyectos}: Props) => {
                 <Button variant={"contained"}>Ver más</Button>
             </Grid>
         </>
-        //TODO Botón ver más landing
+
     )
 }
 

@@ -28,7 +28,7 @@ const news = [
         fecha: "15 de Enero de 2024"
     },
     {
-        image: "/meli.png",
+        image: "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/Noticias/Noticias4.jpg",
         titulo: "Celebramos un Nuevo Hitórico de Donaciones",
         descripcion: "Estamos emocionados de anunciar que hemos alcanzado un nuevo récord de donaciones. Gracias a tu generosidad, estamos logrando un impacto real en la sociedad.",
         fecha: "3 de Febrero de 2024"

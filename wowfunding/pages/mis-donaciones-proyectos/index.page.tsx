@@ -1,3 +1,4 @@
+'use client'
 import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import MisDonaciones from "components/layouts/mis-donaciones/mis-donaciones";
 import CardsMisProyectos from "components/layouts/cards-mis-proyectos/cards-mis-proyectos";
@@ -6,17 +7,17 @@ import GeneralHeader from "components/layouts/header/general-header.component";
 import GeneralFooter from "components/layouts/footer-general/general-footer.component";
 import { Donaciones } from 'interfaces/donaciones.type';
 import { ProyectoFinal } from 'interfaces/proyect.type';
-import { getDonacionesUsuario, getDonacionesUsuarioApi } from 'services/donaciones/donaciones.service';
+import { getDonacionesUsuario} from 'services/donaciones/donaciones.service';
 import { getProyectos, getProyectosUsuario } from 'services/proyectos/proyectos.service';
 import Head from 'next/head';
 
 interface Props {
-  listaDonacionesUsuario: Donaciones[];
   proyectos: ProyectoFinal[];
-  listaProyectosUsuario: ProyectoFinal[];
+  proyectosUsuario: ProyectoFinal[];
+  // donacionesUsuario: Donaciones[];
 }
 
-const MisDonacionesProyectos: NextPage<Props> = ({ listaDonacionesUsuario, proyectos, listaProyectosUsuario }: Props) => {
+const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos, proyectosUsuario }: Props) => {
   return (
     <>
       <Head>
@@ -25,68 +26,79 @@ const MisDonacionesProyectos: NextPage<Props> = ({ listaDonacionesUsuario, proye
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GeneralHeader />
-      <MisDonaciones listaDonaciones={listaDonacionesUsuario} listaProyectos={proyectos} />
-      <CardsMisProyectos listaProyectosUsuario={listaProyectosUsuario} />
+      {/* <MisDonaciones listaDonaciones={donacionesUsuario} listaProyectos={proyectos} /> */}
+      <CardsMisProyectos listaProyectosUsuario={proyectosUsuario} /> 
       <CardsDonacionesRecomendadas listaProyectos={proyectos} />
       <GeneralFooter />
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-  try {
-    const usuarioId = 18;
-
-    const donacionesUsuario = await getDonacionesUsuarioApi(usuarioId);
-    const proyectos = await getProyectos(0, 12);
-    const proyectosUsuario = await getProyectosUsuario(usuarioId);
-    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
-
-    return {
-      props: {
-        listaDonacionesUsuario: donacionesUsuario,
-        proyectos: proyectos,
-        listaProyectosUsuario: proyectosUsuario,
-      },
-    };
-  } catch (error) {
-    console.error('Error al ocargar datos', error);
-
-    return {
-      props: {
-        listaDonacionesUsuario: [],
-        proyectos: [],
-        listaProyectosUsuario: [],
-      },
-    };
-  }
-};
-
-//TODO Ver refactorización código
-
-
-// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+// export const getServerSideProps: GetServerSideProps<MisDonacionesProyectosProps> = async (context) => {
 //   try {
-//     const proyectos = await getProyectos(0, 10);
 
-//     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
-    
+// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('user-info') : null;
+// const usuarioLogueado: IUser = localStorageUser ? JSON.parse(localStorageUser) : null;
+
+//Cookies, usuario id=1
+// const cookieUser = context.req.cookies && context.req.cookies["user-info"];
+// const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
+//     const usuarioLogueado = {id:1};
+
+
+//     const donacionesUsuario = await getDonacionesPorUsuario(usuarioLogueado.id);
+//     console.log(donacionesUsuario)
+
+//     const proyectosUsuario = await getProyectosPorUsuario(usuarioLogueado.id);
+//     const proyectos = await getProyectos();
+
 //     return {
 //       props: {
-//         proyectos: proyectos,
-//         proyectosCargados:true
+//         listaProyectosUsuario: proyectosUsuario,
+//         listaProyectos: proyectos,
+//         listaDonacionesUsuario: donacionesUsuario,
 //       },
 //     };
 //   } catch (error) {
-//     console.error('Error al cargar proyectos', error);
+//     console.error('Error fetching data:', error);
 //     return {
 //       props: {
-//         proyectos: [],
-//         proyectosCargados:false
+//         listaProyectosUsuario: [],
+//         listaProyectos: [],
+//         listaDonacionesUsuario: [],
 //       },
 //     };
 //   }
 // };
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  try {
+    const usuarioId = 18;
+    const proyectos = await getProyectos(0, 10);
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
+    const proyectosUsuario = await getProyectosUsuario(usuarioId, 0, 10);
+
+    // const donacionesUsuario = await getDonacionesUsuario(usuarioId);
+    // console.log(donacionesUsuario)
+
+    return {
+      props: {
+        proyectos: proyectos,
+        proyectosUsuario: proyectosUsuario,
+        // donacionesUsuario: donacionesUsuario,
+      },
+    };
+  } catch (error) {
+    console.error('Error al cargar proyectos', error);
+    return {
+      props: {
+        proyectos: [],
+        proyectosUsuario: [],
+        // donacionesUsuario: [],
+      },
+    };
+  }
+};
 
 export default MisDonacionesProyectos;
 
