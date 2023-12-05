@@ -74,7 +74,7 @@ const RegistroForm = () => {
                 <Typography
                     variant='body1'
                     marginTop={2}>
-                    Ya tenes una cuenta?
+                    Ya tienes una cuenta?
                     <NextLink href="/login" passHref>
                         <MUILink variant="body2" sx={{ fontSize: 18, marginRight: 5 }}> Ingresa aqui</MUILink>
                     </NextLink>

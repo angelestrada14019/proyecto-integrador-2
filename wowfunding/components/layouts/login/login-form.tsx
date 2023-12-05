@@ -74,7 +74,7 @@ const LoginForm = () => {
                     Todavia no te registraste?
 
                     <NextLink href="/registro" passHref>
-                        <MUILink variant="body2" sx={{ fontSize: 18, marginRight: 5 }}> Registrate aqui</MUILink>
+                        <MUILink variant="body2" sx={{ fontSize: 18, marginRight: 5 }}> Regístrate aqui</MUILink>
                     </NextLink>
                 </Typography >
 
