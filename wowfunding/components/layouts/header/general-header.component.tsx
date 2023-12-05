@@ -21,6 +21,7 @@ const usuarioLogueado = false; // temporal mientras implementamos la conexión a
 // const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
 //     const usuarioLogueado = {id:1};
 
+//TODO Traer el nombre del usuario logueado
 
 const Header: FC<Props> = ({variant}: Props) => {
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth:"1490px" }}>

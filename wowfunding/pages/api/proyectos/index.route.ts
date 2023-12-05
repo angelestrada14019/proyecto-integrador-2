@@ -27,13 +27,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     } else if (req.method === "DELETE") {
         try {
           const { id: deleteId } = req.body;
+        //   console.log("deletedId", deleteId)
           const deleteIdNumber = parseInt(`${deleteId}`);
-    
+          if (isNaN(deleteIdNumber)) {
+            console.error("ID no válido:", deleteId);
+            res.status(400).json({ error: "Error 400", message: "ID no válido" });
+            return;
+          }
           await deleteProyecto(deleteIdNumber);
           res.status(204).end();
         } catch (err) {
           console.error(err);
-          res.status(500).json({ error: "en el error 500  ", message: "Error al eliminar el proyecto" });
+          res.status(500).json({ error: "Error 500  ", message: "Error al eliminar el proyecto" });
         }
         return;
       }

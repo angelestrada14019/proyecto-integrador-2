@@ -34,25 +34,35 @@ export const getProyectosUsuario = async (usuarioId: number, offset?: number, li
 
 //TODO deleteProyecto
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxNzMxMDg3LCJleHAiOjE3MDE3MzI4ODd9.OXzv7oMEIvHI1smRBwAcnZGi1TtEAN_q7BDK0Mbx9-0'
+  console.log("deletedID", proyectoId )
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
       method: "DELETE",
   });
-
-  if (!response.ok) {
+  console.log(response)
+  if (response.status !== 204) {
       throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
   }
 };
 
 export const deleteProyectoAPI = async (id: number): Promise<void> => {
   try {
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxNzMxMDg3LCJleHAiOjE3MDE3MzI4ODd9.OXzv7oMEIvHI1smRBwAcnZGi1TtEAN_q7BDK0Mbx9-0'
     const response = await fetch(`/api/proyectos/`, {
       method: "DELETE",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({ id }),
     });
-    if (!response.ok) {
+    if (response.status !== 204) {
       console.error("Error al eliminar el proyecto:", response.statusText);
       throw new Error(response.statusText);
     }

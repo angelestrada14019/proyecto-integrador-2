@@ -92,12 +92,6 @@ const ImageCarousel = () => {
                             opacity: '1',
                         }}
                     >
-
-                        {/* <NextLink href="/login" passHref>
-                            <MUILink variant="h6" style={{ color: 'white', fontWeight: 'bold' }}>
-                            {item.text}
-                            </MUILink>
-                        </NextLink> */}
                         <Typography variant="h6" style={{ color: 'white', fontWeight: 'bold' }}>
                         {item.text}
                         </Typography>
