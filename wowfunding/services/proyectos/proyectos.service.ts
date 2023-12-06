@@ -34,9 +34,9 @@ export const getProyectosUsuario = async (usuarioId: number, offset?: number, li
 
 //TODO deleteProyecto
 export const deleteProyecto = async (proyectoId: number): Promise<void> => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDE4MTU3NTgsImV4cCI6MTcwMTgxNzU1OH0.rvZF75-j_qU7nPhibERiRXTcGsm4gWxJjNYbP8BMkHI'
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxODgyNDE0LCJleHAiOjE3MDE4ODQyMTR9.QiQNLwdirhkK5MtrTV-ci4Lh9_EGGrvsOt5V_2ec_Iw'
   
-  console.log("deletedID", proyectoId )
+
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
     headers: {
       Accept: "application/json",
@@ -45,15 +45,15 @@ export const deleteProyecto = async (proyectoId: number): Promise<void> => {
     },
       method: "DELETE",
   });
-  console.log(response)
-  if (response.status !== 204) {
+
+  if (response !== 204) {
       throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
   }
 };
 
 export const deleteProyectoAPI = async (id: number): Promise<void> => {
   try {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDE4MTU3NTgsImV4cCI6MTcwMTgxNzU1OH0.rvZF75-j_qU7nPhibERiRXTcGsm4gWxJjNYbP8BMkHI'
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxODgyNDE0LCJleHAiOjE3MDE4ODQyMTR9.QiQNLwdirhkK5MtrTV-ci4Lh9_EGGrvsOt5V_2ec_Iw'
     const response = await fetch(`/api/proyectos/`, {
       method: "DELETE",
       headers: {

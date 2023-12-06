@@ -27,7 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     } else if (req.method === "DELETE") {
         try {
           const { id: deleteId } = req.body;
-        //   console.log("deletedId", deleteId)
           const deleteIdNumber = parseInt(`${deleteId}`);
           if (isNaN(deleteIdNumber)) {
             console.error("ID no válido:", deleteId);
