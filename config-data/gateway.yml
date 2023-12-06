@@ -44,9 +44,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${IP_EUREKA:localhost}:8761/eureka
-#  instance:
-#    hostName: 44.202.51.198
-    # instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  instance:
+    hostName: 44.202.51.198
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 management:
   endpoint:
