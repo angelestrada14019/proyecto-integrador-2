@@ -26,5 +26,8 @@ export const fetchApi = async (endpoint: string, data?: { headers?: Record<strin
         method: data?.method || "GET",
         body: data?.body ? JSON.stringify(data.body) : undefined,
     });
+    if (response.status === 204) {
+        return response.status; 
+    }
     return await response.json();
 }

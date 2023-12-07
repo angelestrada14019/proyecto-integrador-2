@@ -42,6 +42,7 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const handleEliminar = async () => {
     try {
       await deleteProyectoAPI(proyecto.id);
+      router.reload();
       setSnackbarOpen(true);
       setSnackbarSeverity('success');
     } catch (error) {
