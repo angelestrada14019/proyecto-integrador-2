@@ -1,4 +1,4 @@
-'use client'
+'use server'
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import BodySingle from "components/layouts/body/single/body-single";
@@ -38,7 +38,29 @@ interface Props {
 }
 
 
-const Index: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
+// const Index: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
+
+const Index: NextPage<Props> = () => {
+
+  const [proyectos, setProyectos] = useState<ProyectoFinal[]>([])
+  const [proyectosCargados, setProyectosCargados] = useState(false)
+
+  useEffect(() => {
+    const fetchProyectos = async () => {
+      try {
+        const proyectosData = await getProyectos(0, 10);
+        setProyectos(proyectosData);
+        setProyectosCargados(true);
+      } catch (error) {
+        console.error('Error al cargar proyectos', error);
+        setProyectos([]);
+        setProyectosCargados(false);
+      }
+    };
+
+    fetchProyectos();
+  }, []);
+
 
   if (!proyectosCargados) {
     return (
@@ -98,28 +120,28 @@ const Index: NextPage<Props> = ({ proyectos, proyectosCargados }: Props) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  try {
-    const proyectos = await getProyectos(0, 10);
+// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+//   try {
+//     const proyectos = await getProyectos(0, 10);
 
-    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
+//     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
 
-    return {
-      props: {
-        proyectos: proyectos,
-        proyectosCargados: true
-      },
-    };
-  } catch (error) {
-    console.error('Error al cargar proyectos', error);
-    return {
-      props: {
-        proyectos: [],
-        proyectosCargados: false
-      },
-    };
-  }
-};
+//     return {
+//       props: {
+//         proyectos: proyectos,
+//         proyectosCargados: true
+//       },
+//     };
+//   } catch (error) {
+//     console.error('Error al cargar proyectos', error);
+//     return {
+//       props: {
+//         proyectos: [],
+//         proyectosCargados: false
+//       },
+//     };
+//   }
+// };
 
 
 export default Index
