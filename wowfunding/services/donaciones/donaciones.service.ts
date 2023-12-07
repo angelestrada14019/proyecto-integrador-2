@@ -1,5 +1,5 @@
 import { Donaciones } from "interfaces/donaciones.type";
-import { API_URL, fetchApi } from "utils/servicesUtils";
+import { fetchApi } from "utils/servicesUtils";
 
 export const postDonaciones = async (data: Donaciones) => {
   const response = await fetchApi(`api-donaciones/donacion`, {
@@ -30,7 +30,7 @@ export const postDonacionApi = async (data: Donaciones): Promise<any> => {
 };
 
 export const getDonacionesUsuario = async (usuarioId: number) => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxODkxNjczLCJleHAiOjE3MDE4OTM0NzN9.0rWGUcv4bx4W2zDSVQdlevAN2KdmIIJoieIrkNLqGsY'
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxOTEwMjg0LCJleHAiOjE3MDE5MTIwODR9.ydjzvz-IzU_yoIBh2t8cNTDt917NiUZGmdvGc9U46Og'
   const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
   headers: {
     Accept: "application/json",
