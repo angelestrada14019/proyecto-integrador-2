@@ -1,3 +1,4 @@
+import { ProjectInput } from "checkout/checkout.types";
 import { ProyectoFinal } from "interfaces/proyect.type";
 import { fetchApi, fetchApsi } from "utils/servicesUtils";
 
@@ -74,9 +75,33 @@ export const deleteProyectoAPI = async (id: number): Promise<void> => {
   };
 
 
-export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
+export const postProyecto = async (proyecto: ProjectInput): Promise<any> => {
+  try {
     const dataProyecto = JSON.stringify(proyecto);
-    const response = await fetch(`/api-productos/productos/creatAll`, {
+    const response = await fetch(`http://44.202.51.198:8080/api-productos/productos/creatAll`, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
+            'Access-Control-Request-Method': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0bHVpc2FAZ21haWwuY29tIiwiaWF0IjoxNzAxOTE1NDYzLCJleHAiOjE3MDE5MTcyNjN9.6xcTHdKUVZxOFtqdaeuzgH7t_Re3dHCxY9-YazUm-6Q`
+        },
+        method: "POST",
+        body: dataProyecto,
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar el proyecto", error);
+    throw error;
+  }
+}
+
+export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
+    const dataProyecto = JSON.stringify(proyecto);
+    const response = await fetch(`/api/proyectos`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -87,18 +112,4 @@ export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
 
     return await response.json();
 }
-
-// export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
-//     const dataProyecto = JSON.stringify(proyecto);
-//     const response = await fetch(`/api/proyecto`, {
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         method: "POST",
-//         body: dataProyecto,
-//     });
-
-//     return await response.json();
-// }
 
