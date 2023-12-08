@@ -14,7 +14,7 @@ import Head from 'next/head';
 interface Props {
   proyectos: ProyectoFinal[];
   proyectosUsuario: ProyectoFinal[];
-  // donacionesUsuario: Donaciones[];
+  donacionesUsuario: Donaciones[];
 }
 
 const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos, proyectosUsuario }: Props) => {
@@ -26,7 +26,7 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GeneralHeader />
-      {/* <MisDonaciones listaDonaciones={donacionesUsuario} listaProyectos={proyectos} /> */}
+      <MisDonaciones listaDonaciones={donacionesUsuario} listaProyectos={proyectos} />
       <CardsMisProyectos listaProyectosUsuario={proyectosUsuario} /> 
       <CardsDonacionesRecomendadas listaProyectos={proyectos} />
       <GeneralFooter />
@@ -46,55 +46,28 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
 //     const usuarioLogueado = {id:1};
 
 
-//     const donacionesUsuario = await getDonacionesPorUsuario(usuarioLogueado.id);
-//     console.log(donacionesUsuario)
-
-//     const proyectosUsuario = await getProyectosPorUsuario(usuarioLogueado.id);
-//     const proyectos = await getProyectos();
-
-//     return {
-//       props: {
-//         listaProyectosUsuario: proyectosUsuario,
-//         listaProyectos: proyectos,
-//         listaDonacionesUsuario: donacionesUsuario,
-//       },
-//     };
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//     return {
-//       props: {
-//         listaProyectosUsuario: [],
-//         listaProyectos: [],
-//         listaDonacionesUsuario: [],
-//       },
-//     };
-//   }
-// };
-
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
     const usuarioId = 18;
     const proyectos = await getProyectos(0, 10);
     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
     const proyectosUsuario = await getProyectosUsuario(usuarioId, 0, 10);
-
-    // const donacionesUsuario = await getDonacionesUsuario(usuarioId);
-    // console.log(donacionesUsuario)
+    const donacionesUsuario = await getDonacionesUsuario(usuarioId);
 
     return {
       props: {
         proyectos: proyectos,
         proyectosUsuario: proyectosUsuario,
-        // donacionesUsuario: donacionesUsuario,
+        donacionesUsuario: donacionesUsuario,
       },
     };
   } catch (error) {
-    console.error('Error al cargar proyectos', error);
+    console.error('Error al cargar datos', error);
     return {
       props: {
         proyectos: [],
         proyectosUsuario: [],
-        // donacionesUsuario: [],
+        donacionesUsuario: [],
       },
     };
   }

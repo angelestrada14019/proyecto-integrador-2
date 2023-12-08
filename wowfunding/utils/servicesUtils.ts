@@ -31,3 +31,4 @@ export const fetchApi = async (endpoint: string, data?: { headers?: Record<strin
     }
     return await response.json();
 }
+

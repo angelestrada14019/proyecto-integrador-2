@@ -36,7 +36,6 @@ const MisDonaciones: React.FC<Props> = ({ listaDonaciones, listaProyectos }) => 
   useEffect(() => {
     setDonacionesUsuario(listaDonaciones);
   }, [listaDonaciones]);
-
   return (
     <div style={{ margin:'80px' }}>
       <LandingTitles smallTitle='Un resumen de tu ayuda' title='Mis donaciones' color="black"/>

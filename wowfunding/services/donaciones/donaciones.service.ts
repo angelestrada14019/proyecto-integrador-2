@@ -1,7 +1,6 @@
 import { Donaciones } from "interfaces/donaciones.type";
 import { fetchApi } from "utils/servicesUtils";
 
-
 export const postDonaciones = async (data: Donaciones) => {
   const response = await fetchApi(`api-donaciones/donacion`, {
     headers: {
@@ -30,17 +29,15 @@ export const postDonacionApi = async (data: Donaciones): Promise<any> => {
   return await response.json();
 };
 
-//TODO getDonacionesUsuario no funciona, falta el getDonacionesUsuarioAPI (?)
 export const getDonacionesUsuario = async (usuarioId: number) => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ3VzZGFtZWxpb0BkaC5jb20iLCJpYXQiOjE3MDE4MTU3NTgsImV4cCI6MTcwMTgxNzU1OH0.rvZF75-j_qU7nPhibERiRXTcGsm4gWxJjNYbP8BMkHI'
-  const response = await fetchApi(`/api-donaciones/donacion/usuario/${usuarioId}`, {
+  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxOTEwMjg0LCJleHAiOjE3MDE5MTIwODR9.ydjzvz-IzU_yoIBh2t8cNTDt917NiUZGmdvGc9U46Og'
+  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`
   },
-    method: "GET",
 });
-return await response.json();
+    return response || {};
 };
 
