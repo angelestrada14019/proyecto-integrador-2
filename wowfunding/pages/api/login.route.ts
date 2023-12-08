@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         const body: ILogin = req.body;
         const result = await postLoginAPI(body);
         const resultJSON = JSON.stringify(result);
-        res.setHeader('set-cookie', `access-confirmacion=${result.token}; path=/; semesite=lax; httponly`)
+        res.setHeader('set-cookie', `access-confirmacion=${resultJSON}; path=/; semesite=lax;`)
         res.status(200).json({ data: result });
         return
     } catch (err) {

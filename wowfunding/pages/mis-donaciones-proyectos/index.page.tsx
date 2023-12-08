@@ -37,11 +37,11 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
 // export const getServerSideProps: GetServerSideProps<MisDonacionesProyectosProps> = async (context) => {
 //   try {
 
-// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('user-info') : null;
+// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('access-confirmacion') : null;
 // const usuarioLogueado: IUser = localStorageUser ? JSON.parse(localStorageUser) : null;
 
 //Cookies, usuario id=1
-// const cookieUser = context.req.cookies && context.req.cookies["user-info"];
+// const cookieUser = context.req.cookies && context.req.cookies["access-confirmacion"];
 // const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
 //     const usuarioLogueado = {id:1};
 

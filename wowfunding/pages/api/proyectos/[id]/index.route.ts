@@ -2,30 +2,39 @@ import { ProyectoFinal } from "interfaces/proyect.type";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getProyecto, postProyecto } from "services/proyectos/proyectos.service";
 import { ERROR_SERVER } from "services/sesion/user-sesion.errors";
+import { parse } from 'cookie';
+
 
 type Data = {
     data: any;
 } | { error: string, message: string }
-
+type Cookies = {
+    [key: string]: string;
+  };
+  
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+    const cookies: Cookies = parse(req.headers.cookie || '');
+    console.log('cookies', cookies)
     const { id } = req.query;
+    
     res.setHeader("Content-Type", "application/json");
     const idNumber = parseInt(`${id}`);
 
+    
+    // if (req.method == "POST") {
+    //     try {
+    //         const cookieUser = cookies['access-confirmacion'] || '';
+    //         const result = await postProyecto(req.body, cookieUser);
+    //         res.status(200).json({ data: result });
 
-    if (req.method == "POST") {
-        try {
+    //     } catch (err) {
 
-            const result = await postProyecto(req.body);
-            res.status(200).json({ data: result });
-
-        } catch (err) {
-
-            res.status(500).json({ error: "en el error 500  ", message: "error 500" });
-        }
-        return
-    }
+    //         res.status(500).json({ error: "en el error 500  ", message: "error 500" });
+    //     }
+    //     return
+    // }
     try {
+
         const result: any | null = await getProyecto(idNumber);
         if (result === null) {
             res.status(404).json({ error: "No se encontró el proyecto", message: "El proyecto no existe" });

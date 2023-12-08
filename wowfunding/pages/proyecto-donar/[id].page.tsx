@@ -37,19 +37,11 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
     }
 
     const handleDonate = async (id: number) => {
-        const response: ProyectoFinal = await getProyectoById(id);
-
-
-        if (response) {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            router.push({
-                pathname: "/donaciones",
-                query: { id: response.id },
-            });
-        } else {
-            router.push(`/`);
-        }
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        router.push({
+            pathname: "/donaciones",
+            query: { id: 60 },
+        });
     };
 
     return (
@@ -107,9 +99,9 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                 <Grid sx={{ display: "flex", justifyContent: "center" }} marginTop={5} marginBottom={5}>
                                     {esFechaExpirada(proyecto.fechaFinalizacion) ?
                                         // <NextLink href="/donaciones" passHref >
-                                            <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} onClick={() =>handleDonate(proyecto.id)}>
-                                                Donar a la campaña
-                                            </Button>
+                                        <Button variant="contained" sx={{ backgroundColor: "#4BC6B9", padding: "18px", color: "black" }} onClick={() => handleDonate(proyecto.id)}>
+                                            Donar a la campaña
+                                        </Button>
                                         // </NextLink>
                                         :
 

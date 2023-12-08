@@ -1,20 +1,23 @@
 import type { AppProps } from 'next/app';
-import {CssBaseline, ThemeProvider} from "@mui/material";
-import {theme} from "styles/material-theme"
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "styles/material-theme"
+import { AuthProvider } from 'context/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <ThemeProvider theme={theme}>
-    <CssBaseline />
+  return <AuthProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Component {...pageProps} />
-    
-        <style jsx global>{`
+
+      <style jsx global>{`
           
 
           #__next {
             height: 100%;
           }
         `}</style>
-  </ThemeProvider>
+    </ThemeProvider>
+  </AuthProvider>
 }
 
 export default MyApp

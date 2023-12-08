@@ -7,23 +7,27 @@ import Container from '@mui/material/Container';
 import NextLink from 'next/link'
 import {Link as MUILink} from '@mui/material';
 import Image from "next/image";
+import { useAuth } from 'context/AuthContext';
 
 type Props = {
     variant?: "simple" | "general"
 }
 
-const usuarioLogueado = false; // temporal mientras implementamos la conexión al backend
-// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('user-info') : null;
+ // temporal mientras implementamos la conexión al backend
+// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('access-confirmacion') : null;
 // const usuarioLogueado: IUser = localStorageUser ? JSON.parse(localStorageUser) : null;
 
 //Cookies, usuario id=1
-// const cookieUser = context.req.cookies && context.req.cookies["user-info"];
+// const cookieUser = context.req.cookies && context.req.cookies["access-confirmacion"];
 // const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
 //     const usuarioLogueado = {id:1};
 
 //TODO Traer el nombre del usuario logueado
 
 const Header: FC<Props> = ({variant}: Props) => {
+    // const usuarioLogueado = false;
+    const {token } = useAuth()
+    const {user } = useAuth()
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth:"1490px" }}>
         <Toolbar disableGutters sx={{ paddingX: "40px", background: "#F7F7FF", marginTop:"17px", height:"10px" }} >
             <NextLink href="/" passHref>
@@ -39,7 +43,7 @@ const Header: FC<Props> = ({variant}: Props) => {
                 </NextLink>
             </Box>
 
-            {!usuarioLogueado && <Box sx={{marginLeft: "auto" }}>
+            {!user && <Box sx={{marginLeft: "auto" }}>
                 <NextLink href="/registro" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5 }}>Registrarse</MUILink>
                 </NextLink>
@@ -49,15 +53,15 @@ const Header: FC<Props> = ({variant}: Props) => {
             </Box>}
 
 
-            {usuarioLogueado && <Box sx={{marginLeft: "auto", display:"flex", alignItems:"center" }}>
+            {user && <Box sx={{marginLeft: "auto", display:"flex", alignItems:"center" }}>
                 <NextLink href="/mis-donaciones-proyectos" passHref>
                     <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginRight: 3 }}>Donaciones y proyectos</MUILink>
                 </NextLink>
                 <NextLink href="/" passHref >
-                    <Image src="/perfil.png"  width={"45px"} height={"45px"} alt="Perfil" ></Image>
+                    <Image src={"/perfil.png"}  width={"45px"} height={"45px"} alt="Perfil" ></Image>
                 </NextLink>
                 <NextLink href="/login" passHref>
-                    <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginLeft:1}}>Nombre</MUILink>
+                    <MUILink variant="body2" sx={{color: 'black', fontSize: 14, fontWeight: 400, marginLeft:1}}>{user.name} {user.lastname}</MUILink>
                 </NextLink>
             </Box>}
         </Toolbar>

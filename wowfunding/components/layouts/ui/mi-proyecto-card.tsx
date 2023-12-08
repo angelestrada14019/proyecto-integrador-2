@@ -22,6 +22,7 @@ import {
 import LinearDeterminate from './linear-determinate';
 import { useState } from 'react';
 import { deleteProyecto, deleteProyectoAPI } from 'services/proyectos/proyectos.service';
+import { useAuth } from 'context/AuthContext';
 
 interface Props {
   proyecto: ProyectoFinal;
@@ -30,6 +31,7 @@ interface Props {
 
 const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const router = useRouter();
+  const {token} = useAuth();
   
 
   const LISTA_MULTIMEDIAS = proyecto.multimedias;
@@ -42,7 +44,7 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
 
   const handleEliminar = async () => {
     try {
-      await deleteProyectoAPI(proyecto.id);
+      await deleteProyectoAPI(proyecto.id, token || "");
       router.reload();
       setSnackbarOpen(true);
       setSnackbarSeverity('success');

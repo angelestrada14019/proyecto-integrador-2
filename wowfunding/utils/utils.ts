@@ -73,7 +73,7 @@ export const buscarDescipcionPorTipo = (descripciones: ListaDescripciones[], tip
 };
 
 
-export const esFechaExpirada = (fechaFinalizacion: string):boolean => {
+export const esFechaExpirada = (fechaFinalizacion: string): boolean => {
     const fechaActual = new Date();
 
     const fechaFinalizacionObj = new Date(fechaFinalizacion);
@@ -96,8 +96,8 @@ export const obtenerFechaActualFormateada = () => {
     const horas = String(fechaActual.getHours()).padStart(2, '0');
     const minutos = String(fechaActual.getMinutes()).padStart(2, '0');
     const segundos = String(fechaActual.getSeconds()).padStart(2, '0');
-  
+
     // const fechaFormateada = `${año}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
     const fechaFormateada = `${año}-${mes}-${dia}`;
     return fechaFormateada;
-  };
+};

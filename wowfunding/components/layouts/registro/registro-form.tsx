@@ -36,7 +36,6 @@ const RegistroForm = () => {
             }
             else {
                 
-                console.log(response.message);
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }

@@ -1,32 +1,29 @@
 import { ProyectoFinal } from "interfaces/proyect.type";
 import { NextApiRequest } from "next";
-import { fetchApi, fetchApsi } from "utils/servicesUtils";
+import { fetchApi } from "utils/servicesUtils";
 
 export const getProyectos = async (offset?: number, limit?: number) => {
   const params = new URLSearchParams();
   if (offset) params.set("pageNumber", `${offset}`);
   if (limit) params.set("pageSize", `${limit}`);
-  // const data = await fetchApi(`api-productos/productos?pageNumber=${offset}&pageSize=${limit}`);
-  //TODO revisar si se puede hacer este tipo de llamado para reemplazar el de abajo
-  const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}`);
 
-  const endpoint = 'api-productos/productos/getProducto';
-  // const data = await fetchApi(`${endpoint}?${params}`);
+  const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}`);
 
   return data || {}; // Devuelve un objeto vacío si los datos son undefined
 }
 
 export const getProyecto = async (proyectoId: number) => {
-  return fetchApi(`api-productos/productos/${proyectoId}`)
+  return fetchApi(`api-productos/productos/getProductoPorId/${proyectoId}`)
 }
 
 export const getProyectoById = async (proyectoId: number): Promise<any> => {
-  const response = await fetch(`/api/proyectos/${proyectoId}`);
-
+  // const response = await fetch(`/api/proyectos/${proyectoId}`);
+  const response = await fetch(`/api/proyectos`);
+  console.log('response', response)
   return await response.json();
 };
 
-export const getProyectosUsuario = async (usuarioId: number, offset?: number, limit?: number) => {
+export const getProyectosUsuario = async (usuarioId: number, token?: string | null, offset?: number, limit?: number) => {
   const params = new URLSearchParams();
 
   params.set("usuariosId", `${usuarioId}`);
@@ -38,10 +35,10 @@ export const getProyectosUsuario = async (usuarioId: number, offset?: number, li
   return data || {};
 };
 
-export const deleteProyecto = async (proyectoId: number): Promise<void> => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxOTEwMjg0LCJleHAiOjE3MDE5MTIwODR9.ydjzvz-IzU_yoIBh2t8cNTDt917NiUZGmdvGc9U46Og'
+export const deleteProyecto = async (proyectoId: number, token: string | null): Promise<void> => {
 
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
+    token,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -51,14 +48,15 @@ export const deleteProyecto = async (proyectoId: number): Promise<void> => {
   });
 
   if (response !== 204) {
-      throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
+    throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
   }
 };
 
-export const deleteProyectoAPI = async (id: number): Promise<void> => {
+export const deleteProyectoAPI = async (id: number, token: string): Promise<void> => {
   try {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAxOTEwMjg0LCJleHAiOjE3MDE5MTIwODR9.ydjzvz-IzU_yoIBh2t8cNTDt917NiUZGmdvGc9U46Og'
-    const response = await fetch(`/api/proyectos/`, {
+
+    const response = await fetchApi(`/api/proyectos/`, {
+      token,
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -78,9 +76,10 @@ export const deleteProyectoAPI = async (id: number): Promise<void> => {
 };
 
 
-export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
+export const postProyecto = async (proyecto: ProyectoFinal, token: string): Promise<any> => {
   const dataProyecto = JSON.stringify(proyecto);
-  const response = await fetch(`/api-productos/productos/creatAll`, {
+  const response = await fetchApi(`/api-productos/productos/creatAll`, {
+    token,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

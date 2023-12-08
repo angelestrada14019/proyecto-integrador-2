@@ -11,7 +11,7 @@ const nextConfig = {
     },
     images: {
         domains: ['www.bbva.com', 'www.unifranz.edu.bo', 'www.acumar.gob.ar', 'www.campanario.es', 'www.paho.org', 'placekitten.com', 's3-pi2-gp2-wowfunding.s3.amazonaws.com',
-            "https://static.vecteezy.com/"
+            "https://static.vecteezy.com/", "https://tinyurl.com"
         ],
     },
     reactStrictMode: true,
