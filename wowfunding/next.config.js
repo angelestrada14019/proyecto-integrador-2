@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: 'http://44.202.51.198:8080/api/:path*', // Ajusta la URL de tu servidor
+            },
+        ];
+    },
     images: {
         domains: ['www.bbva.com', 'www.unifranz.edu.bo', 'www.acumar.gob.ar', 'www.campanario.es', 'www.paho.org', 'placekitten.com', 's3-pi2-gp2-wowfunding.s3.amazonaws.com',
             "https://static.vecteezy.com/"
@@ -16,19 +24,7 @@ const nextConfig = {
     // will have to be renamed to _document.page.tsx, _app.page.tsx, middleware.route.ts, pages/users.page.tsx
     // and pages/api/users.page.ts respectively.
     pageExtensions: ['page.tsx', 'page.ts', 'route.tsx', 'route.ts'],
-    async headers() {
-        return [
-            {
-                source: "/api-productos/:path*",
-                headers: [
-                    { key: "Access-Control-Allow-Credentials", value: "true" },
-                    { key: "Access-Control-Allow-Origin", value: "http://localhost:3000" }, // Cambia esto con tu URL de origen
-                    { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
-                    { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
-                ]
-            }
-        ];
-    },
+
 }
 
 module.exports = nextConfig
