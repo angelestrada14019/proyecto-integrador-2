@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 import { ProjectInput } from 'checkout/checkout.types';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { postProyecto, postProyectoAPI } from 'services/proyectos/proyectos.service';
+import { ProyectoFinal, ListaDescripciones, Categoria } from 'interfaces/proyect.type';
 
 
 interface Props {
@@ -71,17 +71,75 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [mensaje, setMensaje] = useState('');
-    const [error, setError] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [category, setCategory] = React.useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const onSubmit: SubmitHandler<ProjectInput> = (data) => {
-        alert(data)
-        /*setError(true);
-        setOpen(true);*/
+    const onSubmit: SubmitHandler<ProjectInput> = async (data) => {
+        
+        const descripcionesL: ListaDescripciones[] = [
+            {
+                id: 1,
+                tipo: 1,
+                descripcion: data.project.description_short
+            },
+            {
+                id: 2,
+                tipo: 1,
+                descripcion: data.project.description_large
+            },
+            {
+                id: 3,
+                tipo: 1,
+                descripcion: data.project.conclusion
+            }
+        ];
+
+        const categoria: Categoria = {
+            id:1,
+            nombre: data.project.category,
+            descripcion: ""
+        }
+
+
+        const proyecto: ProyectoFinal = {
+            categoriasId: categoria,
+            descripciones: descripcionesL,
+            fechaFinalizacion: '', 
+            fechaPublicacion: '',  
+            id: 1345,  
+            monto: data.project.amount,  
+            montoSumatoriaDonaciones: 500,  
+            multimedias: [],
+            nombre: data.project.name,
+            usuarioId: 1  
+        };
+
+        const response = await postProyectoAPI(proyecto);
+
+        try {
+            if (!response.error) {
+                setError(`Su proyecto fue creado con exito`);
+                setOpenSnackbar(true);
+                router.push("/")
+            } else {
+
+                setError(`${response.error}- - -${response.message}`);
+                setOpenSnackbar(true);
+            }
+
+        } catch (error: any) {
+            setError(`${response.error}- - -${response.message}`);
+            setOpenSnackbar(true);
+        }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
     const handleOutsideButtonClick = async () => {
@@ -143,7 +201,7 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                             {...field}
                                             variant="outlined"
                                             fullWidth
-                                            onChange={handleSelectChange}
+                                            //onChange={handleSelectChange}
                                             sx={{ mb: 2 }}>
                                             <MenuItem  value="Medio Ambiente">Medio Ambiente</MenuItem>            
                                             <MenuItem  value="Educación">Educación</MenuItem >            
@@ -371,18 +429,18 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
 
             </Grid>
 
-
+            <Grid container>
             <Snackbar
-                open={open}
-                autoHideDuration={6000} // Duración en milisegundos
-                onClose={handleClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert severity={error ? 'error' : 'success'} onClose={handleClose}>
-                    {mensaje}
-                </Alert>
-            </Snackbar>
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+                message={error || ""} //TODO  modificar modal para notificaciones
+            />
+
+            </Grid>
         </Grid >
+
+        
     )
 }
 

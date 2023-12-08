@@ -21,18 +21,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const idNumber = parseInt(`${id}`);
 
     
-    // if (req.method == "POST") {
-    //     try {
-    //         const cookieUser = cookies['access-confirmacion'] || '';
-    //         const result = await postProyecto(req.body, cookieUser);
-    //         res.status(200).json({ data: result });
 
-    //     } catch (err) {
+    if (req.method == "POST") {
+        try {
+            const cookieUser = cookies['access-confirmacion'] || '';
+            const result = await postProyecto(req.body, cookieUser);
+            res.status(200).json({ data: result });
 
-    //         res.status(500).json({ error: "en el error 500  ", message: "error 500" });
-    //     }
-    //     return
-    // }
+        } catch (err) {
+            console.log(err)
+            res.status(500).json({ error: "en el error 500  ", message: "error 500" });
+        }
+        return
+    }
     try {
 
         const result: any | null = await getProyecto(idNumber);

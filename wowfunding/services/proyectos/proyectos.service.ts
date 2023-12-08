@@ -1,3 +1,4 @@
+import { ProjectInput } from "checkout/checkout.types";
 import { ProyectoFinal } from "interfaces/proyect.type";
 import { NextApiRequest } from "next";
 import { fetchApi } from "utils/servicesUtils";
@@ -76,10 +77,34 @@ export const deleteProyectoAPI = async (id: number, token: string): Promise<void
 };
 
 
-export const postProyecto = async (proyecto: ProyectoFinal, token: string): Promise<any> => {
+export const postProyecto = async (proyecto: ProjectInput, token: string): Promise<any> => {
+  try {
+    const dataProyecto = JSON.stringify(proyecto);
+    const response = await fetchApi(`api-productos/productos/creatAll`, {
+      token,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
+        'Access-Control-Request-Method': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      },
+      method: "POST",
+      body: dataProyecto,
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar el proyecto", error);
+    throw error;
+  }
+}
+
+export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
   const dataProyecto = JSON.stringify(proyecto);
-  const response = await fetchApi(`/api-productos/productos/creatAll`, {
-    token,
+  const response = await fetch(`/api/proyectos`, {
+   
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -90,18 +115,4 @@ export const postProyecto = async (proyecto: ProyectoFinal, token: string): Prom
 
   return await response.json();
 }
-
-// export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
-//     const dataProyecto = JSON.stringify(proyecto);
-//     const response = await fetch(`/api/proyecto`, {
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         method: "POST",
-//         body: dataProyecto,
-//     });
-
-//     return await response.json();
-// }
 
