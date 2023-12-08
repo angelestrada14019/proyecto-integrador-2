@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const { id } = req.query;
     res.setHeader("Content-Type", "application/json");
     const idNumber = parseInt(`${id}`);
-
+    console.log("id", idNumber)
 
     if (req.method == "POST") {
         try {

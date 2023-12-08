@@ -1,5 +1,5 @@
-export const API_URL = "http://localhost:8080"
-// export const API_URL = "http://44.202.51.198:8080"
+// export const API_URL = "http://localhost:8080"
+export const API_URL = "http://44.202.51.198:8080"
 
 // export const URL_DOMAIN = "http://localhost:3080"
 
@@ -21,7 +21,6 @@ export const fetchApi = async (endpoint: string, data?: { headers?: Record<strin
             'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
             'Access-Control-Request-Method': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-
         },
         method: data?.method || "GET",
         body: data?.body ? JSON.stringify(data.body) : undefined,

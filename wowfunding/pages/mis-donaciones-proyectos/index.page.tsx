@@ -48,12 +48,15 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
+    const cookies = req.cookies
+    const tokenUser = cookies['access-confirmacion']
     const usuarioId = 18;
     const proyectos = await getProyectos(0, 10);
     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
     const proyectosUsuario = await getProyectosUsuario(usuarioId, 0, 10);
     const donacionesUsuario = await getDonacionesUsuario(usuarioId);
 
+    
     return {
       props: {
         proyectos: proyectos,

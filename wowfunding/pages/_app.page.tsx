@@ -2,8 +2,11 @@ import type { AppProps } from 'next/app';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {theme} from "styles/material-theme"
 
+
 function MyApp({ Component, pageProps }: AppProps) {
-  return <ThemeProvider theme={theme}>
+  return (
+
+  <ThemeProvider theme={theme}>
     <CssBaseline />
       <Component {...pageProps} />
     
@@ -15,6 +18,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
         `}</style>
   </ThemeProvider>
+
+  )
 }
 
 export default MyApp
