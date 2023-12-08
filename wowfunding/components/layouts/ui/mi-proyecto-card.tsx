@@ -30,6 +30,7 @@ interface Props {
 
 const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const router = useRouter();
+  
 
   const LISTA_MULTIMEDIAS = proyecto.multimedias;
   const LISTA_DESCRIPCIONES = proyecto.descripciones;
