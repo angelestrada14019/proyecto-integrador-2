@@ -1,30 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { URL_DOMAIN } from 'utils/servicesUtils';
 
-const excludedRoutes = ['/', '/login', '/registro'];
-
 export function middleware(req: NextRequest, res: NextResponse) {
-
-  const cookieUser = req.cookies.get("user-info");
+  const cookieUser = req.cookies.get("access-confirmacion");
   const url = req.nextUrl.pathname;
 
-  // Verificar si la ruta está excluida
-  // if (excludedRoutes.includes(url)) {
-  //   return NextResponse.next();
-  // }
 
-  // // // Realizar la comprobación del cookie solo para las rutas no excluidas
-  if (url.includes("/reportes") && !cookieUser) {
+  const redirectUrls = [
+    "/actualizacion-perfil",
+    "/donaciones",
+    "/mis-donaciones-proyectos",
+    "/nuevo-proyecto",
+    "/proyecto-donar",
+    "/registro-exitoso",
+    "/reportes",
+  ];
 
-    return NextResponse.redirect(`http://localhost:3000/`);
+  if (!cookieUser && redirectUrls.some(redirectUrl => url.includes(redirectUrl))) {
+    return NextResponse.redirect(`${URL_DOMAIN}`);
   }
 
-
-
   return NextResponse.next();
-
 }
-// export const config = {
-//   matcher: ['/', '/login', '/register'],
-// };
+
+export const config = {
+  // Definir aquí las rutas que quieres excluir del middleware
+  exclude: ['/login', '/register'],
+};
 

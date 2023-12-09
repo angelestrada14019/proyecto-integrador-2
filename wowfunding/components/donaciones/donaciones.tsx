@@ -15,9 +15,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { getProyectoById } from 'services/proyectos/proyectos.service';
 import { ProyectoFinal } from 'interfaces/proyect.type';
 import { Spinner } from 'components/layouts/ui/spinner';
+import { useAuth } from 'context/AuthContext';
 
 
 const DonacionesForm = () => {
+    const { token } = useAuth();
     const router = useRouter();
     const { id } = router.query;
     const [error, setError] = useState<string | null>(null);
@@ -40,7 +42,7 @@ const DonacionesForm = () => {
 
         const dataDonacion: Donaciones =
         {
-            id:1,
+            id: 1,
             comentario,
             cantidad: parseFloat(dataValues.cantidad),
             fechaDonacion: obtenerFechaActualFormateada(),
@@ -51,7 +53,7 @@ const DonacionesForm = () => {
             idProductos: proyecto?.id || 23
         }
 
-        const response = await postDonacionApi(dataDonacion);
+        const response = await postDonacionApi(dataDonacion, token || "");
 
         try {
             if (!response.error) {

@@ -1,60 +1,61 @@
+import { ProjectInput } from "checkout/checkout.types";
 import { ProyectoFinal } from "interfaces/proyect.type";
 import { NextApiRequest } from "next";
 import { fetchApi, fetchApsi } from "utils/servicesUtils";
 
 export const getProyectos = async (offset?: number, limit?: number) => {
-    const params = new URLSearchParams();
-    if (offset) params.set("pageNumber", `${offset}`);
-    if (limit) params.set("pageSize", `${limit}`);
-    // const data = await fetchApi(`api-productos/productos?pageNumber=${offset}&pageSize=${limit}`);
-    const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}`);
-    return data || {}; // Devuelve un objeto vacío si los datos son undefined
+  const params = new URLSearchParams();
+  if (offset) params.set("pageNumber", `${offset}`);
+  if (limit) params.set("pageSize", `${limit}`);
+
+  const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}`);
+
+  return data || {}; // Devuelve un objeto vacío si los datos son undefined
+}
+export const getProyecto = async (proyectoId: number) => {
+  return fetchApi(`api-productos/productos/getProductoPorId/${proyectoId}`)
 }
 
-export const getProyecto = async (proyectoId: number) => {
-    return fetchApi(`api-productos/productos/getProductoPorId/${proyectoId}`)
-}
 
 export const getProyectoById = async (proyectoId: number): Promise<any> => {
-    const response = await fetch(`/api/proyectos/${proyectoId}`);
+  const response = await fetch(`/api/proyectos/${proyectoId}`);
 
-    return await response.json();
+  return await response.json();
 };
-
-export const getProyectosUsuario = async (usuarioId: number, offset?: number, limit?: number) => {
+export const getProyectosUsuario = async (usuarioId: number, token?: string | null, offset?: number, limit?: number) => {
   const params = new URLSearchParams();
 
   params.set("usuariosId", `${usuarioId}`);
 
   if (offset) params.set("pageNumber", `${offset}`);
   if (limit) params.set("pageSize", `${limit}`);
-  
+
   const data = await fetchApi(`api-productos/productos/getProducto?pageNumber=${offset}&pageSize=${limit}&usuariosId=${usuarioId}`);
   return data || {};
 };
 
-
-export const deleteProyecto = async (proyectoId: number): Promise<void> => {
-  const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAyMDM2NjA1LCJleHAiOjE3MDIwMzg0MDV9.QibJksvGnALvb0fQGi1cRuBXv0e56Yw2ky-b6ZydodM'
+export const deleteProyecto = async (proyectoId: number, token: string | null): Promise<void> => {
 
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
+    token,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
-      method: "DELETE",
+    method: "DELETE",
   });
 
   if (response !== 204) {
-      throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
+    throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
   }
 };
 
-export const deleteProyectoAPI = async (id: number): Promise<void> => {
+export const deleteProyectoAPI = async (id: number, token: string): Promise<void> => {
   try {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbnZAZGguY29tIiwiaWF0IjoxNzAyMDM2NjA1LCJleHAiOjE3MDIwMzg0MDV9.QibJksvGnALvb0fQGi1cRuBXv0e56Yw2ky-b6ZydodM'
-    const response = await fetch(`/api/proyectos/`, {
+
+    const response = await fetchApi(`/api/proyectos/`, {
+      token,
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -71,34 +72,44 @@ export const deleteProyectoAPI = async (id: number): Promise<void> => {
     console.error("Error al eliminar el proyecto", error);
     throw error;
   }
-  };
+};
 
 
-export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
+export const postProyecto = async (proyecto: ProjectInput, token: string): Promise<any> => {
+  try {
     const dataProyecto = JSON.stringify(proyecto);
-    const response = await fetch(`/api-productos/productos/creatAll`, {
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: dataProyecto,
+    const response = await fetchApi(`api-productos/productos/creatAll`, {
+      token,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
+        'Access-Control-Request-Method': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      },
+      method: "POST",
+      body: dataProyecto,
     });
 
     return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar el proyecto", error);
+    throw error;
+  }
 }
 
-// export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
-//     const dataProyecto = JSON.stringify(proyecto);
-//     const response = await fetch(`/api/proyecto`, {
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         method: "POST",
-//         body: dataProyecto,
-//     });
+export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
+  const dataProyecto = JSON.stringify(proyecto);
+  const response = await fetch(`/api/proyectos`, {
 
-//     return await response.json();
-// }
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: dataProyecto,
+  });
 
+  return await response.json();
+}

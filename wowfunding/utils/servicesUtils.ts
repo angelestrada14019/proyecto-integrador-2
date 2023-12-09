@@ -1,6 +1,6 @@
 // export const API_URL = "http://localhost:8080"
 export const API_URL = "http://44.202.51.198:8080"
-
+export const URL_DOMAIN = "http://localhost:3000/login"
 // export const URL_DOMAIN = "http://localhost:3080"
 
 export const fetchApsi = async (endpoint: string, urlParams?: string) => {
@@ -9,7 +9,7 @@ export const fetchApsi = async (endpoint: string, urlParams?: string) => {
     return await response.json();
 }
 
-export const fetchApi = async (endpoint: string, data?: { headers?: Record<string, string>; method?: string; body?: any }) => {
+export const fetchApi = async (endpoint: string, data?: { token?: string | null; headers?: Record<string, string>; method?: string; body?: any }) => {
     const url = `${API_URL}/${endpoint}`;
     const response = await fetch(url, {
 
@@ -19,8 +19,11 @@ export const fetchApi = async (endpoint: string, data?: { headers?: Record<strin
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
-            'Access-Control-Request-Method': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+'Access-Control-Request-Method': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+            Authorization: data?.token ? `Bearer ${data.token}` : '',
+        ...(data?.headers || {}),
+
         },
         method: data?.method || "GET",
         body: data?.body ? JSON.stringify(data.body) : undefined,
@@ -30,4 +33,3 @@ export const fetchApi = async (endpoint: string, data?: { headers?: Record<strin
     }
     return await response.json();
 }
-
