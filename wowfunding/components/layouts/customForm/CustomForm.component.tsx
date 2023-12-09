@@ -13,7 +13,7 @@ import { ProjectInput } from 'checkout/checkout.types';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import { postProyecto, postProyectoAPI } from 'services/proyectos/proyectos.service';
-import { ProyectoFinal, ListaDescripciones, Categoria } from 'interfaces/proyect.type';
+import { ProyectoFinal, ListaDescripciones, Categoria, ListaMultimedias } from 'interfaces/proyect.type';
 
 
 interface Props {
@@ -83,41 +83,104 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
         
         const descripcionesL: ListaDescripciones[] = [
             {
-                id: 1,
                 tipo: 1,
                 descripcion: data.project.description_short
             },
             {
-                id: 2,
-                tipo: 1,
+                tipo: 2,
+                descripcion: data.project.about_us
+            },
+            {
+                tipo: 3,
                 descripcion: data.project.description_large
             },
             {
-                id: 3,
-                tipo: 1,
+                tipo: 3,
                 descripcion: data.project.conclusion
             }
         ];
 
         const categoria: Categoria = {
-            id:1,
-            nombre: data.project.category,
-            descripcion: ""
+            id:16,
         }
 
+        const multimediasL: ListaMultimedias[] = [
+            {
+                tipo: 1,
+                url: data.project.image
+            },
+            {
+                tipo: 2,
+                url: data.project.image2
+            },
+            {
+                tipo: 3,
+                url: data.project.image3
+            },
+            {
+                tipo: 3,
+                url: data.project.image4
+            }
+        ];
 
         const proyecto: ProyectoFinal = {
             categoriasId: categoria,
             descripciones: descripcionesL,
-            fechaFinalizacion: '', 
-            fechaPublicacion: '',  
-            id: 1345,  
+            fechaPublicacion: `${data.project.startDate} 00:00:00`,
+            fechaFinalizacion: `${data.project.endDate} 00:00:00`,   
             monto: data.project.amount,  
             montoSumatoriaDonaciones: 500,  
-            multimedias: [],
+            multimedias: multimediasL,
             nombre: data.project.name,
-            usuarioId: 1  
+            usuariosId: 18      
         };
+
+        /*const testJson: ProyectoFinal = {
+            "nombre": "Nuevos Horizontes Test 7",
+            "fechaPublicacion": "2023-11-30 21:55:00",
+            "fechaFinalizacion": "2025-02-30 03:00:00",
+            "monto": 12000,
+            "usuariosId": 18,
+            "categoriasId": {
+                "id": 16
+            },
+            "multimedias": [
+                {
+                    "url": "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/PortadaNuevosHorizontes.jpg",
+                    "tipo": 1
+                },
+                {
+                    "url": "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img1NuevosHorizontes.jpg",
+                    "tipo": 2
+                },
+                {
+                    "url": "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img2NuevosHorizontes.jpg",
+                    "tipo": 3
+                },
+                {
+                    "url": "https://s3-pi2-gp2-wowfunding.s3.amazonaws.com/NuevosHorizontes/Img3NuevosHorizontes.jpg",
+                    "tipo": 4
+                }
+            ],
+            "descripciones": [
+                {
+                    "descripcion": "¡Abre tu mente a nuevas experiencias! Únete a Nuevos Horizontes y apoya proyectos que fomentan el entendimiento cultural y la exploración.",
+                    "tipo": 1
+                },
+                {
+                    "descripcion": "Descubre Nuevos Horizontes es una iniciativa liderada por viajeros apasionados y defensores de la diversidad cultural. Nuestro equipo incluye exploradores, antropólogos y amantes de la aventura que creen en la importancia de conocer y apreciar las diversas culturas del mundo.",
+                    "tipo": 2
+                },
+                {
+                    "descripcion": "Colaboraremos con organizaciones de turismo sostenible, comunidades locales y expertos en cultura para financiar proyectos que promuevan el turismo responsable y la preservación cultural. Nuestra estrategia se centrará en la creación de programas educativos, intercambios culturales y la promoción de destinos turísticos que respeten el entorno y las tradiciones locales.",
+                    "tipo": 3
+                },
+                {
+                    "descripcion": "El objetivo final de Descubre Nuevos Horizontes es fomentar la comprensión global y el respeto por la diversidad cultural a través del turismo sostenible. Con tu apoyo, podremos financiar proyectos que permitan a las comunidades locales beneficiarse de manera equitativa del turismo y preservar su patrimonio cultural para las generaciones futuras.",
+                    "tipo": 4
+                }
+            ]
+        };*/
 
         const response = await postProyectoAPI(proyecto);
 
@@ -127,7 +190,6 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                 setOpenSnackbar(true);
                 router.push("/")
             } else {
-
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }
@@ -235,22 +297,22 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                         />
                                     )}
                                 />
-
+                                <label>Imagen portada</label>
                                 <Controller
                                     name="project.image"
                                     control={control}
                                     defaultValue={""}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
-                                        <Button
-                                        {...field} 
-                                        component="label" 
-                                        variant="contained" 
-                                        startIcon={<CloudUploadIcon />}
-                                        sx={{ mb: 2 }}>
-                                            Cargar imagen
-                                            <VisuallyHiddenInput type="file" />
-                                        </Button>
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image}
+                                            helperText={errors.project?.name?.message}
+                                            sx={{ mb: 2 }}
+                                        />
                                     )}
                                 />
 
@@ -282,21 +344,22 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                     )}
                                 />
 
+                                <label>Imagen </label>
                                 <Controller
                                     name="project.image2"
                                     control={control}
                                     defaultValue={""}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
-                                        <Button
-                                        {...field} 
-                                        component="label" 
-                                        variant="contained" 
-                                        startIcon={<CloudUploadIcon />}
-                                        sx={{ mb: 2 }}>
-                                            Cargar imagen
-                                            <VisuallyHiddenInput type="file" />
-                                        </Button>
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image2}
+                                            helperText={errors.project?.image2?.message}
+                                            sx={{ mb: 2 }}
+                                        />
                                     )}
                                 />
 
@@ -328,6 +391,26 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                     )}
                                 />
 
+                                <label>Imagen </label>
+                                <Controller
+                                    name="project.image3"
+                                    control={control}
+                                    defaultValue={""}
+                                    rules={{ required: true }}
+                                    render={({ field }: any) => (
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image3}
+                                            helperText={errors.project?.image3?.message}
+                                            sx={{ mb: 2 }}
+                                        />
+                                    )}
+                                />
+
+
                             </>
 
                         )
@@ -354,6 +437,26 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                         />
                                     )}
                                 />
+
+                                <label>Imagen </label>
+                                <Controller
+                                    name="project.image4"
+                                    control={control}
+                                    defaultValue={""}
+                                    rules={{ required: true }}
+                                    render={({ field }: any) => (
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image4}
+                                            helperText={errors.project?.image4?.message}
+                                            sx={{ mb: 2 }}
+                                        />
+                                    )}
+                                />
+
 
                             </>
 
@@ -397,7 +500,7 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                 <Controller
                                     name="project.amount"
                                     control={control}
-                                    defaultValue={""}
+                                    defaultValue={0}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
                                         <TextField

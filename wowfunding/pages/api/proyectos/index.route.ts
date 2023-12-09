@@ -8,19 +8,15 @@ type Data = {
 } | { error: string, message: string }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    const { id } = req.query;
-    res.setHeader("Content-Type", "application/json");
-    const idNumber = parseInt(`${id}`);
-
 
     if (req.method == "POST") {
         try {
-
             const result = await postProyecto(req.body);
+            console.log(result);
             res.status(200).json({ data: result });
 
         } catch (err) {
-
+            console.log(err)
             res.status(500).json({ error: "en el error 500  ", message: "error 500" });
         }
         return
@@ -41,18 +37,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         }
         return;
       }
-    try {
-        const result: any | null = await getProyecto(idNumber);
-        if (result === null) {
-            res.status(404).json({ error: "No se encontró el proyecto", message: "El proyecto no existe" });
-        } else {
-            res.status(200).json(result);
-        }
-        return;
-    } catch (err) {
-        res.status(500).json(ERROR_SERVER)
-    }
-
-
 
 }

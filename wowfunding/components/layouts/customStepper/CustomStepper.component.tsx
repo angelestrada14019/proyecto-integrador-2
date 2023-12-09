@@ -79,8 +79,8 @@ export default function HorizontalLinearStepper(props: Props) {
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
 
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? 'Enviar' : 'siguiente'}
+                        <Button onClick={handleNext} disabled={activeStep === steps.length - 1}>
+                            {activeStep === steps.length - 1 ? '' : 'siguiente'}
                         </Button>
                     </Box>
                 </>

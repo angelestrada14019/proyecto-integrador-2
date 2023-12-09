@@ -75,18 +75,15 @@ export const deleteProyectoAPI = async (id: number): Promise<void> => {
   };
 
 
-export const postProyecto = async (proyecto: ProjectInput): Promise<any> => {
+export const postProyecto = async (proyecto: ProyectoFinal): Promise<any> => {
   try {
     const dataProyecto = JSON.stringify(proyecto);
+    console.log(dataProyecto)
     const response = await fetch(`http://44.202.51.198:8080/api-productos/productos/creatAll`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
-            'Access-Control-Request-Method': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0bHVpc2FAZ21haWwuY29tIiwiaWF0IjoxNzAxOTE1NDYzLCJleHAiOjE3MDE5MTcyNjN9.6xcTHdKUVZxOFtqdaeuzgH7t_Re3dHCxY9-YazUm-6Q`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0bHVpc2FAZ21haWwuY29tIiwiaWF0IjoxNzAyMTIwMzYzLCJleHAiOjE3MDIxMjIxNjN9.WT1cTjFuwTDJW9apDnRvbpkGdaM7LWm4q8FUybGP5kk`
         },
         method: "POST",
         body: dataProyecto,
