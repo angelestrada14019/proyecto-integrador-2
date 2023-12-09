@@ -31,6 +31,7 @@ interface Props {
 const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const router = useRouter();
   const {token} = useAuth();
+  console.log("Token Delete",token)
 
   const LISTA_MULTIMEDIAS = proyecto.multimedias;
   const LISTA_DESCRIPCIONES = proyecto.descripciones;

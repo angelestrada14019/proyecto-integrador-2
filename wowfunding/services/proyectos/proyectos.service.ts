@@ -37,14 +37,14 @@ export const getProyectosUsuario = async (usuarioId: number,  offset?: number, l
 export const deleteProyecto = async (proyectoId: number, token: string | null): Promise<void> => {
 
   const response = await fetchApi(`api-productos/productos/${proyectoId}`, {
-    token,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     method: "DELETE",
   });
+  console.log("Respuesta", response)
 
   if (response !== 204) {
     throw new Error(`Error al eliminar el proyecto ${proyectoId}`);
@@ -54,8 +54,7 @@ export const deleteProyecto = async (proyectoId: number, token: string | null): 
 export const deleteProyectoAPI = async (id: number, token: string): Promise<void> => {
   try {
 
-    const response = await fetchApi(`/api/proyectos/`, {
-      token,
+    const response = await fetch(`/api/proyectos/`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

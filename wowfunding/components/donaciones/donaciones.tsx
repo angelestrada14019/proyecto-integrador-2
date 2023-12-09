@@ -20,6 +20,7 @@ import { useAuth } from 'context/AuthContext';
 
 const DonacionesForm = () => {
     const { token } = useAuth();
+    const { user }=useAuth();
     const router = useRouter();
     const { id } = router.query;
     const [error, setError] = useState<string | null>(null);
@@ -49,7 +50,7 @@ const DonacionesForm = () => {
             metodoPagoID: {
                 id: parseInt(pago)
             },
-            idUsuarios: 18,
+            idUsuarios: user?.id || 18,
             idProductos: proyecto?.id || 23
         }
 
@@ -59,7 +60,7 @@ const DonacionesForm = () => {
             if (!response.error) {
                 setError(`Su donacion se realizo con exito`);
                 setOpenSnackbar(true);
-                // router.push("/mis-donaciones-proyectos")
+                router.push("/mis-donaciones-proyectos")
             } else {
 
                 setError(`${response.error}- - -${response.message}`);

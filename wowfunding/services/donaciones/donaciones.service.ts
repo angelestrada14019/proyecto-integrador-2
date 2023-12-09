@@ -4,9 +4,9 @@ import { fetchApi } from "utils/servicesUtils";
 export const postDonaciones = async (data: Donaciones, token: string) => {
   const response = await fetchApi(`api-donaciones/donacion`, {
     headers: {
-      token,
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     method: "POST",
     body: data

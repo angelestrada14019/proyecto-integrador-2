@@ -25,8 +25,8 @@ const usuarioLogueado = false; // temporal mientras implementamos la conexión a
 const Header: FC<Props> = ({ variant }: Props) => {
     const { token } = useAuth()
     const { user } = useAuth()
-    console.log("TokeHEader", token)
-    console.log("UserHeader", user)
+    // console.log("TokeHEader", token)
+    // console.log("UserHeader", user)
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth: "1490px" }}>
         <Toolbar disableGutters sx={{ paddingX: "40px", background: "#F7F7FF", marginTop: "17px", height: "10px" }} >
             <NextLink href="/" passHref>

@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 // import { getCookieToken } from 'utils/utils';
 interface UserToken {
-  id: number,
+  id: number | undefined,
   name: string,
   lastname: string,
   email: string,
