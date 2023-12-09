@@ -12,7 +12,7 @@ type Cookies = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { id } = req.query;
-    console.log('id', id)
+    console.log('req', req)
     const cookies: Cookies = parse(req.headers.cookie || '');
     const cookieUser = cookies['access-confirmacion'] || '';
     res.setHeader("Content-Type", "application/json");

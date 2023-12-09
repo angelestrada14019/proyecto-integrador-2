@@ -6,25 +6,25 @@ export function middleware(req: NextRequest, res: NextResponse) {
   const url = req.nextUrl.pathname;
 
 
-  const redirectUrls = [
-    "/actualizacion-perfil",
-    "/donaciones",
-    "/mis-donaciones-proyectos",
-    "/nuevo-proyecto",
-    "/proyecto-donar",
-    "/registro-exitoso",
-    "/reportes",
-  ];
+  // const redirectUrls = [
+  //   "/actualizacion-perfil",
+  //   "/donaciones",
+  //   "/mis-donaciones-proyectos",
+  //   "/nuevo-proyecto",
+  //   "/proyecto-donar",
+  //   "/registro-exitoso",
+  //   "/reportes",
+  // ];
 
-  if (!cookieUser && redirectUrls.some(redirectUrl => url.includes(redirectUrl))) {
-    return NextResponse.redirect(`${URL_DOMAIN}`);
-  }
+  // if (!cookieUser && redirectUrls.some(redirectUrl => url.includes(redirectUrl))) {
+  //   return NextResponse.redirect(`${URL_DOMAIN}`);
+  // }
 
   return NextResponse.next();
 }
 
-export const config = {
-  // Definir aquí las rutas que quieres excluir del middleware
-  exclude: ['/login', '/register'],
-};
+// export const config = {
+//   // Definir aquí las rutas que quieres excluir del middleware
+//   exclude: ['/login', '/register'],
+// };
 

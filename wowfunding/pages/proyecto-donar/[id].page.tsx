@@ -37,11 +37,17 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
     }
 
     const handleDonate = async (id: number) => {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        router.push({
-            pathname: "/donaciones",
-            query: { id: 60 },
-        });
+
+        if (id) {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            router.push({
+                pathname: "/donaciones",
+                query: { id: id },
+            });
+        } else {
+            router.push(`/`);
+        }
     };
 
     return (

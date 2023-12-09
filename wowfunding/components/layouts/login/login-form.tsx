@@ -31,7 +31,6 @@ const LoginForm = () => {
         try {
             if (!response.error) {
                 router.push('/');
-                // TODO estaba comentado por alguna razón?
             }
             else {
 

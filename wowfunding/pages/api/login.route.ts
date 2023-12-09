@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.status(200).json({ data: result });
         return
     } catch (err) {
+        const body: ILogin = req.body;
         res.status(500).json(ERROR_SERVER);
     }
 

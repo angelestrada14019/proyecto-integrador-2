@@ -18,9 +18,8 @@ export const getProyecto = async (proyectoId: number) => {
 }
 
 export const getProyectoById = async (proyectoId: number): Promise<any> => {
-  // const response = await fetch(`/api/proyectos/${proyectoId}`);
-  const response = await fetch(`/api/proyectos`);
-  console.log('response', response)
+  const response = await fetch(`/api/proyectos/${proyectoId}`);
+
   return await response.json();
 };
 
@@ -104,7 +103,7 @@ export const postProyecto = async (proyecto: ProjectInput, token: string): Promi
 export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
   const dataProyecto = JSON.stringify(proyecto);
   const response = await fetch(`/api/proyectos`, {
-   
+
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

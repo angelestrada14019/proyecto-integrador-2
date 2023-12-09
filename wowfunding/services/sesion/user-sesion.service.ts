@@ -25,11 +25,12 @@ export const postLoginAPI = async (data: ILogin): Promise<any> => {
       "Content-Type": "application/json",
     },
     method: "POST",
-    body: JSON.stringify(data),
+    body: data
   });
 
   return await response;
 };
+
 
 
 export const postActualizacion = async (data: IUserRegister) => {
