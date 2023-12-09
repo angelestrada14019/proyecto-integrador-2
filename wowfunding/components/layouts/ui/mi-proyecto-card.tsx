@@ -21,9 +21,8 @@ import {
 } from 'utils/utils';
 import LinearDeterminate from './linear-determinate';
 import { useState } from 'react';
-import { deleteProyecto, deleteProyectoAPI } from 'services/proyectos/proyectos.service';
+import { deleteProyectoAPI } from 'services/proyectos/proyectos.service';
 import { useAuth } from 'context/AuthContext';
-
 interface Props {
   proyecto: ProyectoFinal;
   widthParam: boolean;

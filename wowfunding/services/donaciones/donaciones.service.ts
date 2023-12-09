@@ -28,7 +28,13 @@ export const postDonacionApi = async (data: Donaciones, token: string): Promise<
   return await response.json();
 };
 
-export const getDonacionesUsuario = async (usuarioId: number) => {
-  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`);
+export const getDonacionesUsuario = async (usuarioId: number, token: string) => {
+  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response || {};
 };
