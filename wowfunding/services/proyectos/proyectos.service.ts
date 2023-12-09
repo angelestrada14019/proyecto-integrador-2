@@ -22,7 +22,7 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
 
   return await response.json();
 };
-export const getProyectosUsuario = async (usuarioId: number,  offset?: number, limit?: number, token?: string | null) => {
+export const getProyectosUsuario = async (usuarioId: number, offset?: number, limit?: number, token?: string | null) => {
   const params = new URLSearchParams();
 
   params.set("usuariosId", `${usuarioId}`);
@@ -74,24 +74,20 @@ export const deleteProyectoAPI = async (id: number, token: string): Promise<void
 };
 
 
-export const postProyecto = async (proyecto: ProjectInput, token: string): Promise<any> => {
+export const postProyecto = async (proyecto: ProyectoFinal,token: string): Promise<any> => {
   try {
-    const dataProyecto = JSON.stringify(proyecto);
+    const dataProyecto =proyecto
     const response = await fetchApi(`api-productos/productos/creatAll`, {
-      token,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Methods': 'POST, PUT, DELETE, GET, OPTIONS',
-        'Access-Control-Request-Method': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        Authorization: `Bearer ${token}`
       },
       method: "POST",
       body: dataProyecto,
     });
 
-    return await response.json();
+    return await response
   } catch (error) {
     console.error("Error al eliminar el proyecto", error);
     throw error;
@@ -101,7 +97,6 @@ export const postProyecto = async (proyecto: ProjectInput, token: string): Promi
 export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => {
   const dataProyecto = JSON.stringify(proyecto);
   const response = await fetch(`/api/proyectos`, {
-
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -112,3 +107,4 @@ export const postProyectoAPI = async (proyecto: ProyectoFinal): Promise<any> => 
 
   return await response.json();
 }
+

@@ -12,8 +12,9 @@ import { useRouter } from 'next/router';
 import { ProjectInput } from 'checkout/checkout.types';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { postProyecto, postProyectoAPI } from 'services/proyectos/proyectos.service';
+import { ProyectoFinal, ListaDescripciones, Categoria, ListaMultimedias } from 'interfaces/proyect.type';
+import { useAuth } from 'context/AuthContext';
 
 
 interface Props {
@@ -57,7 +58,7 @@ const STEP_TEXTS =
     ]
 
 const CustomForm: FC<Props> = ({ activeStep }) => {
-
+    const {user} = useAuth();
 
     const {
         control,
@@ -71,17 +72,90 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [mensaje, setMensaje] = useState('');
-    const [error, setError] = useState(false);
-    const [category, setCategory] = React.useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [category, setCategory] = React.useState('8');
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const onSubmit: SubmitHandler<ProjectInput> = (data) => {
-        alert(data)
-        /*setError(true);
-        setOpen(true);*/
+    const onSubmit: SubmitHandler<ProjectInput> = async (data) => {
+        
+        const descripcionesL: ListaDescripciones[] = [
+            {
+                tipo: 1,
+                descripcion: data.project.description_short
+            },
+            {
+                tipo: 2,
+                descripcion: data.project.about_us
+            },
+            {
+                tipo: 3,
+                descripcion: data.project.description_large
+            },
+            {
+                tipo: 3,
+                descripcion: data.project.conclusion
+            }
+        ];
+
+        const categoria: Categoria = {
+            id:parseInt(category),
+        }
+
+        const multimediasL: ListaMultimedias[] = [
+            {
+                tipo: 1,
+                url: data.project.image
+            },
+            {
+                tipo: 2,
+                url: data.project.image2
+            },
+            {
+                tipo: 3,
+                url: data.project.image3
+            },
+            {
+                tipo: 3,
+                url: data.project.image4
+            }
+        ];
+
+        const proyecto: ProyectoFinal = {
+            categoriasId: categoria,
+            descripciones: descripcionesL,
+            fechaPublicacion: `${data.project.startDate} 00:00:00`,
+            fechaFinalizacion: `${data.project.endDate} 00:00:00`,   
+            monto: data.project.amount,  
+            montoSumatoriaDonaciones: 0,  
+            multimedias: multimediasL,
+            nombre: data.project.name,
+            usuariosId: user ? user.id : 18
+        };
+
+        const response = await postProyectoAPI(proyecto);
+
+        try {
+            if (!response.error) {
+                setError(`Su proyecto fue creado con exito`);
+                setOpenSnackbar(true);
+                router.push("/")
+            } else {
+                setError(`${response.error}- - -${response.message}`);
+                setOpenSnackbar(true);
+            }
+
+        } catch (error: any) {
+            setError(`${response.error}- - -${response.message}`);
+            setOpenSnackbar(true);
+        }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
     const handleOutsideButtonClick = async () => {
@@ -144,16 +218,17 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                             variant="outlined"
                                             fullWidth
                                             onChange={handleSelectChange}
+                                            defaultValue='8'
                                             sx={{ mb: 2 }}>
-                                            <MenuItem  value="Medio Ambiente">Medio Ambiente</MenuItem>            
-                                            <MenuItem  value="Educación">Educación</MenuItem >            
-                                            <MenuItem  value="Arte">Arte</MenuItem >            
-                                            <MenuItem  value="Salud">Salud</MenuItem >            
-                                            <MenuItem  value="Tecnología">Tecnología</MenuItem >            
-                                            <MenuItem  value="Deportes">Deportes</MenuItem >            
-                                            <MenuItem  value="Ciencia">Ciencia</MenuItem >            
-                                            <MenuItem  value="Derechos Humanos">Derechos Humanos</MenuItem >            
-                                            <MenuItem  value="Viajes">Viajes</MenuItem >            
+                                            <MenuItem  value={8} >Medio Ambiente</MenuItem>            
+                                            <MenuItem  value={9}>Educación</MenuItem >            
+                                            <MenuItem  value={10}>Arte</MenuItem >            
+                                            <MenuItem  value={11}>Salud</MenuItem >            
+                                            <MenuItem  value={12}>Tecnología</MenuItem >            
+                                            <MenuItem  value={13}>Deportes</MenuItem >            
+                                            <MenuItem  value={14}>Ciencia</MenuItem >            
+                                            <MenuItem  value={15}>Derechos Humanos</MenuItem >            
+                                            <MenuItem  value={16}>Viajes</MenuItem >            
                                         </Select>
                                     )}
                                 />
@@ -177,22 +252,22 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                         />
                                     )}
                                 />
-
+                                <label>Imagen portada</label>
                                 <Controller
                                     name="project.image"
                                     control={control}
                                     defaultValue={""}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
-                                        <Button
-                                        {...field} 
-                                        component="label" 
-                                        variant="contained" 
-                                        startIcon={<CloudUploadIcon />}
-                                        sx={{ mb: 2 }}>
-                                            Cargar imagen
-                                            <VisuallyHiddenInput type="file" />
-                                        </Button>
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image}
+                                            helperText={errors.project?.name?.message}
+                                            sx={{ mb: 2 }}
+                                        />
                                     )}
                                 />
 
@@ -224,21 +299,22 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                     )}
                                 />
 
+                                <label>Imagen </label>
                                 <Controller
                                     name="project.image2"
                                     control={control}
                                     defaultValue={""}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
-                                        <Button
-                                        {...field} 
-                                        component="label" 
-                                        variant="contained" 
-                                        startIcon={<CloudUploadIcon />}
-                                        sx={{ mb: 2 }}>
-                                            Cargar imagen
-                                            <VisuallyHiddenInput type="file" />
-                                        </Button>
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image2}
+                                            helperText={errors.project?.image2?.message}
+                                            sx={{ mb: 2 }}
+                                        />
                                     )}
                                 />
 
@@ -270,6 +346,26 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                     )}
                                 />
 
+                                <label>Imagen </label>
+                                <Controller
+                                    name="project.image3"
+                                    control={control}
+                                    defaultValue={""}
+                                    rules={{ required: true }}
+                                    render={({ field }: any) => (
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image3}
+                                            helperText={errors.project?.image3?.message}
+                                            sx={{ mb: 2 }}
+                                        />
+                                    )}
+                                />
+
+
                             </>
 
                         )
@@ -296,6 +392,26 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                         />
                                     )}
                                 />
+
+                                <label>Imagen </label>
+                                <Controller
+                                    name="project.image4"
+                                    control={control}
+                                    defaultValue={""}
+                                    rules={{ required: true }}
+                                    render={({ field }: any) => (
+                                        <TextField
+                                            {...field}
+                                            type="text"
+                                            variant="outlined"
+                                            fullWidth
+                                            error={!!errors.project?.image4}
+                                            helperText={errors.project?.image4?.message}
+                                            sx={{ mb: 2 }}
+                                        />
+                                    )}
+                                />
+
 
                             </>
 
@@ -339,7 +455,7 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
                                 <Controller
                                     name="project.amount"
                                     control={control}
-                                    defaultValue={""}
+                                    defaultValue={0}
                                     rules={{ required: true }}
                                     render={({ field }: any) => (
                                         <TextField
@@ -371,18 +487,18 @@ const CustomForm: FC<Props> = ({ activeStep }) => {
 
             </Grid>
 
-
+            <Grid container>
             <Snackbar
-                open={open}
-                autoHideDuration={6000} // Duración en milisegundos
-                onClose={handleClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert severity={error ? 'error' : 'success'} onClose={handleClose}>
-                    {mensaje}
-                </Alert>
-            </Snackbar>
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+                message={error || ""} //TODO  modificar modal para notificaciones
+            />
+
+            </Grid>
         </Grid >
+
+        
     )
 }
 

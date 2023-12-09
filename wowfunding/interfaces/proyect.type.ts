@@ -5,36 +5,36 @@ export type ProyectoFinal = {
     descripciones: ListaDescripciones[];
     fechaFinalizacion: string;
     fechaPublicacion: string;
-    id: number;
+    id?: number;
     monto: number;
-    montoSumatoriaDonaciones: number;
+    montoSumatoriaDonaciones?: number;
     multimedias: ListaMultimedias[]
     nombre: string;
-    usuarioId: number;
+    usuariosId?: number;
 
 }
 
 export type ProyectoCategoria ={
-    id: number;
+    id?: number;
     categoria: string;
 
 }
 
 export type Categoria = {
     id: number;
-    descripcion: string;
-    nombre: string;
+    descripcion?: string;
+    nombre?: string;
 
 }
 export type ListaMultimedias = {
-    id: number;
+    id?: number;
     url: string;
     tipo: number;
 
 }
 
 export type ListaDescripciones = {
-    id: number;
+    id?: number;
     tipo: number;
     descripcion: string;
 }

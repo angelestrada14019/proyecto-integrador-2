@@ -28,6 +28,7 @@ const RegistroForm = () => {
 
     const onSubmit = async (data: any) => {
         const dataValues = getValues()
+        
         const response = await postRegistro(dataValues);
         try {
             if (!response.error) {

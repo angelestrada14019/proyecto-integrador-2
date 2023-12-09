@@ -12,6 +12,6 @@ export type ProjectInput = {
         conclusion: string,
         startDate: Date,
         endDate: Date,
-        amount: string
+        amount: number
     }
 }

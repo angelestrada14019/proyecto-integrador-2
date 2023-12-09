@@ -56,20 +56,22 @@ export const postRegistroApi = async (data: IUserRegister): Promise<any> => {
       id: 1
     }
   }
-  const dataRegistro = JSON.stringify(transformData);
+  const dataRegistro = transformData
 
-  const response = await fetchApi(`${API_URL}/users`,
+  const response = await fetchApi(`auth/register`,
     {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        // Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0bHVpc2FAZ21haWwuY29tIiwiaWF0IjoxNzAyMTIwMzYzLCJleHAiOjE3MDIxMjIxNjN9.WT1cTjFuwTDJW9apDnRvbpkGdaM7LWm4q8FUybGP5kk`
       },
       method: "POST",
       body: dataRegistro,
     });
-
+  
   return await response
 };
+
 export const postRegistro = async (data: IUserRegister): Promise<any> => {
   const transformData =
   {
