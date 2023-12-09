@@ -22,11 +22,11 @@ const usuarioLogueado = false; // temporal mientras implementamos la conexión a
 // const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
 //     const usuarioLogueado = {id:1};
 
-//TODO Traer el nombre del usuario logueado
-
 const Header: FC<Props> = ({ variant }: Props) => {
     const { token } = useAuth()
     const { user } = useAuth()
+    console.log("TokeHEader", token)
+    console.log("UserHeader", user)
     return <Container maxWidth="xl" sx={{ height: "100px", maxWidth: "1490px" }}>
         <Toolbar disableGutters sx={{ paddingX: "40px", background: "#F7F7FF", marginTop: "17px", height: "10px" }} >
             <NextLink href="/" passHref>
@@ -68,7 +68,6 @@ const Header: FC<Props> = ({ variant }: Props) => {
         </Toolbar>
     </Container>
 }
-
 
 const GeneralHeader: FC<Props> = ({ variant }: Props) => {
     return variant == 'general' ?

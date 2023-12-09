@@ -30,7 +30,11 @@ export const postDonacionApi = async (data: Donaciones, token: string): Promise<
 
 export const getDonacionesUsuario = async (usuarioId: number, token: string) => {
   const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
-    token,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response || {};
 };

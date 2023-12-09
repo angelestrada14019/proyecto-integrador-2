@@ -35,36 +35,19 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
   );
 };
 
-// export const getServerSideProps: GetServerSideProps<MisDonacionesProyectosProps> = async (context) => {
-//   try {
-
-// const localStorageUser = typeof window !== 'undefined' ? localStorage.getItem('user-info') : null;
-// const usuarioLogueado: IUser = localStorageUser ? JSON.parse(localStorageUser) : null;
-
-//Cookies, usuario id=1
-// const cookieUser = context.req.cookies && context.req.cookies["user-info"];
-// const usuarioLogueado: IUser = cookieUser ? JSON.parse(cookieUser) : {id:1};
-//     const usuarioLogueado = {id:1};
-
-
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
     const cookies = req.cookies
     const cookieInfo = cookies['access-confirmacion']
     const cookieObj = JSON.parse(cookieInfo as any);
-    const usuarioId = cookieObj.id;
-    const token = cookieObj.token;
-
-    // console.log("Id:", usuarioId);
-    // console.log("Token:", token);
+      const usuarioId = cookieObj.id;
+      const token = cookieObj.token;
 
     const proyectos = await getProyectos(0, 10);
     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate');
     const proyectosUsuario = await getProyectosUsuario(usuarioId, 0, 10);
     const donacionesUsuario = await getDonacionesUsuario(usuarioId, token);
-    // console.log("Donaciones Usuario", donacionesUsuario)
-
-
+    
     return {
       props: {
         proyectos: proyectos,

@@ -22,7 +22,7 @@ export const getProyectoById = async (proyectoId: number): Promise<any> => {
 
   return await response.json();
 };
-export const getProyectosUsuario = async (usuarioId: number, offset?: number, limit?: number) => {
+export const getProyectosUsuario = async (usuarioId: number,  offset?: number, limit?: number, token?: string | null) => {
   const params = new URLSearchParams();
 
   params.set("usuariosId", `${usuarioId}`);
