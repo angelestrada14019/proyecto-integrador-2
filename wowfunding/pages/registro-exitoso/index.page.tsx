@@ -37,15 +37,15 @@ const RegistroExitoso = () => {
               </NextLink>
             </Grid>
             <Grid container justifyContent="center">
-  <Grid item xs={12} style={{ textAlign: 'center' }}>
-    <Image src="/logo.png" width={120} height={70} alt="Logo" />
-  </Grid>
-  <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-    <Link href="/" replace>
-      Volver al inicio
-    </Link>
-  </Grid>
-</Grid>
+              <Grid item xs={12} style={{ textAlign: 'center' }}>
+                <Image src="/logo.png" width={120} height={70} alt="Logo" />
+              </Grid>
+              <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                <Link href="/" replace>
+                  Volver al inicio
+                </Link>
+              </Grid>
+            </Grid>
           </Grid>
         </Container>
       </Grid>

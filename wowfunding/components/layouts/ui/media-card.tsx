@@ -35,7 +35,7 @@ const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proy
     return (
         <Card sx={{ maxWidth: widthParam ? 600 : 345, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
             <CardMedia
-                sx={{ position: 'relative', height: 250 }}
+                sx={{ position: 'relative', height: 250, minWidth: 450}}
                 image={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, TIPO_LANDING)}
                 title="green iguana">
                 <div style={{

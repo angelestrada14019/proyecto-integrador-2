@@ -12,7 +12,6 @@ export function middleware(req: NextRequest, res: NextResponse) {
     "/mis-donaciones-proyectos",
     "/nuevo-proyecto",
     "/proyecto-donar",
-    "/registro-exitoso",
     "/reportes",
   ];
 

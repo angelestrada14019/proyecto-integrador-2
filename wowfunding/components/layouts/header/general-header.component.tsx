@@ -32,12 +32,14 @@ const Header: FC<Props> = ({ variant }: Props) => {
             <NextLink href="/" passHref>
                 <MUILink variant="body2" sx={{ color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5 }}> Explorar proyectos</MUILink>
             </NextLink>
-            <NextLink href="/nuevo-proyecto" passHref>
-                <MUILink variant="body2" sx={{
-                    color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5,
-                    background: "#CDCACC", padding: "8px", borderRadius: "20px"
-                }}> Crear un proyecto</MUILink>
-            </NextLink>
+            {user && user.id == 38 ? <></> :
+                <NextLink href="/nuevo-proyecto" passHref>
+                    <MUILink variant="body2" sx={{
+                        color: 'black', fontSize: 14, fontWeight: 400, marginRight: 5,
+                        background: "#CDCACC", padding: "8px", borderRadius: "20px"
+                    }}> Crear un proyecto</MUILink>
+                </NextLink>
+            }
             <Box sx={{ marginLeft: "auto", marginTop: "5px" }}>
                 <NextLink href="/" passHref>
                     <Image src="/logo_completo.png" width={"284px"} height={"50%"} alt="Logo" ></Image>
@@ -55,9 +57,15 @@ const Header: FC<Props> = ({ variant }: Props) => {
 
 
             {user && <Box sx={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                <NextLink href="/mis-donaciones-proyectos" passHref>
-                    <MUILink variant="body2" sx={{ color: 'black', fontSize: 14, fontWeight: 400, marginRight: 3 }}>Donaciones y proyectos</MUILink>
-                </NextLink>
+                {
+                    user.id == 38 ?
+                        <NextLink href="/reportes" passHref>
+                            <MUILink variant="body2" sx={{ color: 'black', fontSize: 14, fontWeight: 800, marginRight: 4 }}>Reportes</MUILink>
+                        </NextLink> : <NextLink href="/mis-donaciones-proyectos" passHref>
+                            <MUILink variant="body2" sx={{ color: 'black', fontSize: 14, fontWeight: 400, marginRight: 3 }}>Donaciones y proyectos</MUILink>
+                        </NextLink>
+                }
+
                 <NextLink href="/" passHref >
                     <Image src="/perfil.png" width={"45px"} height={"45px"} alt="Perfil" ></Image>
                 </NextLink>
