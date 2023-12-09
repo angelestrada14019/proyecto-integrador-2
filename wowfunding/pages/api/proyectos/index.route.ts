@@ -19,7 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const idNumber = parseInt(`${id}`);
     console.log('idNumber', idNumber)
 
-
     if (req.method == "POST") {
         try {
             const result = await postProyecto(req.body, cookieUser);
