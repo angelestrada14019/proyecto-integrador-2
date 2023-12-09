@@ -11,6 +11,7 @@ type Data = {
 type Cookies = {
   [key: string]: string;
 };
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const cookies: Cookies = parse(req.headers.cookie || '');
 
@@ -22,8 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   try {
 
-    const cookieUser = cookies['access-confirmacion'] || '';
-    const result = await postDonaciones(req.body, cookieUser);
+    const cookieInfo = cookies['access-confirmacion']
+    const cookieObj = JSON.parse(cookieInfo as any);
+    const usuarioId = cookieObj.id;
+    const token = cookieObj.token;
+    const result = await postDonaciones(req.body, token);
     res.status(200).json({ data: result });
 
   } catch (err) {

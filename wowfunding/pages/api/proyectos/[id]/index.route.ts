@@ -9,8 +9,8 @@ type Data = {
 } | { error: string, message: string }
 type Cookies = {
     [key: string]: string;
-  };
-  
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const cookies: Cookies = parse(req.headers.cookie || '');
     console.log('cookies', cookies)
@@ -22,8 +22,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     if (req.method == "POST") {
         try {
 
-            const cookieUser = cookies['access-confirmacion'] || '';
-            const result = await postProyecto(req.body, cookieUser);
+            const cookieInfo = cookies['access-confirmacion']
+            const cookieObj = JSON.parse(cookieInfo as any);
+            const token = cookieObj.token;
+            const result = await postProyecto(req.body, token);
             res.status(200).json({ data: result });
 
         } catch (err) {

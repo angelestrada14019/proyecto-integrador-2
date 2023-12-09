@@ -12,14 +12,16 @@ type Cookies = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { id } = req.query;
     const cookies: Cookies = parse(req.headers.cookie || '');
-    const cookieUser = cookies['access-confirmacion'] || '';
+    const cookieInfo = cookies['access-confirmacion']
+    const cookieObj = JSON.parse(cookieInfo as any);
+    const token = cookieObj.token;
     res.setHeader("Content-Type", "application/json");
     const idNumber = parseInt(`${id}`);
 
     if (req.method == "POST") {
         try {
 
-            const result = await postProyecto(req.body, cookieUser);
+            const result = await postProyecto(req.body, token);
             res.status(200).json({ data: result });
 
         } catch (err) {
@@ -36,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             res.status(400).json({ error: "Error 400", message: "ID no válido" });
             return;
           }
-          await deleteProyecto(deleteIdNumber, cookieUser);
+          await deleteProyecto(deleteIdNumber, token);
           res.status(204).end();
         } catch (err) {
           console.error(err);

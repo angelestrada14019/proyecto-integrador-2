@@ -1,7 +1,7 @@
 import { Donaciones } from "interfaces/donaciones.type";
 import { fetchApi } from "utils/servicesUtils";
 
-export const postDonaciones = async (data: Donaciones, token: string ) => {
+export const postDonaciones = async (data: Donaciones, token: string) => {
   const response = await fetchApi(`api-donaciones/donacion`, {
     headers: {
       token,
@@ -28,7 +28,9 @@ export const postDonacionApi = async (data: Donaciones, token: string): Promise<
   return await response.json();
 };
 
-export const getDonacionesUsuario = async (usuarioId: number) => {
-  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`);
+export const getDonacionesUsuario = async (usuarioId: number, token: string) => {
+  const response = await fetchApi(`api-donaciones/donacion/usuario/${usuarioId}`, {
+    token,
+  });
   return response || {};
 };
