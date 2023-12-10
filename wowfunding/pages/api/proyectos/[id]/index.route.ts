@@ -13,11 +13,11 @@ type Cookies = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const cookies: Cookies = parse(req.headers.cookie || '');
-    // console.log('cookies', cookies)
+
     const { id } = req.query;
     res.setHeader("Content-Type", "application/json");
     const idNumber = parseInt(`${id}`);
-    // console.log("id", idNumber)
+
 
     if (req.method == "POST") {
         try {

@@ -1,4 +1,4 @@
-// import React from 'react'
+
 import { Button, Grid, Snackbar, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import NextLink from 'next/link'
@@ -11,6 +11,7 @@ import { CustomTextField } from '../ui/custom-text-field-props';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
 import { postLogin } from 'services/sesion/user-sesion.service';
+import { useAuth } from 'context/AuthContext';
 
 const LoginForm = () => {
     const router = useRouter();
@@ -24,16 +25,21 @@ const LoginForm = () => {
         handleSubmit,
         getValues,
     } = useForm<DataForm>({ resolver: yupResolver(schema), defaultValues: {} });
+    
+    const { setUser } = useAuth();
 
     const onSubmit = async (data: any) => {
         const dataValues = getValues()
         const response = await postLogin(dataValues);
         try {
             if (!response.error) {
-                router.push('/');
-                // TODO estaba comentado por alguna razón?
-            }
-            else {
+                setUser(response.user);
+
+        // Retrasar el push a la landing page por 2 segundos
+        setTimeout(() => {
+          router.push('/');
+        }, 3000);
+      } else {
 
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);

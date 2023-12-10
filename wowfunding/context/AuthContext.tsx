@@ -15,9 +15,10 @@ interface UserToken {
 interface AuthContextProps {
   token: string | null;
   user: UserToken | null
+  setUser: React.Dispatch<React.SetStateAction<UserToken | null>>;
 }
 
-const AuthContext = createContext<AuthContextProps>({ token: null, user: null });
+const AuthContext = createContext<AuthContextProps>({ token: null, user: null, setUser: () => {}, });
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
@@ -43,7 +44,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   }, []);
 
-  return <AuthContext.Provider value={{ token, user }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ token, user, setUser }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

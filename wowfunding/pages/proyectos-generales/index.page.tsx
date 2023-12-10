@@ -21,7 +21,7 @@ interface Props {
 
 const ProyectosGenerales = ({ proyectos, proyectosCargados }: Props) => {
     const [proyectoFiltrados, setProyectoFiltrados] = useState(proyectos);
-    console.log('proyectoFiltrados', proyectoFiltrados)
+
     const [filtrosBusqueda, setFiltrosBusqueda] = useState({});
     const [selectCategorias, setSelectCategorias] = useState("");
     const [proyectoRespone, setProyectoRespone] = useState(proyectos);

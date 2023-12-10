@@ -11,7 +11,7 @@ export const getProyectos = async (offset?: number, limit?: number, categoria?: 
   if (categoria) params.set("categoriasIdNombre", categoria);
 
   const queryString = params.toString();
-  console.log('queryString', queryString)
+
 
   const data = await fetchApi(`api-productos/productos/getProducto?${queryString}`);
 

@@ -18,7 +18,7 @@ interface Props {
 }
 
 const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos, proyectosUsuario }: Props) => {
-  console.log('donacionesUsuario', donacionesUsuario)
+
   return (
     <>
       <Head>

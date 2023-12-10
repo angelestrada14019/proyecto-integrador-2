@@ -49,7 +49,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return;
       }
       await deleteProyecto(deleteIdNumber, token);
-      console.log("Token Delete API", token)
       res.status(204).end();
     } catch (err) {
       console.error(err);
