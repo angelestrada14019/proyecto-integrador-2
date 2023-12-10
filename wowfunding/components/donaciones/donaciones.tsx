@@ -17,7 +17,6 @@ import { ProyectoFinal } from 'interfaces/proyect.type';
 import { Spinner } from 'components/layouts/ui/spinner';
 import { useAuth } from 'context/AuthContext';
 
-
 const DonacionesForm = () => {
     const { token } = useAuth();
     const { user }=useAuth();
