@@ -27,7 +27,6 @@ const ProyectosGenerales = ({ proyectos, proyectosCargados }: Props) => {
     const [proyectoRespone, setProyectoRespone] = useState(proyectos);
 
     const handleCategorias = (param: string) => {
-        console.log('param', param);
         setSelectCategorias(param);
     };
 
@@ -48,11 +47,9 @@ const ProyectosGenerales = ({ proyectos, proyectosCargados }: Props) => {
             setProyectoRespone(response.data);
             setProyectoFiltrados(response.data);
 
-            console.log('Proyectos filtrados actualizados:', response);
 
             return response;
         } catch (error) {
-            console.error('Error al filtrar proyectos', error);
             return [];
         }
     };

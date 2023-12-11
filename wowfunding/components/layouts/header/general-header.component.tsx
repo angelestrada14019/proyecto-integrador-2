@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
-import { useAuth } from "context/AuthContext";
+import { UserToken, useAuth } from "context/AuthContext";
 import Cookies from "js-cookie";
 import router from "next/router";
 import { useTheme } from "@mui/material/styles";
@@ -24,10 +24,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 type Props = {
   variant?: "simple" | "general";
+  user?: UserToken | null
 };
 
-const Header: FC<Props> = ({ variant }: Props) => {
-  const { user } = useAuth();
+const Header: FC<Props> = ({ variant, user }: Props) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -67,8 +67,8 @@ const Header: FC<Props> = ({ variant }: Props) => {
                 <NextLink href="/" passHref>
                   <Image
                     src="/logo.png"
-                    width={"75px"}
-                    height={"40%"}
+                    width={75}
+                    height={40}
                     alt="Logo"
                   />
                 </NextLink>
@@ -79,8 +79,8 @@ const Header: FC<Props> = ({ variant }: Props) => {
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Image
                       src="/perfil.png"
-                      width={"30px"}
-                      height={"30px"}
+                      width={30}
+                      height={30}
                       alt="Perfil"
                     />
                     <Typography
@@ -115,7 +115,7 @@ const Header: FC<Props> = ({ variant }: Props) => {
               open={isDrawerOpen}
               onClose={handleDrawerClose}
               sx={{
-                width: 206, 
+                width: 206,
               }}
             >
               <List>
@@ -131,8 +131,8 @@ const Header: FC<Props> = ({ variant }: Props) => {
                   <NextLink href="/" passHref>
                     <Image
                       src="/logo.png"
-                      width={"75px"}
-                      height={"40%"}
+                      width={75}
+                      height={40}
                       alt="Logo"
                     />
                   </NextLink>
@@ -333,8 +333,8 @@ const Header: FC<Props> = ({ variant }: Props) => {
               <NextLink href="/" passHref>
                 <Image
                   src="/logo_completo.png"
-                  width={"284px"}
-                  height={"50%"}
+                  width={284}
+                  height={50}
                   alt="Logo"
                 />
               </NextLink>
@@ -404,8 +404,8 @@ const Header: FC<Props> = ({ variant }: Props) => {
                 <NextLink href="/" passHref>
                   <Image
                     src="/perfil.png"
-                    width={"45px"}
-                    height={"45px"}
+                    width={45}
+                    height={45}
                     alt="Perfil"
                   />
                 </NextLink>
@@ -448,13 +448,13 @@ const Header: FC<Props> = ({ variant }: Props) => {
   );
 };
 
-const GeneralHeader: FC<Props> = ({ variant }: Props) => {
+const GeneralHeader: FC<Props> = ({ variant, user }: Props) => {
   return variant == "general" ? (
     <AppBar position="static">
-      <Header variant={variant} />
+      <Header variant={variant} user={user} />
     </AppBar>
   ) : (
-    <Header variant={variant} />
+    <Header variant={variant} user={user} />
   );
 };
 

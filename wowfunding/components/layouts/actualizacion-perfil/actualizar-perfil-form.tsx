@@ -36,13 +36,11 @@ const ActualizarPerfilForm = () => {
             }
             else {
                 
-                console.log("error");
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }
         }
         catch (error: any) {
-            console.log("error");
             setError(`${response.error}- - -${response.message}`);
             setOpenSnackbar(true);
         }

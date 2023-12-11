@@ -64,7 +64,6 @@ export const deleteProyecto = async (proyectoId: number, token: string | null): 
     },
     method: "DELETE",
   });
-  console.log("Respuesta", response)
 
   if (response !== 204) {
     throw new Error(`Error al eliminar el proyecto ${proyectoId}`);

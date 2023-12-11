@@ -27,7 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const token = cookieObj.token;
   res.setHeader("Content-Type", "application/json");
   const idNumber = parseInt(`${id}`);
-  console.log('Ruta recibida:', req.url);
   if (req.method == "POST") {
     try {
 
@@ -35,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       res.status(200).json({ data: result });
 
     } catch (err) {
-      console.log(err)
       res.status(500).json({ error: "en el error 500  ", message: "error 500" });
     }
     return
@@ -59,11 +57,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   else {
     try {
       const result = await getProyectos(req.body);
-      console.log('result', result)
       res.status(200).json({ data: result });
 
     } catch (err) {
-      console.log(err)
       res.status(500).json({ error: "en el error 500  ", message: "error 500" });
     }
   }

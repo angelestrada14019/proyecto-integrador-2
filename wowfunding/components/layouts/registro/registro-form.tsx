@@ -37,13 +37,11 @@ const RegistroForm = () => {
             }
             else {
                 
-                console.log(response.message);
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);
             }
         }
         catch (error: any) {
-            console.log("error");
             setError(`${response.error}- - -${response.message}`);
             setOpenSnackbar(true);
         }

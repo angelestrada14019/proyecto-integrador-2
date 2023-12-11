@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 // import { getCookieToken } from 'utils/utils';
-interface UserToken {
+export interface UserToken {
   id: number | undefined,
   name: string,
   lastname: string,
@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const parsedToken = JSON.parse(tokenValue);
         const { token, ...user } = parsedToken
         setToken(token);
-        setUser(user);
+        setUser((prevUser) => ({ ...prevUser, ...user }));
       } catch (error) {
         console.error('Error al analizar el token JSON:', error);
       }

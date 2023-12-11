@@ -25,7 +25,6 @@ const items: { imageUrl: string; text: string }[] = [
 // const ImageCarousel = () => {
 
 //     const handleLabelClick = (index: any) => {
-//         console.log(index);
 
 //     };
 //     return (

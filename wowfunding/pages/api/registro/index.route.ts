@@ -26,7 +26,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.setHeader('Set-Cookie', `access-confirmacion=${resultJSON}; Path=; HttpOnly; SameSite=Lax`);
         res.status(200).json({ data: result });
     } catch (err) {
-        console.log(err)
         res.status(500).json({ error: "en el error 500  ", message: "error 500" });
     }
 

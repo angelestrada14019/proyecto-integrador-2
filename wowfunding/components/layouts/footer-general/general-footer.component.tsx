@@ -22,7 +22,7 @@ const GeneralFooter = () => {
             <Grid item container justifyContent="center" alignItems="center">
                 {socialMediaIcons.map((socialIcon) => (
                     <Link key={socialIcon.name} href={socialIcon.link} sx={{ marginRight: 5 }}>
-                        <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={"30px"} height={"30px"} />
+                        <Image src={socialIcon.iconUrl} alt={socialIcon.name} width={30} height={30} />
                     </Link>
                 ))}
             </Grid>

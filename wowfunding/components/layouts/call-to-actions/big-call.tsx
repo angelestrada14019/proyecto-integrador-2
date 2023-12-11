@@ -35,7 +35,8 @@ const BigCall = ({ image,
 
     return (
         <Grid sx={containerStyle}>
-            <Image src={image} layout="fill" objectFit="cover" alt='' />
+            <Image src={image} style={{ objectFit: "cover" }} fill
+                alt='' />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0, 0, 0, 0.7)', padding: '20px', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <LandingTitles
                     smallTitle={smallTitle}

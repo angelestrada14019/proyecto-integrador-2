@@ -4,6 +4,8 @@ import { Grid } from '@mui/material';
 
 
 const ReportesAdmin = ({ columns, rows }: any) => {
+  console.log('columns', columns)
+  console.log('rows', rows)
 
   return (
     <Grid style={{ height: 800, width: '100%' }}>

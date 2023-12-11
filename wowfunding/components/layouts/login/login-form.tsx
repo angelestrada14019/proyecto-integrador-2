@@ -25,7 +25,7 @@ const LoginForm = () => {
         handleSubmit,
         getValues,
     } = useForm<DataForm>({ resolver: yupResolver(schema), defaultValues: {} });
-    
+
     const { setUser } = useAuth();
 
     const onSubmit = async (data: any) => {
@@ -33,13 +33,13 @@ const LoginForm = () => {
         const response = await postLogin(dataValues);
         try {
             if (!response.error) {
-                setUser(response.user);
+                setUser((prevUser) => ({ ...prevUser, ...response.user }));
 
-        // Retrasar el push a la landing page por 2 segundos
-        setTimeout(() => {
-          router.push('/');
-        }, 3000);
-      } else {
+                // Retrasar el push a la landing page por 2 segundos
+                setTimeout(() => {
+                    router.push('/');
+                }, 3000);
+            } else {
 
                 setError(`${response.error}- - -${response.message}`);
                 setOpenSnackbar(true);

@@ -14,8 +14,8 @@ const ComoFunciona = () => {
             <Grid container justifyContent={"space-around"} marginTop={5} >
                 <Grid item lg={2}>
                     <Image src="/Paso1.png"
-                        width={500}
-                        height={500}
+                        width={250}
+                        height={250}
                         alt={`Imagen`} />
                     <Typography variant='body1' align='center'>
                         Subís la información de tu idea a wowfunding.Te vamos a guiar paso a paso
@@ -26,8 +26,8 @@ const ComoFunciona = () => {
                 </Grid>
                 <Grid item lg={2}>
                     <Image src="/Paso2.png"
-                        width={500}
-                        height={500}
+                        width={250}
+                        height={250}
                         alt={`Imagen`} />
                     <Typography variant='body1' align='center'>
                         Publicás tu proyecto para que todo el mundo lo vea
@@ -38,8 +38,8 @@ const ComoFunciona = () => {
                 </Grid>
                 <Grid item lg={2}>
                     <Image src="/Paso3.png"
-                        width={500}
-                        height={500}
+                        width={250}
+                        height={250}
                         alt={`Imagen`} />
                     <Typography variant='body1' align='center'>
                         Compartimos en las redes para que  llegue a las personasque te ayudarán
@@ -50,8 +50,8 @@ const ComoFunciona = () => {
                 </Grid>
                 <Grid item lg={2}>
                     <Image src="/Paso4.png"
-                        width={500}
-                        height={500}
+                        width={250}
+                        height={250}
                         alt={`Imagen`} />
                     <Typography variant='body1' align='center'>
                         Llegás al objetivo y WOW!Celebramos el éxito
