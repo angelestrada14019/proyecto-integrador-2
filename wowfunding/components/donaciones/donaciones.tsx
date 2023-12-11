@@ -108,7 +108,7 @@ const DonacionesForm = () => {
     return (<Grid container spacing={0} sx={{ maxWidth: "950px" }}>
         <Grid container sx={{ display: "flex", justifyContent: "center", marginTop: 6 }} spacing={1}>
             <Grid item xs={6}>
-                <Image src={buscarMultimediaPorTipo(proyecto?.multimedias || [{ id: 1, tipo: 1, url: "https://placekitten.com/239/136" }], 1)} width={"440px"} height={"220px"} alt="Perfil" />
+                <Image src={buscarMultimediaPorTipo(proyecto?.multimedias || [{ id: 1, tipo: 1, url: "https://placekitten.com/239/136" }], 1)} width={440} height={220} alt="Perfil" />
                 <Typography variant='h6' sx={{ fontWeight: "400", marginTop: 2 }}>
                     {proyecto?.nombre}
                 </Typography>

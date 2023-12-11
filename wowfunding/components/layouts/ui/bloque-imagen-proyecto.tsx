@@ -18,8 +18,8 @@ const BloqueProyectoImg = ({segmento, imagen, descipcion, tituloImagen }: Props)
         <Grid container sx={{ display: "flex", flexDirection: "column" }} marginTop={5}>
             <Grid item sx={{ display: "flex", flexDirection: "column" }} xs={10}>
                 <Image src={imagen}
-                    width={300}
-                    height={400}
+                    width={950}
+                    height={500}
                     alt={tituloImagen}
                 />
                 <Typography variant='h5' fontWeight={"bold"} marginTop={3}>

@@ -30,7 +30,7 @@ interface Props {
 
 const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
   const router = useRouter();
-  const {token} = useAuth();
+  const { token } = useAuth();
 
   const LISTA_MULTIMEDIAS = proyecto.multimedias;
   const LISTA_DESCRIPCIONES = proyecto.descripciones;
@@ -42,10 +42,13 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
 
   const handleEliminar = async () => {
     try {
-      await deleteProyectoAPI(proyecto.id, token || "");
-      router.reload();
-      setSnackbarOpen(true);
-      setSnackbarSeverity('success');
+      if (proyecto.id) {
+
+        await deleteProyectoAPI(proyecto.id, token || "");
+        router.reload();
+        setSnackbarOpen(true);
+        setSnackbarSeverity('success');
+      }
     } catch (error) {
       setSnackbarSeverity('warning');
       setSnackbarOpen(true);
@@ -60,11 +63,11 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
     <Card sx={{ boxShadow: '3px 1px 18px 2px rgba(0,0,0,0.05)' }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
-        <CardMedia
+          <CardMedia
             component="img"
             alt="Proyecto Image"
-            height="100%" 
-            width="100%"  
+            height="100%"
+            width="100%"
             image={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, TIPO_LANDING)}
           />
         </Grid>
@@ -147,8 +150,8 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
                 <Typography variant="body2" color="text.secondary">
                   {calcularDiasFaltantes(proyecto.fechaFinalizacion) > 0
                     ? `Quedan ${calcularDiasFaltantes(
-                        proyecto.fechaFinalizacion
-                      )} días para que tu proyecto finalice`
+                      proyecto.fechaFinalizacion
+                    )} días para que tu proyecto finalice`
                     : 'Campaña finalizada'}
                 </Typography>
               </Grid>
@@ -180,11 +183,11 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
         onClose={handleSnackbarClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-  <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
-    {snackbarSeverity === 'success'
-      ? 'Proyecto eliminado con éxito.'
-      : 'Error al eliminar el proyecto.'}
-  </Alert>
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
+          {snackbarSeverity === 'success'
+            ? 'Proyecto eliminado con éxito.'
+            : 'Error al eliminar el proyecto.'}
+        </Alert>
       </Snackbar>
     </Card>
   );

@@ -6,18 +6,12 @@ import { AuthProvider } from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <AuthProvider>
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Component {...pageProps} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Component {...pageProps} />
 
-    <style jsx global>{`
-        
-
-        #__next {
-          height: 100%;
-        }
-      `}</style>
-  </ThemeProvider>
-</AuthProvider>
+      <style>{`  #__next { height: 100%; } `}</style>
+    </ThemeProvider>
+  </AuthProvider>
 }
 export default MyApp
