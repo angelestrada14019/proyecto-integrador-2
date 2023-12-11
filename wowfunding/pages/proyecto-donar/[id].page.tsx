@@ -1,33 +1,30 @@
-import { Avatar, Button, Card, Container, Grid, Stack, Typography } from '@mui/material';
+import { Avatar, Button, Card, Container, Grid, Link, Stack, Typography } from '@mui/material';
 import BloqueProyectoImg from 'components/layouts/ui/bloque-imagen-proyecto';
-import LinearDeterminate from 'components/layouts/ui/linear-determinate';
 import { Spinner } from 'components/layouts/ui/spinner';
 import BasicTabs, { CustomTabPanel } from 'components/layouts/ui/tabs';
-import { ListaMultimedias, ProyectoFinal, Proyectos } from 'interfaces/proyect.type'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { ProyectoFinal, Proyectos } from 'interfaces/proyect.type'
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { getProyecto, getProyectoById, getProyectos } from 'services/proyectos/proyectos.service';
-import NextLink from 'next/link'
-import { Link as MUILink } from '@mui/material';
 import GeneralHeader from 'components/layouts/header/general-header.component';
 import CommentBlock from 'components/layouts/coment-section/coment-block';
-import EmailIcon from '@mui/icons-material/Email';
 import { buscarDescipcionPorTipo, buscarMultimediaPorTipo, calcularDiasFaltantes, esFechaExpirada } from 'utils/utils';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ProyectosSugeridos from 'components/layouts/proyectos-sugeridos/proyectos-sugeridos';
+import PreguntasFrecuentes from 'components/preguntas-frecuentes/preguntas-frecuentes';
 
 interface Props {
     proyecto: ProyectoFinal;
     proyectos: Proyectos;
 }
 
-
 const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
     const LISTA_MULTIMEDIAS = proyecto.multimedias
     const LISTA_DESCRIPCIONES = proyecto.descripciones
+    const nombreUsuario = proyecto
     const porcentajeFinal = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
 
     const router = useRouter();
@@ -56,7 +53,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
         <>
             <GeneralHeader />
             <Container maxWidth="xl"  >
-                <Stack direction={"column"} display={'flex'} justifyContent={'center'} spacing={5}>
+                <Stack direction={"column"} display={'flex'} justifyContent={'center'} spacing={5} marginTop={4}>
                     <Typography marginTop={5} variant='h3' fontWeight={"bold"} textAlign={"center"}>{proyecto.nombre}</Typography>
 
                     <Grid container>
@@ -69,33 +66,28 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
                         </Grid>
                         <Grid item xs={4}>
-                            <Grid sx={{ display: "flex", flexDirection: "column" }} >
+                            <Grid sx={{ display: "flex", flexDirection: "column", marginTop: 3 }} >
                                 <Grid >
-                                    <Button variant='contained' sx={{ color: "white", marginBottom: "15px" }} color='secondary'>{proyecto.categoriasId.nombre}</Button>
+                                    <Button variant='contained' sx={{ color: "white", marginBottom: "25px" }} color='secondary'>{proyecto.categoriasId.nombre}</Button>
                                     <Typography variant={'h5'} fontWeight={"bold"} >Resumen del proyecto</Typography>
                                     <Typography variant={'body1'} marginTop={2}>{buscarDescipcionPorTipo(proyecto.descripciones, 1)}</Typography>
-                                    <Grid sx={{ display: "flex" }} gap={2} marginBottom={4} marginTop={4}>
+                                    <Grid sx={{ display: "flex" }} gap={2} marginBottom={5} marginTop={4}>
 
                                         <Avatar src={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, 1)} alt={proyecto.nombre} />
                                         <Grid>
-                                            <Typography variant='body1' fontWeight={900}>{"proyecto.nombreusuario"}</Typography>
-                                            <Typography>Contactarse con el creador:<EmailIcon /> </Typography>
+                                            <Link>Contactarse con el creador </Link>
 
                                         </Grid>
                                     </Grid>
 
-                                    <LinearDeterminate amount={proyecto.monto} finalAmount={proyecto.montoSumatoriaDonaciones} />
-                                    <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={2}>
+                                    <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={3}>
                                         <Grid sx={{ display: "flex" }}>
-
-                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {Math.round(proyecto.montoSumatoriaDonaciones)}</Typography>
-                                            <Typography variant='body1'>recaudados de ${proyecto.monto}</Typography>
-
+                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {Math.round(proyecto.montoSumatoriaDonaciones)} recaudados de ${proyecto.monto}</Typography>
                                         </Grid>
-                                        <Typography variant='h6' marginRight={1} fontWeight={"bold"}>{porcentajeFinal > 100 ? 100 : porcentajeFinal}%</Typography>
+                                        
 
                                     </Grid>
-                                    <Typography variant="body2" color="text.secondary" marginTop={2} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+                                    <Typography variant="body2" color="text.secondary" marginTop={4} sx={{ display: "flex", alignItems: "center", justifyContent: "initial" }}>
                                         <AccessTimeIcon />
                                         {calcularDiasFaltantes(proyecto.fechaFinalizacion) > 0 ?
                                             `Quedan ${calcularDiasFaltantes(proyecto.fechaFinalizacion)} dias`
@@ -115,9 +107,6 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
                                         <Typography variant='h6' marginRight={1} fontWeight={"bold"}>Lo sentimos esta campaña ya finalizo</Typography>
                                     }
-
-
-
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -132,7 +121,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                                     <BloqueProyectoImg segmento={3} imagen={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, 4)} tituloImagen={"Conclusión"} descipcion={buscarDescipcionPorTipo(LISTA_DESCRIPCIONES, 3)} />
                                 </CustomTabPanel>
                                 <CustomTabPanel label="Preguntas frecuentes" index={1} value={0}>
-                                    <Typography variant='h4'>contenido de preguntas frecuentes</Typography>
+                                    <PreguntasFrecuentes/>
                                 </CustomTabPanel>
                                 <CustomTabPanel label="Comentarios" index={2} value={0}>
                                     <CommentBlock />
@@ -146,10 +135,8 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
                 </Stack>
             </Container>
         </>
-
     )
 }
-
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const id = parseInt(params?.id as string);
@@ -166,7 +153,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const dataprojecto: Proyectos = await getProyectos(0, 100);
-
 
     const paths = dataprojecto?.map((proyecto) => {
         return { params: { id: proyecto.id.toString() } };

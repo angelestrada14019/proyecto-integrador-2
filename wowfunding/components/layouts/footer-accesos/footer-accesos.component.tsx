@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 
 const FooterAccesos = () => {
   const boxStyles = {
-    margin: '10px', 
+    margin: '18px', 
 };
 const containerStyles = {
   maxWidth: '100%', 

@@ -46,7 +46,7 @@ const Noticias = () => {
                             <CardMedia
                                 sx={{ height: 140 }}
                                 image={noticia.image}
-                                title="green iguana"
+                                title="foto de noticias"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">

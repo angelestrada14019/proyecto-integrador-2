@@ -13,21 +13,21 @@ const CommentBlock: React.FC = () => {
     const [comments, setComments] = useState<CommentBlockProps[]>([
         {
             userAvatar: 'https://www.paho.org/sites/default/files/2023-04/who-75-whd-2023-web-banner-es.jpg',
-            userName: 'Usuario 1',
+            userName: 'Gabi',
             commentDate: '2023-11-07',
-            commentText: 'Este es el comentario del Usuario 1.',
+            commentText: 'Me encanta este proyecto! Espero que lleguen al monto recaudado lo antes posible.',
         },
         {
             userAvatar: 'https://www.paho.org/sites/default/files/2023-04/who-75-whd-2023-web-banner-es.jpg',
-            userName: 'Usuario 2',
-            commentDate: '2023-11-08',
-            commentText: 'Otro comentario del Usuario 2.',
+            userName: 'Rodrigo',
+            commentDate: '2023-12-01',
+            commentText: 'Por más gente con esta iniciativa. Cuenten conmigo',
         },
         {
             userAvatar: 'https://www.paho.org/sites/default/files/2023-04/who-75-whd-2023-web-banner-es.jpg',
-            userName: 'Usuario 3',
-            commentDate: '2023-11-09',
-            commentText: 'Tercer comentario del Usuario 3.',
+            userName: 'Martina',
+            commentDate: '2023-12-09',
+            commentText: 'Aportando mi granito de arena para que se llegue al objetivo',
         },
     ]);
 
@@ -86,7 +86,7 @@ const CommentBlock: React.FC = () => {
                 value={newComment.commentText} // Accede al campo 'commentText'
                 onChange={(e) => setNewComment({ ...newComment, commentText: e.target.value })} // Actualiza solo 'commentText'
             />
-            <Button variant="contained" color="primary" onClick={handleAddComment}>
+            <Button variant="contained" color="primary" onClick={handleAddComment} sx={{ marginTop: '15px' }}>
                 Agregar Comentario
             </Button>
         </Paper>

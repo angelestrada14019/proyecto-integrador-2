@@ -74,7 +74,7 @@ const ProyectosGenerales = ({ proyectos, proyectosCargados }: Props) => {
             <BodySingle title={""}>
                 <LandingTitles smallTitle='Filtra por lo que busques' title={"Explora nuestros proyectos"} color={"black"} />
 
-                <Grid sx={{ width: "100vw", display: "flex" }} gap={3}>
+                <Grid sx={{ width: "100vw", display: "flex", justifyContent: "center" }} gap={3}>
                     <BasicSelect valoresTexto={"Categorias"} handleFiltro={handleCategorias} />
                     <Button variant='contained' onClick={handleFiltrarProyectos}>Filtrar proyectos</Button>
                 </Grid>

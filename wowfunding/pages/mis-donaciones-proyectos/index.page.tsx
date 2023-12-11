@@ -2,7 +2,6 @@
 import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import MisDonaciones from "components/layouts/mis-donaciones/mis-donaciones";
 import CardsMisProyectos from "components/layouts/cards-mis-proyectos/cards-mis-proyectos";
-import CardsDonacionesRecomendadas from "components/layouts/cards-donaciones-recomendadas/cards-donaciones-recomendadas";
 import GeneralHeader from "components/layouts/header/general-header.component";
 import GeneralFooter from "components/layouts/footer-general/general-footer.component";
 import { Donaciones } from 'interfaces/donaciones.type';
@@ -10,6 +9,7 @@ import { ProyectoFinal } from 'interfaces/proyect.type';
 import { getDonacionesUsuario } from 'services/donaciones/donaciones.service';
 import { getProyectos, getProyectosUsuario } from 'services/proyectos/proyectos.service';
 import Head from 'next/head';
+import CardsRecomendaciones from 'components/layouts/cards-recomendaciones/cards-recomendaciones';
 
 interface Props {
   proyectos: ProyectoFinal[];
@@ -29,7 +29,7 @@ const MisDonacionesProyectos: NextPage<Props> = ({ donacionesUsuario, proyectos,
       <GeneralHeader />
       <MisDonaciones listaDonaciones={donacionesUsuario} listaProyectos={proyectos} />
       <CardsMisProyectos listaProyectosUsuario={proyectosUsuario} />
-      <CardsDonacionesRecomendadas listaProyectos={proyectos} />
+      <CardsRecomendaciones listaProyectos={proyectos} />
       <GeneralFooter />
     </>
   );
