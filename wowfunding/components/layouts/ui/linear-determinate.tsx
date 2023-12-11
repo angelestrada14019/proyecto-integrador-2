@@ -20,7 +20,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const LinearDeterminate = ({ amount, finalAmount }: Prop) => {
-const calculo = amount?(amount / finalAmount) : 1
+const calculo = amount?(amount / finalAmount) : 0
   return (
     <Box sx={{ width: '100%' }}>
       <BorderLinearProgress

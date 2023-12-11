@@ -81,7 +81,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
                                     <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={3}>
                                         <Grid sx={{ display: "flex" }}>
-                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {proyecto.montoSumatoriaDonaciones ? Math.round(proyecto.montoSumatoriaDonaciones):0} recaudados de ${proyecto.monto}</Typography>
+                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {proyecto.montoSumatoriaDonaciones ? Math.round(proyecto.montoSumatoriaDonaciones): 0} recaudados de ${proyecto.monto}</Typography>
                                         </Grid>
                                         
 
