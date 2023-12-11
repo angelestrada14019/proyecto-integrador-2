@@ -108,7 +108,7 @@ const MiProyectoCard: React.FC<Props> = ({ proyecto, widthParam }) => {
                 >
                   %{' '}
                   {Math.round(
-                    (proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100
+                    proyecto.montoSumatoriaDonaciones ? (proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100 : 0
                   )}
                 </Typography>
               </Grid>

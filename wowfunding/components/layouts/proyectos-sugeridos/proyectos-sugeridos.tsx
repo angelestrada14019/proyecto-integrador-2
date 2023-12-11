@@ -11,11 +11,12 @@ interface Props {
 }
 
 const ProyectosSugeridos = ({listaProyectos}:Props) => {
+    const proyectosLimitados = listaProyectos.slice(0, 3);
     return (
         <Grid container sx={{ display: "flex" }}>
-            <Typography variant='h5' fontWeight={"bold"} marginBottom={6}> Proyectos relacionados</Typography>
+            <Typography variant='h5' fontWeight={"bold"} marginBottom={6} marginLeft={1}> Proyectos recientes</Typography>
             <Grid container gap={6}>
-                {listaProyectos.map((card, index) =>
+                {proyectosLimitados.map((card, index) =>
                     <MediaCard
                         key={index}
                         proyecto={card}

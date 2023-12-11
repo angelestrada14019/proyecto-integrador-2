@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getProyecto, getProyectoById } from 'services/proyectos/proyectos.service';
 
-
 interface Props {
     proyecto: ProyectoFinal,
     widthParam: boolean
@@ -22,22 +21,20 @@ interface Props {
 
 const MediaCard = ({ proyecto, widthParam }: Props) => {
 
-    const router = useRouter();
+const router = useRouter();
 
-    const LISTA_MULTIMEDIAS = proyecto.multimedias
-    const LISTA_DESCRIPCIONES = proyecto.descripciones
-    const TIPO_LANDING = 1;
+const LISTA_MULTIMEDIAS = proyecto.multimedias
+const LISTA_DESCRIPCIONES = proyecto.descripciones
+const TIPO_LANDING = 1;
 
-
-const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
-
+const porcentajeCalculado = proyecto.montoSumatoriaDonaciones? Math.round((proyecto.montoSumatoriaDonaciones/ proyecto.monto) * 100): 0
 
     return (
-        <Card sx={{ maxWidth: widthParam ? 600 : 345, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
+        <Card sx={{ maxWidth: widthParam ? 500 : 345, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
             <CardMedia
-                sx={{ position: 'relative', height: 250, minWidth: 450}}
+                sx={{ position: 'relative', height: 250, minWidth: 500}}
                 image={buscarMultimediaPorTipo(LISTA_MULTIMEDIAS, TIPO_LANDING)}
-                title="green iguana">
+                title="Foto proyecto">
                 <div style={{
                     position: 'absolute',
                     top: 10,
@@ -77,7 +74,7 @@ const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proy
             <CardContent>
                 <Grid sx={{ display: 'flex', justifyContent: "space-between" }}>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        Recaudados $ {Math.round(proyecto.montoSumatoriaDonaciones)}
+                        Recaudados $ { proyecto.montoSumatoriaDonaciones ? Math.round(proyecto.montoSumatoriaDonaciones) : 0}
                     </Typography>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
                         % {porcentajeCalculado > 100 ? 100 : porcentajeCalculado}
