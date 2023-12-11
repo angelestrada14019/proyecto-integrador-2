@@ -27,7 +27,7 @@ const LISTA_MULTIMEDIAS = proyecto.multimedias
 const LISTA_DESCRIPCIONES = proyecto.descripciones
 const TIPO_LANDING = 1;
 
-const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
+const porcentajeCalculado = proyecto.montoSumatoriaDonaciones? Math.round((proyecto.montoSumatoriaDonaciones/ proyecto.monto) * 100): 1
 
     return (
         <Card sx={{ maxWidth: widthParam ? 500 : 345, boxShadow: "3px 1px 18px 2px rgba(0,0,0,0.05)" }}>
@@ -74,7 +74,7 @@ const porcentajeCalculado = Math.round((proyecto.montoSumatoriaDonaciones / proy
             <CardContent>
                 <Grid sx={{ display: 'flex', justifyContent: "space-between" }}>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
-                        Recaudados $ {Math.round(proyecto.montoSumatoriaDonaciones)}
+                        Recaudados $ { proyecto.montoSumatoriaDonaciones ? Math.round(proyecto.montoSumatoriaDonaciones) : 1}
                     </Typography>
                     <Typography gutterBottom variant="body1" fontWeight={"bold"} sx={{ color: "#abb8c3" }}>
                         % {porcentajeCalculado > 100 ? 100 : porcentajeCalculado}

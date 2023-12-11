@@ -24,8 +24,6 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
     const LISTA_MULTIMEDIAS = proyecto.multimedias
     const LISTA_DESCRIPCIONES = proyecto.descripciones
-    const nombreUsuario = proyecto
-    const porcentajeFinal = Math.round((proyecto.montoSumatoriaDonaciones / proyecto.monto) * 100)
 
     const router = useRouter();
 
@@ -33,8 +31,9 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
         return <Spinner />;
     }
 
-    const handleDonate = async (id: number) => {
-        const response: ProyectoFinal = await getProyectoById(id);
+    const handleDonate = async (id: number | undefined) => {
+        const codigoId = id? id : 122
+        const response: ProyectoFinal = await getProyectoById(codigoId);
 
 
         if (response) {
@@ -82,7 +81,7 @@ const ProyectoID = ({ proyecto, proyectos }: Props) => {
 
                                     <Grid sx={{ display: "flex", justifyContent: "space-between" }} marginTop={3}>
                                         <Grid sx={{ display: "flex" }}>
-                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {Math.round(proyecto.montoSumatoriaDonaciones)} recaudados de ${proyecto.monto}</Typography>
+                                            <Typography variant='h6' marginRight={1} fontWeight={"bold"}>$ {proyecto.montoSumatoriaDonaciones ? Math.round(proyecto.montoSumatoriaDonaciones):0} recaudados de ${proyecto.monto}</Typography>
                                         </Grid>
                                         
 
@@ -155,7 +154,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const dataprojecto: Proyectos = await getProyectos(0, 100);
 
     const paths = dataprojecto?.map((proyecto) => {
-        return { params: { id: proyecto.id.toString() } };
+        const codigoId = proyecto.id? proyecto.id : 122
+        return { params: { id: codigoId.toString() } };
     });
     return {
         paths,

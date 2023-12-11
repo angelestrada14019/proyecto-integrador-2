@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 interface Prop {
-  amount: number
+  amount: number | undefined
   finalAmount: number
 }
 
@@ -20,7 +20,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const LinearDeterminate = ({ amount, finalAmount }: Prop) => {
-
+const calculo = amount?(amount / finalAmount) : 1
   return (
     <Box sx={{ width: '100%' }}>
       <BorderLinearProgress
@@ -28,7 +28,7 @@ const LinearDeterminate = ({ amount, finalAmount }: Prop) => {
           color: (theme) =>
             theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
         }}
-        variant="determinate" value={(amount / finalAmount) * 100 > 100 ? 100 : (amount / finalAmount) * 100} />
+        variant="determinate" value={calculo * 100 > 100 ? 100 : calculo * 100} />
     </Box>
   );
 }
