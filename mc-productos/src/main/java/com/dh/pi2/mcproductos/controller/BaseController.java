@@ -16,28 +16,27 @@ public abstract class BaseController<D extends Object> {
     public BaseController(CrudService<D> crudService) {
         this.crudService = crudService;
     }
-    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<D> obtenerId(@PathVariable int id) {
         D oDto = crudService.obtenerId(id);
         return ResponseEntity.ok(oDto);
     }
 
-    @CrossOrigin(origins = "*")
+
     @PostMapping
     public ResponseEntity<D> crear(@RequestBody D dto) {
         D nDtl = crudService.crear(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nDtl);
     }
 
-    @CrossOrigin(origins = "*")
+
     @PutMapping("/{id}")
     public ResponseEntity<D> actualizar(@RequestBody D dto) {
         D aDto = crudService.actualizar(dto);
         return ResponseEntity.ok(aDto);
     }
 
-    @CrossOrigin(origins = "*")
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable int id) {
         crudService.eliminar(id);

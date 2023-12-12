@@ -6,7 +6,7 @@ import com.dh.pi2.mcproductos.service.DescripcionesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/api-productos/descripciones")
 public class DescripcionesController extends BaseController<DescripcionesDto> {
